@@ -1,2 +1,2 @@
-# SIStore
-Social Inter-Store
+# NoName
+NoIdea project
