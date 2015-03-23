@@ -20,7 +20,7 @@ ATTENDER  is a mobile platform which achieves to make networking more reachable 
 [presentation] (http://app.emaze.com/@AOTQROTW/attender#1)
 
 
-https://www.dropbox.com/s/9ixz4wwwpg6ccfv/Attender.docx?dl=0
 
-http://app.emaze.com/@AOTQROTW/attender#1
+
+
 
