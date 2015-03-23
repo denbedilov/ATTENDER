@@ -1,6 +1,6 @@
 # ATTENDER
 
-![ATTENDER logo] (http://upng.co.il/uploads/a9d78826e88b5690659bb2aa2cf47fe5.png)
+![ATTENDER logo] (http://upng.co.il/uploads/73f5d7ccc904d3ba2d625102e3f41061.png)
 
 # CHAT
 
