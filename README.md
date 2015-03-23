@@ -4,7 +4,7 @@
 
 <b>About</b><br>
 </p>
-ATTENDER  is a mobile platform which will make networking more reachable and easy, simply by making the hard work of finding the meetings and events for the client- Which leaves the client only to attend. 
+ATTENDER  is a mobile platform which achieves to make networking more reachable and easy, simply by taking on the hard work of finding the meetings and events for the client-by his interests- Which leaves him only to attend. 
 </p>
 
 # CHAT
