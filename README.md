@@ -4,12 +4,12 @@
 
 <b>About</b><br>
 </p>
-ATTENDER  is a mobile platform which achieves to make networking more reachable and easy, simply by taking on the hard work of finding the meetings and events for the client-by his interests- Which leaves him only to attend. 
+ATTENDER  is a mobile platform which achieves to make networking more reachable and easy, simply by taking on the hard work of finding the meetings and events for the client-by his interests - which leaves him only to attend. 
 </p>
 
 # CHAT
 
-[chat](https://gitter.im/denbedilov/ATTENDER?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
+[Chat](https://gitter.im/denbedilov/ATTENDER?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
 
 # Home Page
 
