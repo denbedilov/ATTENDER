@@ -16,11 +16,11 @@ ATTENDER  is a mobile platform which achieves to make networking more reachable 
 [Home Page]( https://github.com/denbedilov/ATTENDER/wiki)
 
 # Documentation
-######[document](https://www.dropbox.com/s/9ixz4wwwpg6ccfv/Attender.docx?dl=0)
-######[presentation](http://app.emaze.com/@AOTQROTW/attender#1)
+######[Project Documentation](https://www.dropbox.com/s/9ixz4wwwpg6ccfv/Attender.docx?dl=0)
+######[PowerPoint Presentation](http://app.emaze.com/@AOTQROTW/attender#1)
 
 
-[back to JCE/projects](https://github.com/jce-il/se-class/wiki/Projects)
+[Go back to JCE/projects](https://github.com/jce-il/se-class/wiki/Projects)
 
 
 
