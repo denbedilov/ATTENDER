@@ -17,7 +17,7 @@ ATTENDER  is a mobile platform which achieves to make networking more reachable 
 # Documentation
 ######[Project Documentation](https://www.dropbox.com/s/9ixz4wwwpg6ccfv/Attender.docx?dl=0)
 ######[PowerPoint Presentation](http://app.emaze.com/@AOTQROTW/attender#1)
-######[SRS](https://docs.google.com/document/d/1JqcVqmay9Mws6uiqrx_Dh_1-JtBcML_C48R3gCQWLXk/edit?usp=sharing)
+######[SRS](https://docs.google.com/document/d/1Nb8qIyNllFHEUo6v4j27-h6mLMIhX9EyRbs_Bel3VG0/edit)
 
 
 [Go back to JCE/projects](https://github.com/jce-il/se-class/wiki/Projects)
