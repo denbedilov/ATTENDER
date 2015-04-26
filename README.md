@@ -21,7 +21,7 @@ ATTENDER  is a mobile platform which achieves to make networking more reachable 
 ######[PowerPoint Presentation](http://app.emaze.com/@AOTQROTW/attender#1)
 ######[SRS](https://docs.google.com/document/d/1Nb8qIyNllFHEUo6v4j27-h6mLMIhX9EyRbs_Bel3VG0/edit?usp=sharing)
 ######[SDS](https://github.com/denbedilov/ATTENDER/wiki/SDS)
-
+######[Minimum Viable Product](https://github.com/denbedilov/ATTENDER/wiki/Minimum-Viable-Product)
 [Go back to JCE/projects](https://github.com/jce-il/se-class/wiki/Projects)
 
 
