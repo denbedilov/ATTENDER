@@ -15,6 +15,7 @@ ATTENDER  is a mobile platform which achieves to make networking more reachable 
 [Home Page]( https://github.com/denbedilov/ATTENDER/wiki)
 
 # Documentation
+######[[User Manual|https://github.com/denbedilov/ATTENDER/wiki/User-Manual]]
 ######[Project Documentation](https://www.dropbox.com/s/9ixz4wwwpg6ccfv/Attender.docx?dl=0)
 ######[PowerPoint Presentation](http://app.emaze.com/@AOTQROTW/attender#1)
 ######[SRS](https://docs.google.com/document/d/1Nb8qIyNllFHEUo6v4j27-h6mLMIhX9EyRbs_Bel3VG0/edit?usp=sharing)
