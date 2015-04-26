@@ -1,0 +1,51 @@
+<resources>
+    <string name="app_name">Attender</string>
+
+    <string name="hello_world">Hello world!</string>
+    <string name="action_settings">Settings</string>
+    <string name="title_activity_event_page_avtivity">EventPageAvtivity</string>
+    <string name="title_activity_event__page_">Event_Page_Activity</string>
+    <string name="title_activity_calendar_page">CalendarPageActivity</string>
+    <string name="title_activity_search_event">searchEventActivity</string>
+    <string name="title_activity_event_list_page">EventListPageActivity</string>
+
+    <string-array name="type_array">
+        <item>Type</item>
+        <item>Clothing</item>
+        <item>Programming</item>
+        <item>Theatre</item>
+        <item>Forums</item>
+        <item>Cosmetics</item>
+        <item>Tech</item>
+        <item>Entrepreneurs</item>
+        <item>Movies</item>
+    </string-array>
+    <string-array name="dates_array">
+        <item>Date</item>
+        <item>January</item>
+    <item>February</item>
+    <item>March</item>
+    <item>April</item>
+    <item>May</item>
+    <item>June</item>
+    <item>July</item>
+    <item>August</item>
+    <item>September</item>
+    <item>October</item>
+    <item>November</item>
+    <item>December</item>
+</string-array>
+    <string-array name="cities_array">
+        <item>City</item>
+        <item>Jerusalem</item>
+        <item>Tel-Aviv</item>
+        <item>Haifa</item>
+        <item>Beer-Sheva</item>
+        <item>Eilat</item>
+        <item>Givataim</item>
+        <item>Rishon-Letsion</item>
+
+    </string-array>
+    <string name="title_activity_chat_page">Chat</string>
+
+</resources>

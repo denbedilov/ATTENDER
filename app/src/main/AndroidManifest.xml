@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.example.rita.attender" >
+
+    <application
+        android:allowBackup="true"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:theme="@style/AppTheme" >
+        <activity
+            android:name=".loginPageActivity"
+            android:label="@string/app_name" >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".Event_Page_Activity"
+            android:label="@string/title_activity_event__page_" >
+        </activity>
+        <activity
+            android:name=".CalendarPageActivity"
+            android:label="@string/title_activity_calendar_page" >
+        </activity>
+        <activity
+            android:name=".searchEventActivity"
+            android:label="@string/title_activity_search_event" >
+        </activity>
+        <activity
+            android:name=".ChatPageActivity"
+            android:label="@string/title_activity_chat_page" >
+        </activity>
+    </application>
+
+</manifest>

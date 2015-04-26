@@ -1,0 +1,58 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
+    android:layout_height="match_parent" android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    tools:context="com.example.rita.attender.ChatPageActivity"
+    android:background="#ffb0b0b0">
+    <Button
+        style="?android:attr/buttonStyleSmall"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="       Chat      "
+        android:id="@+id/chat_cmd"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentStart="true"
+        android:textStyle="bold" />
+
+    <Button
+        style="?android:attr/buttonStyleSmall"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="      Events   "
+        android:id="@+id/events_cmd"
+        android:layout_alignParentTop="true"
+        android:layout_toEndOf="@+id/chat_cmd"
+        android:textStyle="bold"
+        android:onClick="eventsPressed"/>
+
+    <Button
+        style="?android:attr/buttonStyleSmall"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="    Explore       "
+        android:id="@+id/explore_cmd"
+        android:textStyle="bold"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:onClick="explorePressed"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="Select Event To Chat"
+        android:id="@+id/select_label"
+        android:layout_marginTop="39dp"
+        android:layout_below="@+id/chat_cmd"
+        android:layout_centerHorizontal="true" />
+
+    <ListView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/chatlistView"
+        android:layout_below="@+id/select_label"
+        android:layout_toEndOf="@+id/chat_cmd"
+        android:layout_alignParentStart="true" />
+</RelativeLayout>
