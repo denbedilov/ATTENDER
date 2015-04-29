@@ -7,7 +7,7 @@
     android:background="#ffffffff"
     >
 
-    <TextView android:text="@string/welcome" android:layout_width="wrap_content"
+    <TextView android:text="Welcome" android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/welcome_txt"
         android:textColor="#ff070707"
