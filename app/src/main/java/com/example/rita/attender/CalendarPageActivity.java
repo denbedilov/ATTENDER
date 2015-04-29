@@ -1,41 +1,44 @@
 package com.example.rita.attender;
 
-import android.support.v7.app.ActionBarActivity;
+import android.content.Intent;
 import android.os.Bundle;
+import android.support.v7.app.ActionBarActivity;
 import android.view.Menu;
 import android.view.MenuItem;
-import java.util.ArrayList;
-import java.util.Arrays;
-import android.content.Intent;
-import android.app.Activity;
-import android.os.Bundle;
-import android.widget.ArrayAdapter;
-import android.widget.ListView;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ListView;
+
+import java.sql.Date;
+import java.util.ArrayList;
+
+//import static com.example.rita.attender.R.id.listView;
 
 public class CalendarPageActivity extends ActionBarActivity {
-    private ListView list;
-    private ArrayAdapter<String> adapter;
-    private ArrayList<String> arrayList;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_calendar_page);
-        list = (ListView) findViewById(R.id.eventslistView);
-        arrayList = new ArrayList<String>();
-        adapter = new ArrayAdapter<String>(getApplicationContext(), android.R.layout.simple_spinner_item, arrayList);
-        list.setAdapter(adapter);
-        adapter.add("event1");
-        adapter.add("event2");
-        adapter.add("event3");
-        adapter.add("event4");
-        adapter.add("event5");
-        adapter.add("event6");
-        adapter.add("event7");
-        adapter.add("event1");
-        adapter.add("event1");
-        adapter.add("event1");
-        adapter.add("event1");
+
+        ListView listView = (ListView) findViewById(R.id.listView);
+        ArrayList<Event> names = new ArrayList<>();
+        names.clear();
+        for(int i=1; i<=10; i++)
+        {
+            Event ev = new Event();
+            ev.date = Date.valueOf("2015-" + i + "-" + i);
+            ev.name = "Event "+i;
+            names.add(ev);
+        }
+        EventAdapter adapter = new EventAdapter(this, names);
+        listView.setAdapter(adapter);
+
+        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                Intent myIntent = new Intent(getApplicationContext(), Event_Page_Activity.class);
+                startActivity(myIntent);
+            }
+        });
     }
     public void eventsPressed(View v)
     {
@@ -45,11 +48,6 @@ public class CalendarPageActivity extends ActionBarActivity {
     public void chatPressed(View v)
     {
         Intent intent=new Intent(this,ChatPageActivity.class);
-        startActivity(intent);
-    }
-    public void listPressed(View v)
-    {
-        Intent intent=new Intent(this,Event_Page_Activity.class);
         startActivity(intent);
     }
 
@@ -74,4 +72,5 @@ public class CalendarPageActivity extends ActionBarActivity {
 
         return super.onOptionsItemSelected(item);
     }
+
 }
