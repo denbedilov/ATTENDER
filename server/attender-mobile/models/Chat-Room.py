@@ -6,7 +6,7 @@ from User import User
 
 
 class ChatRoom(ndb.Model):
-    user_id = ndb.KeyProperty(kind=User.user_id)
+    user_id = ndb.KeyProperty(kind=User.user_name)
     chat_id = ndb.KeyProperty(kind=Chat.chat_id)
 
 

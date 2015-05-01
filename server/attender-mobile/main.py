@@ -16,7 +16,6 @@
 #
 import webapp2
 
-
 class MainHandler(webapp2.RequestHandler):
     def get(self):
         self.response.write('Welcome to attender server!')
@@ -24,3 +23,5 @@ class MainHandler(webapp2.RequestHandler):
 app = webapp2.WSGIApplication([
     ('/', MainHandler)
 ], debug=True)
+
+

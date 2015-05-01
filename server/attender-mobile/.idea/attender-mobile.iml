@@ -3,7 +3,7 @@
   <component name="FacetManager">
     <facet type="google-appengine-python" name="Google App Engine (Python)">
       <configuration>
-        <option name="rootFolder" value="C:\Users\olesya\Documents\GitHub\ATTENDER\server\attender-mobile" />
+        <option name="rootFolder" value="C:\Oles_ka\googleapp\attender\attender-mobile" />
         <option name="sdkFolder" value="C:\Program Files (x86)\Google\google_appengine" />
         <option name="templatesFolder" value="" />
         <option name="email" value="ilana.olesya@gmail.com" />
