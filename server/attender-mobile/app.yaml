@@ -8,10 +8,16 @@ handlers:
 - url: /favicon\.ico
   static_files: favicon.ico
   upload: favicon\.ico
-
+# Endpoints handler: this must be /_ah/spi for Endpoints, NOT /_ah/api!
+- url: /_ah/spi/.*
+  script: search_endpoint.APPLICATION
 - url: .*
   script: main.app
 
 libraries:
 - name: webapp2
   version: "2.5.2"
+- name: pycrypto
+  version: latest
+- name: endpoints
+  version: 1.0
