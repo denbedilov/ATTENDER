@@ -1,8 +1,8 @@
-package com.attender.rita.attender;
+package com.example.rita.attender;
 
-import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v7.app.ActionBarActivity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -11,17 +11,18 @@ import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.Spinner;
 
-import com.attender.R;
-
 import java.sql.Date;
 import java.util.ArrayList;
 
 
+public class searchEventActivity extends ActionBarActivity
+{
+    AttenderBL bl;
 
-public class searchEventActivity extends Activity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        bl = new AttenderBL();
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_search_event);
         Spinner typeSpinner = (Spinner) findViewById(R.id.type_spinner);
@@ -29,17 +30,11 @@ public class searchEventActivity extends Activity {
         Spinner citySpinner = (Spinner) findViewById(R.id.city_spinner);
 
         ListView listView = (ListView) findViewById(R.id.listView);
-        ArrayList<Event> names = new ArrayList<>();
-        names.clear();
-        for(int i=1; i<=10; i++)
-        {
-            Event ev = new Event();
-            ev.date = Date.valueOf("2015-" + i + "-" + i);
-            ev.name = "Event "+i;
-            names.add(ev);
-        }
-        EventAdapter adapter = new EventAdapter(this, names);
+        ArrayList<Event> events = bl.getEvents("type", "fds", "fdsf");  ///!!!!!!!!!!!!!!!!!!!!!!!!!!
+
+        EventAdapter adapter = new EventAdapter(this, events);
         listView.setAdapter(adapter);
+
 
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
