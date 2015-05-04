@@ -1,5 +1,6 @@
-package com.example.rita.attender;
+package com.attender.rita.attender;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
@@ -11,11 +12,13 @@ import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.Spinner;
 
+import com.attender.R;
+
 import java.sql.Date;
 import java.util.ArrayList;
 
 
-public class searchEventActivity extends ActionBarActivity
+public class searchEventActivity extends Activity
 {
     AttenderBL bl;
 

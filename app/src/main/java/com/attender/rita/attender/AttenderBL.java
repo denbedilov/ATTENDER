@@ -1,8 +1,11 @@
-package com.example.rita.attender;
+package com.attender.rita.attender;
 
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.support.v7.app.ActionBarActivity;
+
+import com.attender.rita.attender.AttenderDAL;
+import com.attender.rita.attender.Event;
 
 import org.json.JSONArray;
 import org.json.JSONException;
