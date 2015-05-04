@@ -11,6 +11,8 @@ import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.Spinner;
 
+import com.attender.R;
+
 import java.sql.Date;
 import java.util.ArrayList;
 

@@ -7,6 +7,8 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.TextView;
 
+import com.attender.R;
+
 import java.util.ArrayList;
 
 public class EventAdapter extends ArrayAdapter<String>

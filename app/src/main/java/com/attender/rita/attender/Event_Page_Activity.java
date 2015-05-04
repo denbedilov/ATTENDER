@@ -5,6 +5,8 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 
+import com.attender.R;
+
 
 public class Event_Page_Activity extends Activity {
 

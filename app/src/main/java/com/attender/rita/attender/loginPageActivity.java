@@ -8,7 +8,7 @@ import android.view.MenuItem;
 import android.view.View;
 
 
-
+import com.attender.R;
 import com.facebook.AccessToken;
 import com.facebook.CallbackManager;
 import com.facebook.FacebookSdk;

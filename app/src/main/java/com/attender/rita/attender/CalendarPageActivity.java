@@ -9,6 +9,8 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
 
+import com.attender.R;
+
 import java.sql.Date;
 import java.util.ArrayList;
 
