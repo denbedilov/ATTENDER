@@ -1,9 +1,9 @@
 <resources>
     <string name="app_name">Attender</string>
-    <string name="facebook_app_id">683953828381840</string>
+
     <string name="hello_world">Hello world!</string>
     <string name="action_settings">Settings</string>
-    <string name="title_activity_event_page_activity">EventPageActivity</string>
+    <string name="title_activity_event_page_avtivity">EventPageAvtivity</string>
     <string name="title_activity_event__page_">Event_Page_Activity</string>
     <string name="title_activity_calendar_page">CalendarPageActivity</string>
     <string name="title_activity_search_event">searchEventActivity</string>
