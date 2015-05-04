@@ -17,7 +17,7 @@
         android:layout_centerHorizontal="true" />
 
     <TextView
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceMedium"
         android:text="Create an Account"
@@ -25,7 +25,9 @@
         android:textStyle="bold"
         android:textColor="#ff44e5ff"
         android:layout_below="@+id/welcome_txt"
-        android:layout_alignEnd="@+id/facebook_cmd" />
+        android:layout_alignEnd="@+id/login_button"
+        android:layout_alignParentEnd="true"
+        android:gravity="center_horizontal" />
 
     <TextView
         android:layout_width="match_parent"
@@ -133,17 +135,17 @@
         android:layout_below="@+id/textView"
         android:layout_centerHorizontal="true" />
 
-    <Button
-        style="?android:attr/buttonStyleSmall"
-        android:layout_width="wrap_content"
+    <com.facebook.login.widget.LoginButton
+        android:id="@+id/login_button"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Login With Facebook"
-        android:id="@+id/facebook_cmd"
-        android:background="#ff1398ff"
-        android:textColor="#ffffffff"
+        android:background="#ff1215ff"
+        android:text="facebook login"
+        android:textColor="#fff6f4ff"
         android:layout_below="@+id/confirm_cmd"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="26dp" />
+        android:layout_marginTop="20dp"
+        android:layout_marginLeft="50dp"
+        android:layout_marginRight="50dp" />
 
     <TextView
         android:layout_width="wrap_content"
@@ -151,7 +153,7 @@
         android:textAppearance="?android:attr/textAppearanceSmall"
         android:text="OR:"
         android:id="@+id/textView8"
-        android:layout_alignTop="@+id/facebook_cmd"
+        android:layout_alignTop="@+id/login_button"
         android:layout_toEndOf="@+id/textView3" />
 
     <Button
