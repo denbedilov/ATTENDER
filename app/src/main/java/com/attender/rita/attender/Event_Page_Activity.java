@@ -1,30 +1,24 @@
-package com.example.rita.attender;
+package com.attender.rita.attender;
 
-import android.content.Intent;
-import android.support.v7.app.ActionBarActivity;
+import android.app.Activity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
 
 
-public class loginPageActivity extends ActionBarActivity {
+public class Event_Page_Activity extends Activity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_login_page);
+        setContentView(R.layout.activity_event__page_);
     }
 
-    public void confirmPressed(View v)
-    {
-        Intent intent=new Intent(this,CalendarPageActivity.class);
-        startActivity(intent);
-    }
+
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_login_page, menu);
+        getMenuInflater().inflate(R.menu.menu_event__page_, menu);
         return true;
     }
 

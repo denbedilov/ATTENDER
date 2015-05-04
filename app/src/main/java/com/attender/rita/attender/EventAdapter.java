@@ -1,4 +1,4 @@
-package com.example.rita.attender;
+package com.attender.rita.attender;
 
 import android.content.Context;
 import android.view.LayoutInflater;

@@ -1,8 +1,8 @@
-package com.example.rita.attender;
+package com.attender.rita.attender;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.v7.app.ActionBarActivity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -12,14 +12,12 @@ import android.widget.ListView;
 import java.sql.Date;
 import java.util.ArrayList;
 
-//import static com.example.rita.attender.R.id.listView;
+public class ChatPageActivity extends Activity {
 
-public class CalendarPageActivity extends ActionBarActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_calendar_page);
-
+        setContentView(R.layout.activity_chat_page);
         ListView listView = (ListView) findViewById(R.id.listView);
         ArrayList<Event> names = new ArrayList<>();
         names.clear();
@@ -33,6 +31,7 @@ public class CalendarPageActivity extends ActionBarActivity {
         EventAdapter adapter = new EventAdapter(this, names);
         listView.setAdapter(adapter);
 
+        // click on event
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 Intent myIntent = new Intent(getApplicationContext(), Event_Page_Activity.class);
@@ -45,16 +44,16 @@ public class CalendarPageActivity extends ActionBarActivity {
         Intent intent=new Intent(this,searchEventActivity.class);
         startActivity(intent);
     }
-    public void chatPressed(View v)
+    public void explorePressed(View v)
     {
-        Intent intent=new Intent(this,ChatPageActivity.class);
+        Intent intent=new Intent(this,CalendarPageActivity.class);
         startActivity(intent);
     }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_calendar_page, menu);
+        getMenuInflater().inflate(R.menu.menu_chat_page, menu);
         return true;
     }
 
@@ -72,5 +71,4 @@ public class CalendarPageActivity extends ActionBarActivity {
 
         return super.onOptionsItemSelected(item);
     }
-
 }
