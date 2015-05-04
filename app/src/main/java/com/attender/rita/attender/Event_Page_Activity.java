@@ -1,14 +1,12 @@
-package com.attender.rita.attender;
+package com.example.rita.attender;
 
-import android.app.Activity;
+import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 
-import com.attender.R;
 
-
-public class Event_Page_Activity extends Activity {
+public class Event_Page_Activity extends ActionBarActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

@@ -1,67 +1,30 @@
-package com.attender.rita.attender;
+package com.example.rita.attender;
 
-import android.app.Activity;
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 
 
-import com.attender.R;
-import com.facebook.AccessToken;
-import com.facebook.CallbackManager;
-import com.facebook.FacebookSdk;
-import com.facebook.appevents.AppEventsLogger;
-
-
-public class loginPageActivity extends Activity {
-
-    CallbackManager callbackManager;
+public class loginPageActivity extends ActionBarActivity {
 
     @Override
-    public void onCreate(Bundle savedInstanceState) {
+    protected void onCreate(Bundle savedInstanceState) {
+
         super.onCreate(savedInstanceState);
-        FacebookSdk.sdkInitialize(this.getApplicationContext());
         setContentView(R.layout.activity_login_page);
-
-        callbackManager = CallbackManager.Factory.create();
-
-/*        LoginManager.getInstance().registerCallback(callbackManager,
-                new FacebookCallback<LoginResult>() {
-                    @Override
-                    public void onSuccess(LoginResult loginResult) {
-                        // App code
-                        AccessToken.setCurrentAccessToken(loginResult.getAccessToken());
-                    }
-
-                    @Override
-                    public void onCancel() {
-                        // App code
-                    }
-
-                    @Override
-                    public void onError(FacebookException exception) {
-                        // App code
-                    }
-                });
-*/
-
-
-        // TODO: check facebook login
-        if(AccessToken.getCurrentAccessToken() != null)
-        {
-            Intent intent=new Intent(this,CalendarPageActivity.class);
-            startActivity(intent);
-        }
     }
 
     public void confirmPressed(View v)
     {
+
         Intent intent=new Intent(this,CalendarPageActivity.class);
         startActivity(intent);
     }
-
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
@@ -85,24 +48,23 @@ public class loginPageActivity extends Activity {
     }
 
 
-
-    @Override
-    protected void onResume()
+    private void printAlertDialog(String message)
     {
-        super.onResume();
-        // Logs 'install' and 'app activate' App Events.
-        AppEventsLogger.activateApp(this);
-
-        // TODO: check facebook login
-        if(AccessToken.getCurrentAccessToken() != null)
-        {
-            Intent intent=new Intent(this,CalendarPageActivity.class);
-            startActivity(intent);
-        }
-
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setTitle("LOGIN DIALOG");
+        builder.setMessage(message);
+        builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int id) {
+                        //do things
+                    }
+                });
+        builder.setNegativeButton("NO", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int id) {
+                //do things
+            }
+        });
+        builder.show();
     }
-
-
-
-
 }
