@@ -9,14 +9,47 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 
+import com.attender.R;
+import com.facebook.AccessToken;
+import com.facebook.CallbackManager;
+import com.facebook.FacebookSdk;
+import com.facebook.appevents.AppEventsLoger;
+
 
 public class loginPageActivity extends ActionBarActivity {
+
+    CallbackManager callbackManager;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
         super.onCreate(savedInstanceState);
+        FacebookSdk.sdkInitialize(this.getApplicationContext());
         setContentView(R.layout.activity_login_page);
+        
+        callbackManager = CallbackManager.Factory.create();
+        
+        //TODO: check facebook login
+        if(AccessToken.getCurrentAccessToken() != null)
+        {
+            Intent intent = new Intent(this, CalendarPageActivity.class);
+            startActivity(intent);
+        }
+    }
+
+    @Override
+    protected void onResume()
+    {
+        super.onResume();
+        // Logs 'install' and 'app activate' App Events.
+        AppEventsLogger.activateApp(this);
+        
+        //TODO: check facebook login
+        if(AccessToken.getCurrentAccessToken() != null)
+        {
+            Intent intent = new Intent(this, CalendarPageActivity.class);
+            startActivity(intent);
+        }
     }
 
     public void confirmPressed(View v)
