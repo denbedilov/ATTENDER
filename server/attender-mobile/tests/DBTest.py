@@ -15,6 +15,7 @@ class UserDetails(unittest.TestCase):
         us_list = d.set_user_details("itamar", "sn@dd.com", "123")
         self.assertEqual(us_list.pop().user_name ,"itamar")
 
+
 def main():
     unittest.main()
 

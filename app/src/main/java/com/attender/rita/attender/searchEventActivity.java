@@ -22,7 +22,7 @@ public class searchEventActivity extends Activity
 {
     AttenderBL bl;
 
-
+    ArrayList<Event> events;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         bl = new AttenderBL();
@@ -33,15 +33,20 @@ public class searchEventActivity extends Activity
         Spinner citySpinner = (Spinner) findViewById(R.id.city_spinner);
 
         ListView listView = (ListView) findViewById(R.id.listView);
-        ArrayList<Event> events = bl.getEvents("type", "fds", "fdsf");  ///!!!!!!!!!!!!!!!!!!!!!!!!!!
+        events = bl.getEvents("type", "fds", "fdsf");  ///!!!!!!!!!!!!!!!!!!!!!!!!!!
 
         EventAdapter adapter = new EventAdapter(this, events);
         listView.setAdapter(adapter);
 
 
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            private int position;
+
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 Intent myIntent = new Intent(getApplicationContext(), Event_Page_Activity.class);
+                this.position = position;
+                int eventNum= this.position;
+                myIntent.putExtra("currentEventId",events.get(eventNum).getId());
                 startActivity(myIntent);
             }
         });

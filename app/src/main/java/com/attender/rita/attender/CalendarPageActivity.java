@@ -1,4 +1,4 @@
-package com.example.rita.attender;
+package com.attender.rita.attender;
 
 import android.app.AlertDialog;
 import android.content.DialogInterface;
@@ -10,6 +10,12 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
+
+import com.attender.R;
+import com.attender.rita.attender.ChatPageActivity;
+import com.attender.rita.attender.EventAdapter;
+import com.attender.rita.attender.Event_Page_Activity;
+import com.attender.rita.attender.searchEventActivity;
 
 import java.sql.Date;
 import java.util.ArrayList;

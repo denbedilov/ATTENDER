@@ -1,4 +1,4 @@
-package com.example.rita.attender;
+package com.attender.rita.attender;
 
 import android.util.JsonReader;
 

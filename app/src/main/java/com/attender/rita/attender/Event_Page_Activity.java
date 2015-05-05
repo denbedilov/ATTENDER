@@ -1,6 +1,7 @@
 package com.attender.rita.attender;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.view.Menu;
@@ -15,6 +16,10 @@ public class Event_Page_Activity extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_event__page_);
+        Intent myIntent=getIntent();
+        int curId = 0;
+        myIntent.getIntExtra("currentEventId", curId);
+
     }
 
 
