@@ -9,6 +9,8 @@ import json
 
 # Meetup.com documentation here: http://www.meetup.com/meetup_api/docs/2/groups/
 
+sys.path.insert(0, 'lib')	#we need these two lines in order to make libraries imported from lib folder work properly
+
 UTF8Writer = codecs.getwriter('utf8')
 sys.stdout = UTF8Writer(sys.stdout)
 URL_PATTERN =  "https://api.meetup.com/find/open_events?"
@@ -18,7 +20,7 @@ API_KEY = "185c2b3e44c4b4644365a3022d5a2f"
 #TODO: Scheduale for each day to pull events and save in local DB. Pull new events every day
 
 
-class SearchHandler(webapp2.RequestHandler):
+class SearchHandler():
     def get_events(self, city=None, category=None, datetime=None):
         events_list = []
         per_page = 10
@@ -118,10 +120,6 @@ if __name__=="__main__":
     temp = SearchHandler()
     temp.get_events(category=28)
 
-
-search = webapp2.WSGIApplication([
-    ('/search', SearchHandler)
-], debug=True)
 
 
 '''

@@ -19,7 +19,6 @@ import webapp2
 class MainHandler(webapp2.RequestHandler):
     def get(self):
         self.response.write('Welcome to attender server!')
-
 app = webapp2.WSGIApplication([
     ('/', MainHandler)
 ], debug=True)
