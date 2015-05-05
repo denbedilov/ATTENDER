@@ -1,11 +1,11 @@
 __author__ = 'itamar and olesya'
 
-import webapp2
 import requests
-import time
 import codecs
 import sys
 import json
+from DAL import DAL
+import datetime
 
 # Meetup.com documentation here: http://www.meetup.com/meetup_api/docs/2/groups/
 
@@ -17,16 +17,27 @@ API_KEY = "185c2b3e44c4b4644365a3022d5a2f"
 
 #TODO: Scheduale for each day to pull events and save in local DB. Pull new events every day
 
+class EventSearch():
+    topics = {"Career & Business": 2,
+             "Community & Environment": 4,
+             "Games": 11,
+             "Fitness": 9,
+             "Health & Wellbeing": 14,
+             "Language & Ethnic Identity": 16,
+             "New Age & Spirituality": 22,
+             "Socializing": 31,
+             "Tech": 34}
 
-class SearchHandler(webapp2.RequestHandler):
+
     def get_events(self, city=None, category=None, datetime=None):
         events_list = []
-        per_page = 10
+        per_page = 200
         offset = 0
         cities = []
         request = {}
 
         if category is not None:
+            category = self.topics.get(category)
             t = {"category": category}
             request.update(t)
         if datetime is not None:
@@ -48,36 +59,16 @@ class SearchHandler(webapp2.RequestHandler):
                 for res in response['results']:
                     event = {}
 
+                    check_valid(event, res, 'id', 'id')
+                    check_valid(event, res, 'name', 'name')
+                    check_valid(event, res, 'date', 'time')
+                    check_valid(event, res, 'city', 'venue', 'city')
+                    check_valid(event, res, 'address', 'venue', 'address_1')
+                    check_valid(event, res, 'description', 'description')
+                    check_valid(event, res, 'event_url', 'event_url')
+
                     try:
-                        event['id'] = res['id']
-                    except:
-                        event['id'] = 'Unknown'
-                    try:
-                        event['name'] = res['name']
-                    except:
-                        event['name'] = 'Unknown'
-                    try:
-                        event['date'] = res['time']
-                    except:
-                        event['date'] = 'Unknown'
-                    try:
-                        event['city'] = res['venue']['city']
-                    except:
-                        event['city'] = 'Unknown'
-                    try:
-                        event['address'] = res['venue']['address_1']
-                    except:
-                        event['address'] = 'Unknown'
-                    try:
-                        event['description'] = res['description'] #description
-                    except:
-                        event['description'] = 'Unknown'
-                    try:
-                        event['event_url'] = res['event_url']
-                    except:
-                        event['event_url'] = 'Unknown'
-                    try:
-                        for host in res['event_hosts']: #Owner
+                        for host in res['event_hosts']:  #Owner
                             event['host'] = host['member_name']
                     except:
                         event['host'] = 'Unknown'
@@ -89,18 +80,16 @@ class SearchHandler(webapp2.RequestHandler):
                         event['price'] = res['fee']['amount'] + res['fee']['currency']
                     except:
                         event['price'] = "free"
+
                     events_list.append(event)
-        for ev in events_list:
-            print ev
-            print '\n'
+                    add_to_db(event)
 
         event_json = json.dumps(events_list)
-        print event_json
         return event_json
 
     def request_city(self):
         cities = []
-        city_num = 50
+        city_num = 10
         request = {"sign": "true", "country": "il", "key": API_KEY,
                                    "page": city_num, "offset": 0}
         response = get_results(URL_PATTERN_CITIES, request)
@@ -108,33 +97,28 @@ class SearchHandler(webapp2.RequestHandler):
             cities.append(res["city"])
         return cities
 
+
 def get_results(request_url,params):
     request = requests.get(request_url, params=params)
     data = request.json()
     return data
 
 
-if __name__=="__main__":
-    temp = SearchHandler()
-    temp.get_events(category=28)
+# Surround with try and catch for each requested field in case the information is not available
+def check_valid(event, res, key, params, params2=None):
+    try:
+        if params2 is None:
+            event[key] = res[params]
+        else:
+            event[key] = res[params][params2]
+        return event
+    except:
+        event[key] = "Unknown"
 
 
-search = webapp2.WSGIApplication([
-    ('/search', SearchHandler)
-], debug=True)
+def add_to_db(event):
+    mydb = DAL()
+    sec = event['date'] / 1000
+    date = datetime.datetime.fromtimestamp(sec)
+    mydb.set_event_details(event['id'], event['name'], date, event['address'], event['description'], event['host'])
 
-
-'''
-
-topics = [  {"Career & Business": 2},
-            {"Community & Environment": 4},
-            {"Games": 11},
-            {"Fitness": 9},
-            {"Health & Wellbeing": 14},
-            {"Language & Ethnic Identity": 16},
-            {"New Age & Spirituality": 22},
-            {"Socializing" : 31}
-            {"Tech" : 34}]
-
-
-'''
