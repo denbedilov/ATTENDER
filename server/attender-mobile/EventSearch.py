@@ -2,7 +2,6 @@
 from __future__ import unicode_literals
 import webapp2
 import requests
-from bs4 import BeautifulSoup
 import time
 import codecs
 import sys
