@@ -9,8 +9,6 @@ import datetime
 
 # Meetup.com documentation here: http://www.meetup.com/meetup_api/docs/2/groups/
 
-sys.path.insert(0, 'lib')	#we need these two lines in order to make libraries imported from lib folder work properly
-
 UTF8Writer = codecs.getwriter('utf8')
 sys.stdout = UTF8Writer(sys.stdout)
 URL_PATTERN =  "https://api.meetup.com/find/open_events?"
@@ -122,6 +120,4 @@ def add_to_db(event):
     sec = event['date'] / 1000
     date = datetime.datetime.fromtimestamp(sec)
     mydb.set_event_details(event['id'], event['name'], date, event['address'], event['description'], event['host'])
-
-
 
