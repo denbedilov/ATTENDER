@@ -1,17 +1,18 @@
-package com.attender.rita.attender;
+package com.example.rita.attender;
 
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.support.v7.app.ActionBarActivity;
 
-import com.attender.rita.attender.AttenderDAL;
-import com.attender.rita.attender.Event;
-
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 
 import javax.json.Json;
 import javax.json.stream.JsonParser;
@@ -36,6 +37,8 @@ public class AttenderBL
         ArrayList<Event> events = new ArrayList<Event>();
         JSONArray jsonArr;
         jsonArr = dal.getEvents(eventType, eventDate, eventLocation);
+        Date date;
+
 
         if(jsonArr == null)
         {
@@ -49,18 +52,27 @@ public class AttenderBL
             for (int i = 0; i < jsonArr.length()-1; i++)
             {
                 JSONObject childJSONObject = jsonArr.getJSONObject(i);
+
+                DateFormat dateFormatDate = new SimpleDateFormat("dd/MM/yyyy");
+                DateFormat dateFormatTime = new SimpleDateFormat("HH:mm");
+                date = convertMilliSecondsToDate(childJSONObject.getString("date"));
+
                 ev = new Event(
                         childJSONObject.getString("id"),
-                        childJSONObject.getString("date"),
+                        dateFormatDate.format(date),
                         childJSONObject.getString("name"),
-                        childJSONObject.getString("time"),
+                        dateFormatTime.format(date),
+                        childJSONObject.getString("city"),
                         childJSONObject.getString("address"),
                         childJSONObject.getString("description"),
-                        childJSONObject.getString("performer")
+                        childJSONObject.getString("event_url"),
+                        childJSONObject.getString("host"),
+                        childJSONObject.getString("price"),
+                        date
                 );
+
                 events.add(ev);
             }
-
         }
         catch(JSONException e)
         {
@@ -71,6 +83,16 @@ public class AttenderBL
     }
 
 
+
+    private Date convertMilliSecondsToDate(String miliSecDateString)
+    {
+        Date date = new Date();
+
+        long milliSeconds = Long.parseLong(miliSecDateString);
+        date.setTime(milliSeconds);
+
+        return date;
+    }
 
 
 }

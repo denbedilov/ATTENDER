@@ -1,4 +1,4 @@
-package com.attender.rita.attender;
+package com.example.rita.attender;
 
 import android.util.JsonReader;
 
@@ -32,9 +32,9 @@ public class AttenderDAL
         String jsonData = "{\n" +
                 "     \"Events\":\n" +
                 "     [\n" +
-                "         {\"id\": 1, \"name\": \"e5\", \"date\": \"01/01/01\", \"time\": \"01:00\", \"address\": \"jerusalem, jaffa st. 1\", \"description\": \"rbfdb bfdbfd bfdbd1\", \"performer\": \"bfdbfdb1\"},\n" +
-                "         {\"id\": 2, \"name\": \"e2\", \"date\": \"02/02/02\", \"time\": \"02:00\", \"address\": \"jerusalem, jaffa st. 2\", \"description\": \"rbfdb bfdbfd bfdbd2\", \"performer\": \"bfdbfdb2\"},\n" +
-                "         {\"id\": 3, \"name\": \"e3\", \"date\": \"03/03/03\", \"time\": \"03:00\", \"address\": \"jerusalem, jaffa st. 3\", \"description\": \"rbfdb bfdbfd bfdbd3\", \"performer\": \"bfdbfdb3\"},\n" +
+                "         {\"id\": 1, \"name\": \"e5\", \"date\": \"1322018752992l\", \"city\": \"jerusalem1\", \"address\": \"jaffa st. 1\", \"description\": \"rbfdb bfdbfd bfdbd1\", \"event_url\": \"www.abcd1.com\" , \"host\": \"bfdbfdb1\", \"price\": \"487\"},\n" +
+                "         {\"id\": 2, \"name\": \"e2\", \"date\": \"1322018452992l\", \"city\": \"jerusalem2\", \"address\": \"jaffa st. 2\", \"description\": \"rbfdb bfdbfd bfdbd2\", \"event_url\": \"www.abcd1.com\" , \"host\": \"bfdbfdb2\", \"price\": \"624\"},\n" +
+                "         {\"id\": 3, \"name\": \"e3\", \"date\": \"1322028752992l\", \"city\": \"jerusalem3\", \"address\": \"jaffa st. 3\", \"description\": \"rbfdb bfdbfd bfdbd3\", \"event_url\": \"www.abcd1.com\" , \"host\": \"bfdbfdb3\", \"price\": \"872\"},\n" +
                 "     ]\n" +
                 " }";
         try
