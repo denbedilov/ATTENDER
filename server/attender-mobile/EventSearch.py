@@ -30,11 +30,6 @@ class EventSearch():
              "Socializing": 31,
              "Tech": 34}
 
-
-<<<<<<< HEAD
-class SearchHandler():
-=======
->>>>>>> 0a773a6e43750d47716f05e18230fa2794cdc98c
     def get_events(self, city=None, category=None, datetime=None):
         events_list = []
         per_page = 200
@@ -110,15 +105,6 @@ def get_results(request_url,params):
     return data
 
 
-<<<<<<< HEAD
-if __name__=="__main__":
-    temp = SearchHandler()
-    temp.get_events(category=28)
-
-
-
-'''
-=======
 # Surround with try and catch for each requested field in case the information is not available
 def check_valid(event, res, key, params, params2=None):
     try:
@@ -129,7 +115,6 @@ def check_valid(event, res, key, params, params2=None):
         return event
     except:
         event[key] = "Unknown"
->>>>>>> 0a773a6e43750d47716f05e18230fa2794cdc98c
 
 
 def add_to_db(event):
@@ -138,7 +123,5 @@ def add_to_db(event):
     date = datetime.datetime.fromtimestamp(sec)
     mydb.set_event_details(event['id'], event['name'], date, event['address'], event['description'], event['host'])
 
-<<<<<<< HEAD
-'''
-=======
->>>>>>> 0a773a6e43750d47716f05e18230fa2794cdc98c
+
+
