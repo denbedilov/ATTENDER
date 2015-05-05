@@ -11,20 +11,25 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:padding="5dp"
-        android:text=""
+        android:text="name"
         android:textColor="#ff7835ff"
         android:textSize="24sp">
     </TextView>
+    <LinearLayout
+        android:layout_height="wrap_content"
+        android:layout_width="match_parent"
+        android:gravity="right">
     <TextView
         xmlns:android="http://schemas.android.com/apk/res/android"
         android:id="@+id/tvDate"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:padding="5dp"
-        android:text=""
+        android:text="date"
         android:textColor="#ff1bff0c"
         android:textSize="24sp"
         android:layout_gravity="center_horizontal"
         android:gravity="end">
     </TextView>
+    </LinearLayout>
 </LinearLayout>

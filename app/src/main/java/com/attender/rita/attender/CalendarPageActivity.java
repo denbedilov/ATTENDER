@@ -37,24 +37,24 @@ public class CalendarPageActivity extends ActionBarActivity
         ListView listView = (ListView) findViewById(R.id.listView);
 
 
-        ArrayList<Event> events = bl.getEvents("type", "fds", "aaa");  ///!!!!!!!!!!!!!!!!!!!!!!!!!!
-
-        if(events == null)
-        {
-            printAlertDialog("No events to show!");
-        }
-        else
-        {
-            EventAdapter adapter = new EventAdapter(this, events);
-            listView.setAdapter(adapter);
-
-            listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-                public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                    Intent myIntent = new Intent(getApplicationContext(), Event_Page_Activity.class);
-                    startActivity(myIntent);
-                }
-            });
-        }
+//        ArrayList<Event> events = bl.getEvents("type", "fds", "aaa");  ///!!!!!!!!!!!!!!!!!!!!!!!!!!
+//
+//        if(events == null)
+//        {
+//            printAlertDialog("No events to show!");
+//        }
+//        else
+//        {
+//            EventAdapter adapter = new EventAdapter(this, events);
+//            listView.setAdapter(adapter);
+//
+//            listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+//                public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+//                    Intent myIntent = new Intent(getApplicationContext(), Event_Page_Activity.class);
+//                    startActivity(myIntent);
+//                }
+//            });
+//        }
     }
     public void eventsPressed(View v)
     {
