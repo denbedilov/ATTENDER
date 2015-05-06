@@ -21,7 +21,8 @@
         android:layout_height="wrap_content"
         android:layout_width="wrap_content"
         android:text="Event Name"
-        >
+        android:textStyle="bold|italic"
+        android:textSize="20dp">
     </TextView>
     </LinearLayout>
 
@@ -35,7 +36,8 @@
         <TextView
             android:layout_height="wrap_content"
             android:layout_width="wrap_content"
-            android:text="eventName"
+            android:text="Details"
+            android:textStyle="bold|italic"
             >
         </TextView>
 
@@ -45,12 +47,13 @@
             android:orientation="vertical"
             android:gravity="right">
 
-            <TextView
+            <CheckBox
                 android:layout_height="wrap_content"
                 android:layout_width="wrap_content"
-                android:text="eventName"
-                >
-            </TextView>
+                android:text="Attend"
+                android:id="@+id/attend_check"
+                android:checked="true">
+            </CheckBox>
         </LinearLayout>
     </LinearLayout>
 
@@ -65,7 +68,8 @@
         <TextView
             android:layout_height="wrap_content"
             android:layout_width="wrap_content"
-            android:text="eventName"
+            android:text="city"
+            android:textStyle="bold|italic"
             >
         </TextView>
 
@@ -78,7 +82,8 @@
             <TextView
                 android:layout_height="wrap_content"
                 android:layout_width="wrap_content"
-                android:text="eventName"
+                android:text="city name"
+                android:id="@+id/cityName_lbl"
                 >
             </TextView>
         </LinearLayout>
@@ -95,7 +100,8 @@
         <TextView
             android:layout_height="wrap_content"
             android:layout_width="wrap_content"
-            android:text="eventName"
+            android:text="Address"
+            android:textStyle="bold|italic"
             >
         </TextView>
 
@@ -108,7 +114,8 @@
             <TextView
                 android:layout_height="wrap_content"
                 android:layout_width="wrap_content"
-                android:text="eventName"
+                android:text="address name"
+                android:id="@+id/address_lbl"
                 >
             </TextView>
         </LinearLayout>
@@ -125,7 +132,8 @@
         <TextView
             android:layout_height="wrap_content"
             android:layout_width="wrap_content"
-            android:text="eventName"
+            android:text="Time"
+            android:textStyle="bold|italic"
             >
         </TextView>
 
@@ -138,7 +146,8 @@
             <TextView
                 android:layout_height="wrap_content"
                 android:layout_width="wrap_content"
-                android:text="eventName"
+                android:text="00:00"
+                android:id="@+id/time_lbl"
                 >
             </TextView>
         </LinearLayout>
@@ -155,7 +164,8 @@
         <TextView
             android:layout_height="wrap_content"
             android:layout_width="wrap_content"
-            android:text="eventName"
+            android:text="Cost"
+            android:textStyle="bold|italic"
             >
         </TextView>
 
@@ -168,7 +178,8 @@
             <TextView
                 android:layout_height="wrap_content"
                 android:layout_width="wrap_content"
-                android:text="eventName"
+                android:text="Free"
+                android:id="@+id/cost_lbl"
                 >
             </TextView>
         </LinearLayout>
@@ -186,7 +197,8 @@
         <TextView
             android:layout_height="wrap_content"
             android:layout_width="wrap_content"
-            android:text="eventName"
+            android:text="Attending"
+            android:textStyle="bold|italic"
             >
         </TextView>
 
@@ -199,7 +211,8 @@
             <TextView
                 android:layout_height="wrap_content"
                 android:layout_width="wrap_content"
-                android:text="eventName"
+                android:text="80/100"
+                android:id="@+id/attending_lbl"
                 >
             </TextView>
         </LinearLayout>
@@ -217,7 +230,8 @@
         <TextView
             android:layout_height="wrap_content"
             android:layout_width="wrap_content"
-            android:text="eventName"
+            android:text="Host"
+            android:textStyle="bold|italic"
             >
         </TextView>
 
@@ -230,14 +244,76 @@
             <TextView
                 android:layout_height="wrap_content"
                 android:layout_width="wrap_content"
-                android:text="eventName"
+                android:text="Host name"
+                android:id="@+id/host_lbl"
                 >
             </TextView>
         </LinearLayout>
     </LinearLayout>
 
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:orientation="horizontal"
+        android:id="@+id/ninthLine"
+        android:padding="10dp">
 
+        <TextView
+            android:layout_height="wrap_content"
+            android:layout_width="wrap_content"
+            android:text="Event URL"
+            android:textStyle="bold|italic"
+            >
+        </TextView>
 
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:gravity="right">
+
+            <TextView
+                android:layout_height="wrap_content"
+                android:layout_width="wrap_content"
+                android:text="URL"
+                android:id="@+id/url_lbl"
+                >
+            </TextView>
+        </LinearLayout>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:gravity="center">
+
+        <Button
+            android:layout_height="wrap_content"
+            android:layout_width="wrap_content"
+            android:text="Open Chat"
+            android:id="@+id/chat_cmd"
+            >
+        </Button>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:gravity="center">
+
+        <com.facebook.login.widget.LoginButton
+            android:layout_height="wrap_content"
+            android:layout_width="wrap_content"
+            android:background="#ff1215ff"
+            android:textColor="#fff6f4ff"
+            android:text="Facebook Friends Attending"
+            android:id="@+id/facebook_cmd"
+            />
+
+    </LinearLayout>
 
 
 
