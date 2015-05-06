@@ -1,11 +1,14 @@
 __author__ = 'itamar and olesya'
 
-import requests
 import codecs
 import sys
 import json
 from DAL import DAL
-import datetime
+from datetime import datetime, timedelta
+from models.Event import Event
+
+sys.path.insert(0, 'lib')	#we need these two lines in order to make libraries imported from lib folder work properly
+import requests
 
 # Meetup.com documentation here: http://www.meetup.com/meetup_api/docs/2/groups/
 
@@ -17,7 +20,7 @@ API_KEY = "185c2b3e44c4b4644365a3022d5a2f"
 
 #TODO: Scheduale for each day to pull events and save in local DB. Pull new events every day
 
-class EventSearch():
+class SearchUsingAPI():
     topics = {"Career & Business": 2,
              "Community & Environment": 4,
              "Games": 11,
@@ -26,9 +29,10 @@ class EventSearch():
              "Language & Ethnic Identity": 16,
              "New Age & Spirituality": 22,
              "Socializing": 31,
-             "Tech": 34}
+             "Tech": 34,
+             "Cars & Motorcycles": 3}
 
-    def get_events(self, city=None, category=None, datetime=None):
+    def request_events(self, city=None, category=None, date_and_time=None, city_num=10):
         events_list = []
         per_page = 200
         offset = 0
@@ -36,19 +40,19 @@ class EventSearch():
         request = {}
 
         if category is not None:
-            category = self.topics.get(category)
-            t = {"category": category}
+            topic = self.topics.get(category)
+            t = {"category": topic}
             request.update(t)
-        if datetime is not None:
-            ti = {"time": datetime}
+        if date_and_time is not None:
+            ti = {"time": date_and_time}
             request.update(ti)
         if city is not None:
             cities.append(city)
         else:
-            cities = self.request_city()
+            cities = self.request_city(city_num)
 
         for city in cities:
-            request.update({"sign": "true", "country": "il", "state": "IL", "key": API_KEY,
+            request.update({"sign": "true", "country": "il", "key": API_KEY,
                                     "page": per_page, "offset": offset, "fields": "event_hosts", "city": city})
 
             response = get_results("http://api.meetup.com/2/open_events", request)
@@ -81,14 +85,13 @@ class EventSearch():
                         event['price'] = "free"
 
                     events_list.append(event)
-                    add_to_db(event)
+                    save_in_db(event, category)
 
         event_json = json.dumps(events_list)
         return event_json
 
-    def request_city(self):
+    def request_city(self, city_num):
         cities = []
-        city_num = 10
         request = {"sign": "true", "country": "il", "key": API_KEY,
                                    "page": city_num, "offset": 0}
         response = get_results(URL_PATTERN_CITIES, request)
@@ -97,7 +100,9 @@ class EventSearch():
         return cities
 
 
-def get_results(request_url,params):
+
+
+def get_results(request_url, params):
     request = requests.get(request_url, params=params)
     data = request.json()
     return data
@@ -115,9 +120,38 @@ def check_valid(event, res, key, params, params2=None):
         event[key] = "Unknown"
 
 
-def add_to_db(event):
+def save_in_db(event, category):
     mydb = DAL()
     sec = event['date'] / 1000
-    date = datetime.datetime.fromtimestamp(sec)
-    mydb.set_event_details(event['id'], event['name'], date, event['address'], event['description'], event['host'])
+    e = Event()
+    date = datetime.fromtimestamp(sec)
+    if e.check_event_exist(event['id']) == False:
+        mydb.set_event_details(event['id'], event['name'], date, event['city'], event['address'],
+                               event['description'], event['host'], event['event_url'], event['attendees'], event['price'], category)
 
+
+
+
+class EventSearch():
+    def get_events(self, city=None, category=None, date_and_time=None):
+        se = SearchUsingAPI()
+        results = self.pull_from_db(city, category, date_and_time)
+        if city is None and results.count() < 10: # add more cities so will be more results for topics
+            se.request_events(city, category, date_and_time, city_num=100)
+            results = self.pull_from_db(city, category, date_and_time)  # After more results added to DB pull again
+        return results
+
+    def pull_from_db(self, city=None, category=None, date_and_time=None):
+        e = Event()
+        n = 0
+        if date_and_time is not None:
+            if date_and_time == "1d":
+                n = 1
+            elif date_and_time == "1w":
+                n = 7
+            elif date_and_time == "1m":
+                n = 30
+            future_day = datetime.now() + timedelta(days=n)
+            date_and_time = future_day
+        result = e.return_by_values(city, category, date_and_time)
+        return result

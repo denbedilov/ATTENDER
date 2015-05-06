@@ -27,7 +27,7 @@ class DAL():
     event1.date = datetime.datetime(15,5,5,13,9,0)
     event1.description = "some description"
     event1.name = "python meeting"
-    event1.owner = "Olesya"
+    event1.host = "Olesya"
 
     ev_list.append(event1)
 
@@ -57,7 +57,7 @@ class DAL():
         elif data_type == "name":
             return self.event1.name
         elif data_type == "owner":
-            return self.event1.owner
+            return self.event1.host
         elif data_type == "time":
             return self.event1.time
 
@@ -79,18 +79,22 @@ class DAL():
         return self.us_list
         #user1.put()
 
-    def set_event_details(self, id, name, date, add, descr, own):
-        event1 = Event()
-        event1.id = id
+    def set_event_details(self, e_id, name, date, city,  add, descr, host, url, attendees, price, category):
+        event1 = Event(id=e_id)
+        event1.id = e_id
         event1.name = name
         event1.date = date
+        event1.city = city
         event1.address = add
         event1.description = descr
-        event1.owner = own
+        event1.host = host
+        event1.event_url = url
+        if (attendees != "Unknown"):
+            event1.attendees = attendees
+        event1.price = price
+        if category is not None:
+            event1.category = category
         event1.put()
-        self.ev_list.append(event1)
-        print self.ev_list
-        return self.ev_list
 
     def set_attendings(self, u_key, e_key):
         attendings1 = Attendings()

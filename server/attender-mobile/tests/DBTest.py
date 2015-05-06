@@ -2,12 +2,13 @@ __author__ = 'olesya'
 
 import unittest
 from DAL import DAL
-from EventSearch import EventSearch
+from SearchEventsInterface import SearchUsingAPI
+from google.appengine.ext.ndb import query
 
 class UserDetails(unittest.TestCase):
     def setUp(self):
         self.d = DAL()
-        self.obj = EventSearch()
+        self.obj = SearchUsingAPI()
 
     def test_get_name(self):
         self.assertEqual(self.d.get_user_details("user_name"),"oles_ka")
@@ -17,11 +18,14 @@ class UserDetails(unittest.TestCase):
         self.assertEqual(us_list.pop().user_name ,"itamar")
 
     def test_set_event(self):
-        events = self.obj.get_events(category="Fitness")
+        events = self.obj.request_events(category="Fitness")
         print events
         self.assertTrue(True)
 
-
+    def test_pull_from_db(self):
+        e = SearchUsingAPI()
+        result = e.pull_from_db(category="Fitness", date_and_time="1w")
+        self.assertIsInstance(result, query.Query)
 
 def main():
     unittest.main()

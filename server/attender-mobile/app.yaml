@@ -9,10 +9,13 @@ handlers:
   static_files: favicon.ico
   upload: favicon\.ico
 # Endpoints handler: this must be /_ah/spi for Endpoints, NOT /_ah/api!
-- url: /api/.*
+- url: /_ah/spi/.*
   script: search_endpoint.APPLICATION
-- url: .*
+- url: /cron
+  script: dailytreatevents.app
+- url: /
   script: main.app
+
 
 libraries:
 - name: webapp2
