@@ -1,5 +1,6 @@
 package com.attender.rita.attender;
 
+import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -22,7 +23,7 @@ import java.util.ArrayList;
 
 //import static com.example.rita.attender.R.id.listView;
 
-public class CalendarPageActivity extends ActionBarActivity
+public class CalendarPageActivity extends Activity
 {
     AttenderBL bl;
     ArrayList<Event> events;
