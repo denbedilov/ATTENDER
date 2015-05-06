@@ -11,39 +11,35 @@
 
     <string-array name="type_array">
         <item>Type</item>
-        <item>Clothing</item>
-        <item>Programming</item>
-        <item>Theatre</item>
-        <item>Forums</item>
-        <item>Cosmetics</item>
+        <item>Career &amp; Business</item>
+        <item>Community &amp; Environment</item>
+        <item>Games</item>
+        <item>Fitness</item>
+        <item>Health &amp; Wellbeing</item>
+        <item>Language &amp; Ethnic Identity</item>
+        <item>New age &amp; Spirituality</item>
+        <item>Socializing</item>
         <item>Tech</item>
-        <item>Entrepreneurs</item>
-        <item>Movies</item>
     </string-array>
     <string-array name="dates_array">
         <item>Date</item>
-        <item>January</item>
-    <item>February</item>
-    <item>March</item>
-    <item>April</item>
-    <item>May</item>
-    <item>June</item>
-    <item>July</item>
-    <item>August</item>
-    <item>September</item>
-    <item>October</item>
-    <item>November</item>
-    <item>December</item>
-</string-array>
+        <item>1 day ahead</item>
+        <item>1 week ahead</item>
+        <item>1 month ahead</item>
+
+    </string-array>
     <string-array name="cities_array">
         <item>City</item>
         <item>Jerusalem</item>
-        <item>Tel-Aviv</item>
+        <item>Tel Aviv- Yafo</item>
         <item>Haifa</item>
-        <item>Beer-Sheva</item>
-        <item>Eilat</item>
-        <item>Givataim</item>
-        <item>Rishon-Letsion</item>
+        <item>Herzeliyya</item>
+        <item>Ra\'anana</item>
+        <item>Rekhovot</item>
+        <item>Ramat Gan</item>
+        <item>Kefar Sava</item>
+        <item>Netanya</item>
+        <item>Modi\'in</item>
 
     </string-array>
     <string name="title_activity_chat_page">Chat</string>
