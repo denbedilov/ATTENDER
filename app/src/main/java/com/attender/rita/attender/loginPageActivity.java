@@ -18,8 +18,12 @@ import com.attender.R;
 
 import com.facebook.AccessToken;
 import com.facebook.CallbackManager;
+import com.facebook.FacebookCallback;
+import com.facebook.FacebookException;
 import com.facebook.FacebookSdk;
 import com.facebook.appevents.AppEventsLogger;
+import com.facebook.login.LoginManager;
+import com.facebook.login.LoginResult;
 
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
@@ -36,9 +40,27 @@ public class loginPageActivity extends Activity {
         super.onCreate(savedInstanceState);
         FacebookSdk.sdkInitialize(this.getApplicationContext());
         setContentView(R.layout.activity_login_page);
-        
+
         callbackManager = CallbackManager.Factory.create();
-        
+
+        LoginManager.getInstance().registerCallback(callbackManager, new FacebookCallback<LoginResult>() {
+            @Override
+            public void onSuccess(LoginResult loginResult) {
+                // App code
+                AccessToken.setCurrentAccessToken(loginResult.getAccessToken());
+            }
+
+            @Override
+            public void onCancel() {
+                // App code
+            }
+
+            @Override
+            public void onError(FacebookException exception) {
+                // App code
+            }
+        });
+
         //TODO: check facebook login
         if(AccessToken.getCurrentAccessToken() != null)
         {
@@ -46,7 +68,7 @@ public class loginPageActivity extends Activity {
             startActivity(intent);
         }
 
-        // Add code to print out the key hash
+        // Print out the key hash "KeyHash" at log
         try {
             PackageInfo info = getPackageManager().getPackageInfo(
                     "com.example.rita.attender",
@@ -64,12 +86,18 @@ public class loginPageActivity extends Activity {
     }
 
     @Override
+    protected void onActivityResult(final int requestCode, final int resultCode, final Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        callbackManager.onActivityResult(requestCode, resultCode, data);
+    }
+
+    @Override
     protected void onResume()
     {
         super.onResume();
         // Logs 'install' and 'app activate' App Events.
         AppEventsLogger.activateApp(this);
-        
+
         //TODO: check facebook login
         if(AccessToken.getCurrentAccessToken() != null)
         {
@@ -113,11 +141,11 @@ public class loginPageActivity extends Activity {
         builder.setTitle("LOGIN DIALOG");
         builder.setMessage(message);
         builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int id) {
-                        //do things
-                    }
-                });
+            @Override
+            public void onClick(DialogInterface dialog, int id) {
+                //do things
+            }
+        });
         builder.setNegativeButton("NO", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int id) {
