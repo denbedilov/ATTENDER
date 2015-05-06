@@ -25,7 +25,7 @@ import java.util.ArrayList;
 public class CalendarPageActivity extends ActionBarActivity
 {
     AttenderBL bl;
-
+    ArrayList<Event> events;
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
@@ -37,7 +37,7 @@ public class CalendarPageActivity extends ActionBarActivity
         ListView listView = (ListView) findViewById(R.id.listView);
 
 
-        ArrayList<Event> events = bl.getEvents("type", "fds", "aaa");  ///!!!!!!!!!!!!!!!!!!!!!!!!!!
+         events = bl.getEvents("type", "fds", "aaa");  ///!!!!!!!!!!!!!!!!!!!!!!!!!!
 
         if(events == null)
         {
@@ -49,8 +49,14 @@ public class CalendarPageActivity extends ActionBarActivity
             listView.setAdapter(adapter);
 
             listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-                public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                // private int position;
+
+                public void onItemClick(AdapterView<?> parent, View view, int position, long id)
+                {
                     Intent myIntent = new Intent(getApplicationContext(), Event_Page_Activity.class);
+                    int eventNum = position;
+                    Event testE = events.get(eventNum);
+                    myIntent.putExtra("CurrentEvent",events.get(eventNum));
                     startActivity(myIntent);
                 }
             });

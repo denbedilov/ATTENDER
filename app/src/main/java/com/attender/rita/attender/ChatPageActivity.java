@@ -18,6 +18,7 @@ import java.util.ArrayList;
 public class ChatPageActivity extends Activity
 {
     AttenderBL bl;
+    ArrayList<Event> events;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -26,14 +27,20 @@ public class ChatPageActivity extends Activity
         setContentView(R.layout.activity_chat_page);
         ListView listView = (ListView) findViewById(R.id.listView);
 
-        ArrayList<Event> events = bl.getEvents("type", "fds", "fdsf");  ///!!!!!!!!!!!!!!!!!!!!!!!!!!
+        events = bl.getEvents("type", "fds", "fdsf");  ///!!!!!!!!!!!!!!!!!!!!!!!!!!
 
         EventAdapter adapter = new EventAdapter(this, events);
         listView.setAdapter(adapter);
 
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+            // private int position;
+
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id)
+            {
                 Intent myIntent = new Intent(getApplicationContext(), Event_Page_Activity.class);
+                int eventNum = position;
+                Event testE = events.get(eventNum);
+                myIntent.putExtra("CurrentEvent",events.get(eventNum));
                 startActivity(myIntent);
             }
         });
