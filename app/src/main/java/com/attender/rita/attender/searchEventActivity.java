@@ -33,19 +33,21 @@ public class searchEventActivity extends Activity
         Spinner citySpinner = (Spinner) findViewById(R.id.city_spinner);
 
         ListView listView = (ListView) findViewById(R.id.listView);
-        events = bl.getEvents("type", "fds", "fdsf");  ///!!!!!!!!!!!!!!!!!!!!!!!!!!
+        events = bl.getEvents("type", "fds", "fdsf");  //TODO - send search parameters to server to get res
 
         EventAdapter adapter = new EventAdapter(this, events);
         listView.setAdapter(adapter);
 
 
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            private int position;
+           // private int position;
 
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id)
+            {
                 Intent myIntent = new Intent(getApplicationContext(), Event_Page_Activity.class);
-                int eventNum= this.position;
-                myIntent.putExtra("currentEvent",events.get(eventNum));
+                int eventNum = position;
+                Event testE = events.get(eventNum);
+                myIntent.putExtra("CurrentEvent",events.get(eventNum));
                 startActivity(myIntent);
             }
         });
