@@ -44,9 +44,8 @@ public class searchEventActivity extends Activity
 
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 Intent myIntent = new Intent(getApplicationContext(), Event_Page_Activity.class);
-                this.position = position;
                 int eventNum= this.position;
-                myIntent.putExtra("currentEventId",events.get(eventNum).getId());
+                myIntent.putExtra("currentEvent",events.get(eventNum));
                 startActivity(myIntent);
             }
         });

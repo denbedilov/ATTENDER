@@ -1,11 +1,12 @@
 package com.attender.rita.attender;
 import java.sql.Time;
 import java.util.Date;
+import java.io.Serializable;
 
 /**
  *
  */
-public class Event
+public class Event implements Serializable
 {
     public Event(String id, String date, String name, String time, String city, String address, String description, String eventUrl, String host, String price, Date dateObject)
     {

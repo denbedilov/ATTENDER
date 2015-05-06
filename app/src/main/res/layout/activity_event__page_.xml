@@ -15,14 +15,15 @@
         android:gravity="center_horizontal"
         android:orientation="horizontal"
         android:id="@+id/firstLine"
-        android:padding="20dp">
+        android:padding="10dp">
 
     <TextView
         android:layout_height="wrap_content"
         android:layout_width="wrap_content"
         android:text="Event Name"
         android:textStyle="bold|italic"
-        android:textSize="20dp">
+        android:textSize="20dp"
+        android:id="@+id/evName_lbl">
     </TextView>
     </LinearLayout>
 
@@ -31,7 +32,7 @@
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         android:id="@+id/secondLine"
-        android:padding="10dp">
+        android:padding="5dp">
 
         <TextView
             android:layout_height="wrap_content"
@@ -62,8 +63,39 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
         android:orientation="horizontal"
+        android:id="@+id/eleventhLine"
+        android:padding="5dp">
+
+        <TextView
+            android:layout_height="wrap_content"
+            android:layout_width="wrap_content"
+            android:text="Date"
+            android:textStyle="bold|italic"
+            >
+        </TextView>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:gravity="right">
+
+            <TextView
+                android:layout_height="wrap_content"
+                android:layout_width="wrap_content"
+                android:text="1/11/1111"
+                android:id="@+id/date_lbl"
+                >
+            </TextView>
+        </LinearLayout>
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:orientation="horizontal"
         android:id="@+id/thirdLine"
-        android:padding="10dp">
+        android:padding="5dp">
 
         <TextView
             android:layout_height="wrap_content"
@@ -95,7 +127,7 @@
         android:layout_gravity="center_horizontal"
         android:orientation="horizontal"
         android:id="@+id/forthLine"
-        android:padding="10dp">
+        android:padding="5dp">
 
         <TextView
             android:layout_height="wrap_content"
@@ -127,7 +159,7 @@
         android:layout_gravity="center_horizontal"
         android:orientation="horizontal"
         android:id="@+id/fifthLine"
-        android:padding="10dp">
+        android:padding="5dp">
 
         <TextView
             android:layout_height="wrap_content"
@@ -159,12 +191,12 @@
         android:layout_gravity="center_horizontal"
         android:orientation="horizontal"
         android:id="@+id/sixthLine"
-        android:padding="10dp">
+        android:padding="5dp">
 
         <TextView
             android:layout_height="wrap_content"
             android:layout_width="wrap_content"
-            android:text="Cost"
+            android:text="Price"
             android:textStyle="bold|italic"
             >
         </TextView>
@@ -179,7 +211,7 @@
                 android:layout_height="wrap_content"
                 android:layout_width="wrap_content"
                 android:text="Free"
-                android:id="@+id/cost_lbl"
+                android:id="@+id/price_lbl"
                 >
             </TextView>
         </LinearLayout>
@@ -192,7 +224,7 @@
         android:layout_gravity="center_horizontal"
         android:orientation="horizontal"
         android:id="@+id/seventhLine"
-        android:padding="10dp">
+        android:padding="5dp">
 
         <TextView
             android:layout_height="wrap_content"
@@ -225,7 +257,7 @@
         android:layout_gravity="center_horizontal"
         android:orientation="horizontal"
         android:id="@+id/eighthLine"
-        android:padding="10dp">
+        android:padding="5dp">
 
         <TextView
             android:layout_height="wrap_content"
@@ -257,7 +289,7 @@
         android:layout_gravity="center_horizontal"
         android:orientation="horizontal"
         android:id="@+id/ninthLine"
-        android:padding="10dp">
+        android:padding="5dp">
 
         <TextView
             android:layout_height="wrap_content"
@@ -282,6 +314,40 @@
             </TextView>
         </LinearLayout>
     </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:orientation="horizontal"
+        android:id="@+id/tenthLine"
+        android:padding="5dp">
+
+        <TextView
+            android:layout_height="wrap_content"
+            android:layout_width="wrap_content"
+            android:text="Description"
+            android:textStyle="bold|italic"
+            >
+        </TextView>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:gravity="right">
+
+            <TextView
+                android:layout_height="wrap_content"
+                android:layout_width="wrap_content"
+                android:text="Description"
+                android:id="@+id/description_lbl"
+                >
+            </TextView>
+        </LinearLayout>
+    </LinearLayout>
+
+
 
     <LinearLayout
         android:layout_width="match_parent"
