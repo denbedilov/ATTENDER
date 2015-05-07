@@ -15,10 +15,28 @@
 # limitations under the License.
 #
 import webapp2
+from SearchEventsInterface import EventSearch
+from models.Event import Event
+import logging
+
 
 class MainHandler(webapp2.RequestHandler):
     def get(self):
         self.response.write('Welcome to attender server!')
+        ev = Event()
+        obj = EventSearch()
+        #logging.info("Adding new event to datastore")
+        #obj.get_events(category="Career & Business")
+        logging.info("trying to find event with category 'Fitness'")
+        results = obj.get_events(city = "Herzeliya", category="Career & Business", date_and_time='1w')
+        #results = ev.return_all_events()
+        if results is not None:
+            logging.info("result count: {}".format(results.count()))
+            for res in results:
+                logging.info("The result is: {}".format(res.id))
+                logging.info("The result is: {}".format(res.category))
+
+
 app = webapp2.WSGIApplication([
     ('/', MainHandler)
 ], debug=True)
