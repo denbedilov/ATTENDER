@@ -5,7 +5,9 @@ import sys
 import json
 from DAL import DAL
 from datetime import datetime, timedelta
+from time import mktime
 from models.Event import Event
+import logging
 
 sys.path.insert(0, 'lib')	#we need these two lines in order to make libraries imported from lib folder work properly
 import requests
@@ -39,11 +41,13 @@ class SearchUsingAPI():
         cities = []
         request = {}
 
+        logging.info("Starting connection to meetup.api")
         if category is not None:
             topic = self.topics.get(category)
             t = {"category": topic}
             request.update(t)
         if date_and_time is not None:
+            date_and_time = ',' + date_and_time
             ti = {"time": date_and_time}
             request.update(ti)
         if city is not None:
@@ -125,7 +129,7 @@ def save_in_db(event, category):
     sec = event['date'] / 1000
     e = Event()
     date = datetime.fromtimestamp(sec)
-    if e.check_event_exist(event['id']) == False:
+    if not e.check_event_exist(event['id']):
         mydb.set_event_details(event['id'], event['name'], date, event['city'], event['address'],
                                event['description'], event['host'], event['event_url'], event['attendees'], event['price'], category)
 
@@ -135,11 +139,31 @@ def save_in_db(event, category):
 class EventSearch():
     def get_events(self, city=None, category=None, date_and_time=None):
         se = SearchUsingAPI()
+        events_list = []
+
         results = self.pull_from_db(city, category, date_and_time)
-        if city is None and results.count() < 10: # add more cities so will be more results for topics
-            se.request_events(city, category, date_and_time, city_num=100)
-            results = self.pull_from_db(city, category, date_and_time)  # After more results added to DB pull again
-        return results
+        if city is None and results.count() < 5: # add more cities so will be more results for topics
+            logging.info("Not enough results found")
+            event_json = se.request_events(city, category, date_and_time, city_num=100)
+            return event_json
+
+        for res in results:
+            event = dict()
+            event['id'] = res.id
+            event['name'] = res.name
+            date_time = mktime(res.date.utctimetuple()) * 1000
+            event['date'] = date_time
+            event['city'] = res.city
+            event['address'] = res.address
+            event['description'] = res.description
+            event['host'] = res.host
+            event['event_url'] = res.event_url
+            event['attendees'] = res.attendees
+            event['price'] = res.price
+            events_list.append(event)
+
+        event_json = json.dumps(events_list)
+        return event_json
 
     def pull_from_db(self, city=None, category=None, date_and_time=None):
         e = Event()

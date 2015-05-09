@@ -1,4 +1,4 @@
 cron:
 - description: Daily pull events from meetup.api and store in DB. Remove old events from DB
-  url: /DailyTreatEvents
+  url: /cron
   schedule: every 24 hours

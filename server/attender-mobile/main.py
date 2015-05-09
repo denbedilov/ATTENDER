@@ -18,23 +18,27 @@ import webapp2
 from SearchEventsInterface import EventSearch
 from models.Event import Event
 import logging
+import json
 
 
 class MainHandler(webapp2.RequestHandler):
     def get(self):
         self.response.write('Welcome to attender server!')
+
+        #Only for tests:
         ev = Event()
         obj = EventSearch()
-        #logging.info("Adding new event to datastore")
-        #obj.get_events(category="Career & Business")
-        logging.info("trying to find event with category 'Fitness'")
-        results = obj.get_events(city = "Herzeliya", category="Career & Business", date_and_time='1w')
-        #results = ev.return_all_events()
-        if results is not None:
-            logging.info("result count: {}".format(results.count()))
-            for res in results:
-                logging.info("The result is: {}".format(res.id))
-                logging.info("The result is: {}".format(res.category))
+
+        obj.get_events(category="Career & Business")
+        logging.info("trying to find event from db: ")
+        results = obj.get_events(city="Herzeliya")
+
+        logging.info("The results are: ")
+        logging.info(results)
+        # events_list = json.loads(results)
+        # for ev in events_list:
+        #     logging.info(ev['city'])
+        #     logging.info(ev['id'])
 
 
 app = webapp2.WSGIApplication([

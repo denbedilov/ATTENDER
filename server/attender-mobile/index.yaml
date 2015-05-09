@@ -15,3 +15,13 @@ indexes:
   - name: category
   - name: city
   - name: date
+
+- kind: Event
+  properties:
+  - name: category
+  - name: date
+
+- kind: Event
+  properties:
+  - name: city
+  - name: date
