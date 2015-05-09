@@ -138,6 +138,7 @@ def save_in_db(event, category):
 
 class EventSearch():
     def get_events(self, city=None, category=None, date_and_time=None):
+        # logging.info("in get_events:\ncity: "+city+" category: "+category+" time:"+date_and_time)
         se = SearchUsingAPI()
         events_list = []
 

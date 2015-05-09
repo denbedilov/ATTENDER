@@ -29,12 +29,13 @@ class MainHandler(webapp2.RequestHandler):
         ev = Event()
         obj = EventSearch()
 
-        obj.get_events(category="Career & Business")
+        # obj.get_events(category="Career & Business")
         logging.info("trying to find event from db: ")
-        results = obj.get_events(city="Herzeliya")
-
-        logging.info("The results are: ")
-        logging.info(results)
+        results = obj.get_events(city="Herzeliyya")
+        self.response.write(results)
+        #
+        # logging.info("The results are: ")
+        # logging.info(results)
         # events_list = json.loads(results)
         # for ev in events_list:
         #     logging.info(ev['city'])
