@@ -25,23 +25,6 @@ class MainHandler(webapp2.RequestHandler):
     def get(self):
         self.response.write('Welcome to attender server!')
 
-        #Only for tests:
-        ev = Event()
-        obj = EventSearch()
-
-        # obj.get_events(category="Career & Business")
-        logging.info("trying to find event from db: ")
-        results = obj.get_events(city="Herzeliyya")
-        self.response.write(results)
-        #
-        # logging.info("The results are: ")
-        # logging.info(results)
-        # events_list = json.loads(results)
-        # for ev in events_list:
-        #     logging.info(ev['city'])
-        #     logging.info(ev['id'])
-
-
 app = webapp2.WSGIApplication([
     ('/', MainHandler)
 ], debug=True)

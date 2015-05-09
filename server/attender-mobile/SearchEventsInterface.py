@@ -1,6 +1,5 @@
 __author__ = 'itamar and olesya'
 
-import codecs
 import sys
 import json
 from DAL import DAL
@@ -9,30 +8,27 @@ from time import mktime
 from models.Event import Event
 import logging
 
-sys.path.insert(0, 'lib')	#we need these two lines in order to make libraries imported from lib folder work properly
-import requests
+sys.path.insert(0, 'lib')  #we need this line in order to make libraries imported from lib folder work properly
+import requests  #Used for http requests
 
 # Meetup.com documentation here: http://www.meetup.com/meetup_api/docs/2/groups/
 
-UTF8Writer = codecs.getwriter('utf8')
-sys.stdout = UTF8Writer(sys.stdout)
-URL_PATTERN =  "https://api.meetup.com/find/open_events?"
+URL_PATTERN = "https://api.meetup.com/find/open_events?"
 URL_PATTERN_CITIES = "http://api.meetup.com/2/cities"
 API_KEY = "185c2b3e44c4b4644365a3022d5a2f"
 
-#TODO: Scheduale for each day to pull events and save in local DB. Pull new events every day
 
 class SearchUsingAPI():
     topics = {"Career & Business": 2,
-             "Community & Environment": 4,
-             "Games": 11,
-             "Fitness": 9,
-             "Health & Wellbeing": 14,
-             "Language & Ethnic Identity": 16,
-             "New Age & Spirituality": 22,
-             "Socializing": 31,
-             "Tech": 34,
-             "Cars & Motorcycles": 3}
+              "Community & Environment": 4,
+              "Games": 11,
+              "Fitness": 9,
+              "Health & Wellbeing": 14,
+              "Language & Ethnic Identity": 16,
+              "New Age & Spirituality": 22,
+              "Socializing": 31,
+              "Tech": 34,
+              "Cars & Motorcycles": 3}
 
     def request_events(self, city=None, category=None, date_and_time=None, city_num=10):
         events_list = []
@@ -43,9 +39,12 @@ class SearchUsingAPI():
 
         logging.info("Starting connection to meetup.api")
         if category is not None:
-            topic = self.topics.get(category)
-            t = {"category": topic}
-            request.update(t)
+            catg = self.topics.get(category)  #find in dictionary
+            if catg is not None:
+                t = {"category": catg}
+                request.update(t)
+            else:
+                return
         if date_and_time is not None:
             date_and_time = ',' + date_and_time
             ti = {"time": date_and_time}
@@ -55,13 +54,13 @@ class SearchUsingAPI():
         else:
             cities = self.request_city(city_num)
 
-        for city in cities:
+        for city in cities:  #for each city requst info from meetup
             request.update({"sign": "true", "country": "il", "key": API_KEY,
                                     "page": per_page, "offset": offset, "fields": "event_hosts", "city": city})
 
             response = get_results("http://api.meetup.com/2/open_events", request)
             offset += 1
-
+            logging.info("Actual meetup respond {}".format(response))
             if response is not None:
                 for res in response['results']:
                     event = {}
@@ -124,11 +123,13 @@ def check_valid(event, res, key, params, params2=None):
         event[key] = "Unknown"
 
 
-def save_in_db(event, category):
+def save_in_db(event, category=None):
     mydb = DAL()
     sec = event['date'] / 1000
     e = Event()
     date = datetime.fromtimestamp(sec)
+    if category is not None:
+        e.update_category(event['id'],category)
     if not e.check_event_exist(event['id']):
         mydb.set_event_details(event['id'], event['name'], date, event['city'], event['address'],
                                event['description'], event['host'], event['event_url'], event['attendees'], event['price'], category)
@@ -136,17 +137,17 @@ def save_in_db(event, category):
 
 
 
+
 class EventSearch():
     def get_events(self, city=None, category=None, date_and_time=None):
-        # logging.info("in get_events:\ncity: "+city+" category: "+category+" time:"+date_and_time)
         se = SearchUsingAPI()
         events_list = []
 
         results = self.pull_from_db(city, category, date_and_time)
         if city is None and results.count() < 5: # add more cities so will be more results for topics
             logging.info("Not enough results found")
-            event_json = se.request_events(city, category, date_and_time, city_num=100)
-            return event_json
+            se.request_events(city, category, date_and_time, city_num=100)
+            results = self.pull_from_db(city, category, date_and_time)
 
         for res in results:
             event = dict()

@@ -26,9 +26,9 @@ class DailyTreatEventsHandler(webapp2.RequestHandler):
         self.response.write('Welcome to attender server! Here is a cron job for pulling events from Meetup API')
         obj = SearchUsingAPI()
         ev = Event()
-        logging.info("Adding new events to datastore")
+        logging.info("Adding new events to DataStore")
         obj.request_events()
-        logging.info("Deleting old Events")
+        logging.info("Deleting old events from DataStore")
         qe = ev.return_all_events()
         results = qe.filter(Event.date < datetime.now())
         for res in results:
