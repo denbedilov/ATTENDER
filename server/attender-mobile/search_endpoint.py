@@ -11,6 +11,7 @@ class APIHandler(webapp2.RequestHandler):
         res = EventSearch()
         city = self.request.get("city").encode('ascii', 'ignore')
         category = self.request.get("category").encode('ascii', 'ignore')
+        category = category.rstrip()
         time = self.request.get("time").encode('ascii', 'ignore')
         logging.info("city:"+ city+"\ncategory: "+category+"\ntime: "+time)
         reply_json = res.get_events(city=None if city == "" else city, category=None if category == "" else category, date_and_time=None if time == "" else time)
@@ -21,7 +22,7 @@ class APIHandler(webapp2.RequestHandler):
     def post(self, replyJson = None):
         if replyJson == '[]':
             self.response.set_status(400)
-            self.response.write('No result for this query')
+            self.response.write('[]')
             list = []
             reply_json = json.dumps(list.append("Empty Result"))
             return
