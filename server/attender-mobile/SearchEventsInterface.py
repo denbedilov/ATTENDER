@@ -19,16 +19,16 @@ API_KEY = "185c2b3e44c4b4644365a3022d5a2f"
 
 
 class SearchUsingAPI():
-    topics = {"Career": 2,
-              "Community & Environment": 4,
+    topics = {"Career": 2,                           #Career & Business"
+              "Community": 4,                        #Community & Environment
               "Games": 11,
               "Fitness": 9,
-              "Health & Wellbeing": 14,
-              "Language & Ethnic Identity": 16,
-              "New Age & Spirituality": 22,
+              "Health": 14,                          #Health & Wellbeing"
+              "Language & Ethnic Identity": 16,      #Language & Ethnic Identity"
+              "New Age": 22,                         #New Age & Spirituality
               "Socializing": 31,
               "Tech": 34,
-              "Cars & Motorcycles": 3}
+              "Cars": 3}                             #Cars & Motorcycles
 
     def request_events(self, city=None, category=None, date_and_time=None, city_num=10):
         events_list = []
@@ -39,11 +39,13 @@ class SearchUsingAPI():
 
         logging.info("Starting connection to meetup.api")
         if category is not None:
+            category = category.strip()
             catg = self.topics.get(category)  #find in dictionary
             if catg is not None:
                 t = {"category": catg}
                 request.update(t)
             else:
+                logging.info("There is no such category {}".format(category))
                 return
         if date_and_time is not None:
             date_and_time = ',' + date_and_time
@@ -56,12 +58,12 @@ class SearchUsingAPI():
 
         for city in cities:  #for each city requst info from meetup
             request.update({"sign": "true", "country": "il", "key": API_KEY,
-                                    "page": per_page, "offset": offset, "fields": "event_hosts", "city": city})
+                                    "page": per_page, "offset": offset, "fields": "event_hosts", "city": city, "text_format": "plain"})
 
-            response = get_results("http://api.meetup.com/2/open_events", request)
+            response, status_code = get_results("http://api.meetup.com/2/open_events", request)
             offset += 1
             logging.info("Actual meetup respond {}".format(response))
-            if response is not None:
+            if status_code == 200:
                 for res in response['results']:
                     event = {}
 
@@ -97,18 +99,18 @@ class SearchUsingAPI():
         cities = []
         request = {"sign": "true", "country": "il", "key": API_KEY,
                                    "page": city_num, "offset": 0}
-        response = get_results(URL_PATTERN_CITIES, request)
-        for res in response["results"]:
-            cities.append(res["city"])
-        return cities
-
-
+        response, status_code = get_results(URL_PATTERN_CITIES, request)
+        logging.info("In cities request, status code: {}".format(status_code))
+        if status_code == 200:
+            for res in response["results"]:
+                cities.append(res["city"])
+            return cities
 
 
 def get_results(request_url, params):
     request = requests.get(request_url, params=params)
     data = request.json()
-    return data
+    return data, request.status_code
 
 
 # Surround with try and catch for each requested field in case the information is not available
@@ -146,14 +148,14 @@ class EventSearch():
         results = self.pull_from_db(city, category, date_and_time)
         if city is None and results.count() < 5: # add more cities so will be more results for topics
             logging.info("Not enough results found")
-            se.request_events(city, category, date_and_time, city_num=100)
+            se.request_events(city, category, date_and_time, city_num=50)
             results = self.pull_from_db(city, category, date_and_time)
 
         for res in results:
             event = dict()
-            event['id'] = res.id
+            event['id'] = res.key.id()
             event['name'] = res.name
-            date_time = mktime(res.date.utctimetuple()) * 1000
+            date_time = int(mktime(res.date.utctimetuple()) * 1000)
             event['date'] = date_time
             event['city'] = res.city
             event['address'] = res.address
