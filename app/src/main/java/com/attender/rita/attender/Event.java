@@ -2,6 +2,7 @@ package com.attender.rita.attender;
 import java.sql.Time;
 import java.util.Date;
 import java.io.Serializable;
+import java.util.Random;
 
 /**
  *
@@ -40,7 +41,15 @@ public class Event implements Serializable
     }
 
     public void setId(String id) {
-        _id = Integer.parseInt(id);
+        try {
+            _id = Integer.parseInt(id);
+        }
+        catch(NumberFormatException e)  //temperery!!!!!!!
+        {
+            Random rand = new Random();
+
+            _id = rand.nextInt(999999999) + 1;
+        }
     }
 
     public String getDate() {
