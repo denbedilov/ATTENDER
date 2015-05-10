@@ -19,7 +19,7 @@ API_KEY = "185c2b3e44c4b4644365a3022d5a2f"
 
 
 class SearchUsingAPI():
-    topics = {"Career & Business": 2,
+    topics = {"Career": 2,
               "Community & Environment": 4,
               "Games": 11,
               "Fitness": 9,
