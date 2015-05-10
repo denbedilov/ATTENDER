@@ -55,7 +55,10 @@ public class AttenderBL
 
                 DateFormat dateFormatDate = new SimpleDateFormat("dd/MM/yyyy");
                 DateFormat dateFormatTime = new SimpleDateFormat("HH:mm");
-                date = convertMilliSecondsToDate(childJSONObject.getString("date"));
+                //int parsMili = Integer.parseInt(childJSONObject.getString("date").trim(), 16 );
+                date = convertMilliSecondsToDate("1431264600000");
+
+                //date = convertMilliSecondsToDate(childJSONObject.getString("date"));
 
                 ev = new Event(
                         childJSONObject.getString("id"),
