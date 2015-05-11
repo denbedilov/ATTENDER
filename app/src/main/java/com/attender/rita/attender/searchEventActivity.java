@@ -9,6 +9,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.ListView;
 import android.widget.Spinner;
 
@@ -21,26 +22,28 @@ import java.util.ArrayList;
 public class searchEventActivity extends Activity
 {
     AttenderBL bl;
-
+    Spinner typeSpinner;
+    Spinner dateSpinner;
+    Spinner citySpinner;
+    ListView listView;
     ArrayList<Event> events;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         bl = new AttenderBL();
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_search_event);
-        Spinner typeSpinner = (Spinner) findViewById(R.id.type_spinner);
-        Spinner dateSpinner = (Spinner) findViewById(R.id.date_spinner);
-        Spinner citySpinner = (Spinner) findViewById(R.id.city_spinner);
+        typeSpinner = (Spinner) findViewById(R.id.type_spinner);
+        dateSpinner = (Spinner) findViewById(R.id.date_spinner);
+        citySpinner = (Spinner) findViewById(R.id.city_spinner);
 
-        ListView listView = (ListView) findViewById(R.id.listView);
-        events = bl.getEvents("type", "fds", "fdsf");  //TODO - send search parameters to server to get res
+        listView = (ListView) findViewById(R.id.listView);
+        Button search_button=(Button)findViewById(R.id.search_cmd);
 
-        EventAdapter adapter = new EventAdapter(this, events);
-        listView.setAdapter(adapter);
+
 
 
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-           // private int position;
+            // private int position;
 
             public void onItemClick(AdapterView<?> parent, View view, int position, long id)
             {
@@ -70,6 +73,13 @@ public class searchEventActivity extends Activity
 
     }
 
+    public void searchPressed(View v)
+    {
+        events = bl.getEvents(typeSpinner.toString(), dateSpinner.toString(),citySpinner.toString());  //TODO - send search parameters to server to get res
+
+        EventAdapter adapter = new EventAdapter(this, events);
+        listView.setAdapter(adapter);
+    }
     public void itemPressed(View v)
     {
         Intent intent=new Intent(this,Event_Page_Activity.class);
