@@ -68,11 +68,22 @@
         android:layout_alignEnd="@+id/events_cmd"
         android:layout_toEndOf="@+id/type_spinner" />
 
+    <Button
+        style="?android:attr/buttonStyleSmall"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="      Search       "
+        android:id="@+id/search_cmd"
+        android:layout_below="@+id/date_spinner"
+
+        android:textStyle="bold"
+        android:onClick="SearchPressed"/>
+
     <LinearLayout
         xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/date_spinner"
+        android:layout_below="@+id/search_cmd"
         android:orientation="vertical">
         <TextView
             android:layout_width="wrap_content"
