@@ -75,7 +75,7 @@ public class searchEventActivity extends Activity
 
     public void searchPressed(View v)
     {
-        events = bl.getEvents(typeSpinner.toString(), dateSpinner.toString(),citySpinner.toString());  //TODO - send search parameters to server to get res
+        events = bl.getEvents(typeSpinner.getSelectedItem().toString(), dateSpinner.getSelectedItem().toString(), citySpinner.getSelectedItem().toString());  //TODO - send search parameters to server to get res
 
         EventAdapter adapter = new EventAdapter(this, events);
         listView.setAdapter(adapter);
