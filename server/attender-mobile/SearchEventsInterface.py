@@ -145,8 +145,9 @@ class EventSearch():
         se = SearchUsingAPI()
         events_list = []
 
+
         results = self.pull_from_db(city, category, date_and_time)
-        if city is None and results.count() < 5: # add more cities so will be more results for topics
+        if  results.count() < 5: # add more cities so will be more results for topics
             logging.info("Not enough results found")
             se.request_events(city, category, date_and_time, city_num=50)
             results = self.pull_from_db(city, category, date_and_time)
