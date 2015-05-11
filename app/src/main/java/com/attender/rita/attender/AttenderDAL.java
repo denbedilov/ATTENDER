@@ -40,66 +40,50 @@ import javax.json.Json;
 import javax.json.stream.JsonParser;
 
 /**
- * Created by Shai on 03/05/2015.
+ * Created by Shai Pe'er on 03/05/2015.
  */
 public class AttenderDAL
 {
-    final String apiUrl = "http://attender-mobile.appspot.com/api";
+    final String API_URL = "http://attender-mobile.appspot.com/api";     //api url
 
-    static final String DEBUG_TAG = "HttpExample";
-    EditText urlText;
 
+    //=============================================== BUILDER ==============================================================================
 
     public AttenderDAL()
     {
 
     }
 
+
+    //=============================================== GET EVENTS ==============================================================================
+
     public JSONArray getEvents(String eventType, String eventDate, String eventLocation)
     {
-        FileInputStream json = null;
         JSONObject jsonObject = null;
-        JSONArray jsonArray = null;
-
-        String query = "?time=1m&city=Jerusalem";
-/*      String query = "?";
-        if(eventType != "Type")             query += "category=" + eventType;
-        if(eventDate != "Date")             query += "time="     + eventDate;
+        JSONArray jsonArray   = null;
+        String jsonData = "";
+       //Query format: ?[category=***]&[time=***]&[city=***]";
+        String query = "?";
+        if(eventType != "Type")             query += "category=" + eventType + "&";
+        if(eventDate != "Date")             query += "time="     + eventDate + "&";
         if(eventLocation != "Location")     query += "city="     + eventLocation;
-*/
+        if (query.endsWith("&"))            query = query.substring(0, query.length() - 1); //delete the last char if it '&'
 
-        //String jsonData = getJson(query);
-        String jsonData = "";// = readStream(con.getInputStream());
-        try {
-            URL url = new URL("http://attender-mobile.appspot.com/api?city=Jerusalem");
-            HttpURLConnection con = (HttpURLConnection) url
-                    .openConnection();
-            jsonData = readStream(con.getInputStream());
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
 
-     //   ?city=Jerusalem
-        /*
-        String jsonData = "{\n" +
-                "     \"Events\":\n" +
-                "     [\n" +
-                "         {\"id\": 1, \"name\": \"e5\", \"date\": \"1322018752992\", \"city\": \"jerusalem1\", \"address\": \"jaffa st. 1\", \"description\": \"rbfdb bfdbfd bfdbd1\", \"event_url\": \"www.abcd1.com\" , \"host\": \"bfdbfdb1\", \"price\": \"487\"},\n" +
-                "         {\"id\": 2, \"name\": \"e2\", \"date\": \"1322018452992\", \"city\": \"jerusalem2\", \"address\": \"jaffa st. 2\", \"description\": \"rbfdb bfdbfd bfdbd2\", \"event_url\": \"www.abcd1.com\" , \"host\": \"bfdbfdb2\", \"price\": \"624\"},\n" +
-                "         {\"id\": 3, \"name\": \"e3\", \"date\": \"1322028752992\", \"city\": \"jerusalem3\", \"address\": \"jaffa st. 3\", \"description\": \"rbfdb bfdbfd bfdbd3\", \"event_url\": \"www.abcd1.com\" , \"host\": \"bfdbfdb3\", \"price\": \"872\"},\n" +
-                "     ]\n" +
-                " }";
-                */
-        String str = "{\n" +
-                "     \"Events\":\n";
-        str+= jsonData + "}";
         try
         {
+            jsonData = "{ Events:\n";
+                //URL url = new URL("http://attender-mobile.appspot.com/api?city=Jerusalem");   //for TESTING!!!
+                URL url = new URL(API_URL + query);
+                HttpURLConnection con = (HttpURLConnection) url.openConnection();
+                jsonData += readJsonStream(con.getInputStream());
+            jsonData += "}";
 
-            jsonObject = new JSONObject(str);
+            jsonObject = new JSONObject(jsonData);
             jsonArray = jsonObject.getJSONArray("Events");
+
         }
-        catch (org.json.JSONException e)
+        catch (Exception e)
         {
             return null;
         }
@@ -107,28 +91,44 @@ public class AttenderDAL
         return jsonArray;
     }
 
-    private String readStream(InputStream in) {
+
+    //=========================================== READ STREAM ==================================================================================
+
+    private String readJsonStream(InputStream in)
+    {
         BufferedReader reader = null;
-        String str = "";
-        try {
+        String jsonStreamString = "";
+        try
+        {
             reader = new BufferedReader(new InputStreamReader(in));
             String line = "";
-            while ((line = reader.readLine()) != null) {
-                str += line;
+            while ((line = reader.readLine()) != null)
+            {
+                jsonStreamString += line;
             }
-        } catch (IOException e) {
+        }
+        catch (IOException e)
+        {
             e.printStackTrace();
-        } finally {
-            if (reader != null) {
-                try {
+        }
+        finally
+        {
+            if (reader != null)
+            {
+                try
+                {
                     reader.close();
-                } catch (IOException e) {
-                    e.printStackTrace();
+                }
+                catch (IOException e)
+                {
+                    return "";
                 }
             }
         }
-        return str;
+        return jsonStreamString;
     }
+
+    //=============================================================================================================================
 
 
 

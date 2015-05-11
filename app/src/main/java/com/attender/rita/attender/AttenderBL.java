@@ -18,11 +18,13 @@ import javax.json.Json;
 import javax.json.stream.JsonParser;
 
 /**
- * Created by Shai on 03/05/2015.
+ * Created by Shai Pe'er on 03/05/2015.
  */
 public class AttenderBL
 {
     private AttenderDAL dal;
+
+    //=============================================== BUILDER ==============================================================================
 
     public AttenderBL()
     {
@@ -30,21 +32,20 @@ public class AttenderBL
     }
 
 
-    //The function return the relevant events by search values;
+    //=============================================== GET EVENTS ==============================================================================
+
+    //The function return the relevant events by search values.
     //Return values: null meaning that there are no relevant events, else return the events
     public ArrayList<Event> getEvents(String eventType, String eventDate, String eventLocation)
     {
-        ArrayList<Event> events = new ArrayList<Event>();
-        JSONArray jsonArr;
-        jsonArr = dal.getEvents(eventType, eventDate, eventLocation);
         Date date;
-
-
-        if(jsonArr == null)
-        {
-            return null;
-        }
         Event ev;
+        JSONArray jsonArr;
+        ArrayList<Event> events = new ArrayList<Event>();
+
+        jsonArr = dal.getEvents(eventType, eventDate, eventLocation);
+        if(jsonArr == null)
+            return null;
 
         try
         {
@@ -55,10 +56,8 @@ public class AttenderBL
 
                 DateFormat dateFormatDate = new SimpleDateFormat("dd/MM/yyyy");
                 DateFormat dateFormatTime = new SimpleDateFormat("HH:mm");
-                //int parsMili = Integer.parseInt(childJSONObject.getString("date").trim(), 16 );
-                date = convertMilliSecondsToDate("1431264600000");
-
-                //date = convertMilliSecondsToDate(childJSONObject.getString("date"));
+                //int parsMili = Integer.parseInt(childJSONObject.getString("date").trim(), 16 );//TODO - FIX MILI FORMAT!!!!!
+                date = convertMilliSecondsToDate("1431264600000"); //TODO - temp mili-sec value
 
                 ev = new Event(
                         childJSONObject.getString("id"),
@@ -85,7 +84,7 @@ public class AttenderBL
         return events;
     }
 
-
+    //=============================================== CONVERT MILI-SEC TO DATE ==============================================================================
 
     private Date convertMilliSecondsToDate(String miliSecDateString)
     {
@@ -96,6 +95,9 @@ public class AttenderBL
 
         return date;
     }
+
+
+    //=============================================================================================================================
 
 
 }

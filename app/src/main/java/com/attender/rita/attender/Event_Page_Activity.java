@@ -23,7 +23,7 @@ public class Event_Page_Activity extends Activity {
         currEvent=  (Event)myIntent.getSerializableExtra("CurrentEvent");
 
         //==========  DATE   ==================
-        tv =(TextView)findViewById(R.id.date_lbl);//TODO - ADD DATE
+        tv =(TextView)findViewById(R.id.date_lbl);  //TODO - ADD DATE
         tv.setText(currEvent.getDate());
 
         //==========  NAME   ==================
