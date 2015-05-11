@@ -11,11 +11,7 @@ class APIHandler(webapp2.RequestHandler):
         res = EventSearch()
         city = self.request.get("city").encode('ascii', 'ignore')
         category = self.request.get("category").encode('ascii', 'ignore')
-<<<<<<< HEAD
-        category = category.rstrip()
-=======
         category = category.strip()
->>>>>>> a523c8ba9998f7fff36ea3c76fd60413854e0786
         time = self.request.get("time").encode('ascii', 'ignore')
         logging.info("city:"+ city+"\ncategory: "+category+"\ntime: "+time)
         reply_json = res.get_events(city=None if city == "" else city, category=None if category == "" else category, date_and_time=None if time == "" else time)
