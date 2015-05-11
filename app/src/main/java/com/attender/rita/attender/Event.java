@@ -44,7 +44,7 @@ public class Event implements Serializable
         try {
             _id = Integer.parseInt(id);
         }
-        catch(NumberFormatException e)  //temperery!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+        catch(NumberFormatException e)  //TODO - temperery!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
         {
             Random rand = new Random();
 
@@ -76,9 +76,15 @@ public class Event implements Serializable
         _time = time;
     }
 
-    public String getCity() {   return _city;   }
+    public String getCity()
+    {
+        return _city;
+    }
 
-    public void setCity(String _city) { this._city = _city; }
+    public void setCity(String _city)
+    {
+        this._city = _city;
+    }
 
     public String getAddress() {
         return _address;
@@ -104,9 +110,15 @@ public class Event implements Serializable
         _host = host;
     }
 
-    public Date getDateObject() {   return _dateObject; }
+    public Date getDateObject()
+    {
+        return _dateObject;
+    }
 
-    public void setDateObject(Date _dateObject) {   _dateObject = _dateObject;  }
+    public void setDateObject(Date _dateObject)
+    {
+        _dateObject = (Date) _dateObject.clone();
+    }
 
     public String getEventUrl() {
         return _eventUrl;

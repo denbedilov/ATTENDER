@@ -41,9 +41,6 @@ public class searchEventActivity extends Activity
         listView = (ListView) findViewById(R.id.listView);
         Button search_button=(Button)findViewById(R.id.search_cmd);
 
-
-
-
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             // private int position;
 
@@ -77,24 +74,18 @@ public class searchEventActivity extends Activity
 
     public void searchPressed(View v)
     {
-       String theDate=dateSpinner.getSelectedItem().toString();
-       String theType= typeSpinner.getSelectedItem().toString();
+        String theDate=dateSpinner.getSelectedItem().toString();
+        String theType= typeSpinner.getSelectedItem().toString();
         theType=theType.replaceAll("\\s","");
         String theCity=citySpinner.getSelectedItem().toString();
         theCity=theCity.replaceAll("\\s","");
-       switch(theDate)
-       {
-           case "1 day ahead":
-               theDate="1d";
-               break;
-           case "1 week ahead":
-               theDate="1w";
-               break;
-           case "1 month ahead":
-               theDate="1m";
-               break;
-       }
-        events = bl.getEvents(theType, theDate, theCity);  //TODO - send search parameters to server to get res
+        switch(theDate)
+        {
+           case "1 day ahead":      theDate="1d";   break;
+           case "1 week ahead":     theDate="1w";   break;
+           case "1 month ahead":    theDate="1m";   break;
+        }
+        events = bl.getEvents(theType, theDate, theCity);
         if(events == null)
         {
             printAlertDialog("No events to show!");

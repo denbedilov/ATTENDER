@@ -8,6 +8,7 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.IOException;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -42,6 +43,8 @@ public class AttenderBL
         Event ev;
         JSONArray jsonArr;
         ArrayList<Event> events = new ArrayList<Event>();
+        DateFormat dateFormatDate = new SimpleDateFormat("dd/MM/yyyy");
+        DateFormat dateFormatTime = new SimpleDateFormat("HH:mm");
 
         jsonArr = dal.getEvents(eventType, eventDate, eventLocation);
         if(jsonArr == null)
@@ -50,30 +53,29 @@ public class AttenderBL
         try
         {
            // JSONArray jEventArr = jo.getJSONArray("Events");
-            for (int i = 0; i < jsonArr.length()-1; i++)
+            for (int i = 0; i < jsonArr.length() - 1; i++)
             {
                 JSONObject childJSONObject = jsonArr.getJSONObject(i);
+                date = convertMilliSecondsToDate(childJSONObject.getString("date"));
 
-                DateFormat dateFormatDate = new SimpleDateFormat("dd/MM/yyyy");
-                DateFormat dateFormatTime = new SimpleDateFormat("HH:mm");
-                //int parsMili = Integer.parseInt(childJSONObject.getString("date").trim(), 16 );//TODO - FIX MILI FORMAT!!!!!
-                date = convertMilliSecondsToDate("1431264600000"); //TODO - temp mili-sec value
+                if(date != null)
+                {
+                    ev = new Event(
+                            childJSONObject.getString("id"),
+                            dateFormatDate.format(date),
+                            childJSONObject.getString("name"),
+                            dateFormatTime.format(date),
+                            childJSONObject.getString("city"),
+                            childJSONObject.getString("address"),
+                            childJSONObject.getString("description"),
+                            childJSONObject.getString("event_url"),
+                            childJSONObject.getString("host"),
+                            childJSONObject.getString("price"),
+                            date
+                    );
 
-                ev = new Event(
-                        childJSONObject.getString("id"),
-                        dateFormatDate.format(date),
-                        childJSONObject.getString("name"),
-                        dateFormatTime.format(date),
-                        childJSONObject.getString("city"),
-                        childJSONObject.getString("address"),
-                        childJSONObject.getString("description"),
-                        childJSONObject.getString("event_url"),
-                        childJSONObject.getString("host"),
-                        childJSONObject.getString("price"),
-                        date
-                );
-
-                events.add(ev);
+                    events.add(ev);
+                }
             }
         }
         catch(JSONException e)
@@ -86,13 +88,23 @@ public class AttenderBL
 
     //=============================================== CONVERT MILI-SEC TO DATE ==============================================================================
 
+    //Convert the mili-sec string to date object, in case of fail, return null
     private Date convertMilliSecondsToDate(String miliSecDateString)
     {
         Date date = new Date();
 
-        long milliSeconds = Long.parseLong(miliSecDateString);
-        date.setTime(milliSeconds);
+        //int parsMili = Integer.parseInt(childJSONObject.getString("date").trim(), 16 );
+        //date = convertMilliSecondsToDate("1431264600000");
 
+        try
+        {
+            long milliSeconds = Long.parseLong(miliSecDateString);
+            date.setTime(milliSeconds);
+        }
+        catch(NumberFormatException e)
+        {
+             return null;
+        }
         return date;
     }
 
