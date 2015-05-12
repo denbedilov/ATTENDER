@@ -68,7 +68,7 @@ public class loginPageActivity extends Activity {
             }
         });
 
-        //TODO: check facebook login
+        // check facebook login
         if(AccessToken.getCurrentAccessToken() != null)
         {
             Intent intent = new Intent(this, CalendarPageActivity.class);
@@ -105,7 +105,7 @@ public class loginPageActivity extends Activity {
         // Logs 'install' and 'app activate' App Events.
         AppEventsLogger.activateApp(this);
 
-        //TODO: check facebook login
+        // check facebook login
         if(AccessToken.getCurrentAccessToken() != null)
         {
             Intent intent = new Intent(this, CalendarPageActivity.class);
@@ -115,7 +115,6 @@ public class loginPageActivity extends Activity {
 
     public void confirmPressed(View v)
     {
-
         Intent intent=new Intent(this,CalendarPageActivity.class);
         startActivity(intent);
     }

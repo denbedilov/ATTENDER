@@ -74,6 +74,7 @@ public class searchEventActivity extends Activity
 
     public void searchPressed(View v)
     {
+        // getting data from spinners
         String theDate=dateSpinner.getSelectedItem().toString();
         String theType= typeSpinner.getSelectedItem().toString();
         theType=theType.replaceAll("\\s","%20");
@@ -85,11 +86,12 @@ public class searchEventActivity extends Activity
            case "1 week ahead":     theDate="1w";   break;
            case "1 month ahead":    theDate="1m";   break;
         }
+        // getting events from the server
         events = bl.getEvents(theType, theDate, theCity);
         if(events == null)
         {
+            listView.setAdapter(null);
             printAlertDialog("No events to show!");
-            listView = (ListView) findViewById(R.id.listView);
         }
         else {
             EventAdapter adapter = new EventAdapter(this, events);
