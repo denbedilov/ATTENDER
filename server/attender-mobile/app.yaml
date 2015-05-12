@@ -11,6 +11,8 @@ handlers:
 # Endpoints handler: this must be /_ah/spi for Endpoints, NOT /_ah/api!
 - url: /api
   script: search_endpoint.app
+- url: /login
+  script: server_login.login
 - url: /cron
   script: dailytreatevents.app
 - url: /
