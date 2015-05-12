@@ -10,6 +10,7 @@ class APIHandler(webapp2.RequestHandler):
     def get(self):
         res = EventSearch()
         city = self.request.get("city").encode('ascii', 'ignore')
+        city.strip()
         category = self.request.get("category").encode('ascii', 'ignore')
         category = category.strip()
         time = self.request.get("time").encode('ascii', 'ignore')

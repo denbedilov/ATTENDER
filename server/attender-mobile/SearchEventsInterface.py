@@ -11,6 +11,10 @@ import logging
 sys.path.insert(0, 'lib')  #we need this line in order to make libraries imported from lib folder work properly
 import requests  #Used for http requests
 
+
+
+
+#-*- coding: utf-8 -*-
 # Meetup.com documentation here: http://www.meetup.com/meetup_api/docs/2/groups/
 
 URL_PATTERN = "https://api.meetup.com/find/open_events?"
@@ -24,11 +28,13 @@ class SearchUsingAPI():
               "Games": 11,
               "Fitness": 9,
               "Health": 14,                          #Health & Wellbeing"
-              "Language & Ethnic Identity": 16,      #Language & Ethnic Identity"
+              "Language": 16,      #Language & Ethnic Identity"
               "New Age": 22,                         #New Age & Spirituality
               "Socializing": 31,
               "Tech": 34,
               "Cars": 3}                             #Cars & Motorcycles
+
+    possible_cities = ['Tel Aviv-Yafo', 'Jerusalem', 'Herzeliyya', 'Haifa', "Ra'anana", 'Rekhovot', 'Kefar Sava', 'Ramat Gan', 'Netanya', "Modi'in"]
 
     def request_events(self, city=None, category=None, date_and_time=None, city_num=10):
         events_list = []
@@ -52,7 +58,12 @@ class SearchUsingAPI():
             ti = {"time": date_and_time}
             request.update(ti)
         if city is not None:
-            cities.append(city)
+            if city in self.possible_cities:
+                logging.info("city exist")
+                cities.append(city)
+            else:
+                logging.info("The city is not exist")
+
         else:
             cities = self.request_city(city_num)
 
@@ -71,6 +82,9 @@ class SearchUsingAPI():
                     check_valid(event, res, 'name', 'name')
                     check_valid(event, res, 'date', 'time')
                     check_valid(event, res, 'city', 'venue', 'city')
+                    c = check_city(event['city'])
+                    if c is not None:
+                        event['city'] = c
                     check_valid(event, res, 'address', 'venue', 'address_1')
                     check_valid(event, res, 'description', 'description')
                     check_valid(event, res, 'event_url', 'event_url')
@@ -137,6 +151,27 @@ def save_in_db(event, category=None):
                                event['description'], event['host'], event['event_url'], event['attendees'], event['price'], category)
 
 
+def check_city(city):
+    if city in ["Jerusalem", "jerusalem"]:
+        return "Jerusalem"
+    elif city in ["Tel Aviv-Yafo", "Tel-Aviv", "Tel Aviv"]:
+        return "Tel Aviv-Yafo"
+    elif city in ['Herzeliyya', 'Herzeliya', 'Herzelia', 'Herzeliyya Pituach']:
+        return "Herzeliyya"
+    elif city in ['Haifa']:
+        return "Haifa"
+    elif city in ["Ra'anana", "Raanana", "raanana"]:
+        return "Ra'anana"
+    elif city in ["Rekhovot", "rehovot"]:
+        return "Rekhovot"
+    elif city in ["Kefar Sava"]:
+        return "Kefar Sava"
+    elif city in ["Ramat Gan", "RAMAT GAN"]:
+        return "Ramat Gan"
+    elif city in ["Netanya"]:
+        return "Netanya"
+    elif city in ["Modi'in"]:
+        return "Modi'in"
 
 
 
@@ -147,7 +182,7 @@ class EventSearch():
 
 
         results = self.pull_from_db(city, category, date_and_time)
-        if  results.count() < 5: # add more cities so will be more results for topics
+        if results.count() < 5: # add more cities so will be more results for topics
             logging.info("Not enough results found")
             se.request_events(city, category, date_and_time, city_num=50)
             results = self.pull_from_db(city, category, date_and_time)
@@ -184,3 +219,5 @@ class EventSearch():
             date_and_time = future_day
         result = e.return_by_values(city, category, date_and_time)
         return result
+
+
