@@ -1,6 +1,8 @@
 package com.attender.rita.attender;
 
 import android.app.Activity;
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
@@ -75,10 +77,33 @@ public class searchEventActivity extends Activity
 
     public void searchPressed(View v)
     {
-        events = bl.getEvents(typeSpinner.getSelectedItem().toString(), dateSpinner.getSelectedItem().toString(), citySpinner.getSelectedItem().toString());  //TODO - send search parameters to server to get res
-
-        EventAdapter adapter = new EventAdapter(this, events);
-        listView.setAdapter(adapter);
+       String theDate=dateSpinner.getSelectedItem().toString();
+       String theType= typeSpinner.getSelectedItem().toString();
+        theType=theType.replaceAll("\\s","");
+        String theCity=citySpinner.getSelectedItem().toString();
+        theCity=theCity.replaceAll("\\s","");
+       switch(theDate)
+       {
+           case "1 day ahead":
+               theDate="1d";
+               break;
+           case "1 week ahead":
+               theDate="1w";
+               break;
+           case "1 month ahead":
+               theDate="1m";
+               break;
+       }
+        events = bl.getEvents(theType, theDate, theCity);  //TODO - send search parameters to server to get res
+        if(events == null)
+        {
+            printAlertDialog("No events to show!");
+            listView = (ListView) findViewById(R.id.listView);
+        }
+        else {
+            EventAdapter adapter = new EventAdapter(this, events);
+            listView.setAdapter(adapter);
+        }
     }
     public void itemPressed(View v)
     {
@@ -115,5 +140,24 @@ public class searchEventActivity extends Activity
         }
 
         return super.onOptionsItemSelected(item);
+    }
+    private void printAlertDialog(String message)
+    {
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setTitle("LOGIN DIALOG");
+        builder.setMessage(message);
+        builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int id) {
+                //do things
+            }
+        });
+        builder.setNegativeButton("NO", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int id) {
+                //do things
+            }
+        });
+        builder.show();
     }
 }

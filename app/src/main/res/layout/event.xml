@@ -13,7 +13,7 @@
         android:padding="5dp"
         android:text="name"
         android:textColor="#ff7835ff"
-        android:textSize="24sp">
+        android:textSize="15sp">
     </TextView>
     <LinearLayout
         android:layout_height="wrap_content"
@@ -27,7 +27,7 @@
         android:padding="5dp"
         android:text="date"
         android:textColor="#ff1bff0c"
-        android:textSize="24sp"
+        android:textSize="15sp"
         android:layout_gravity="center_horizontal"
         android:gravity="end">
     </TextView>

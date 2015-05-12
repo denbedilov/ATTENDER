@@ -64,9 +64,9 @@ public class AttenderDAL
         String jsonData = "";
        //Query format: ?[category=***]&[time=***]&[city=***]";
         String query = "?";
-        if(eventType.compareTo("Type") != 0)             query += "Type=" + eventType + "&";
-        if(eventDate.compareTo("Date") != 0)             query += "Date="     + eventDate + "&";
-        if(eventLocation.compareTo("City") != 0)         query += "City="     + eventLocation;
+        if(eventType.compareTo("Type") != 0)             query += "type=" + eventType + "&";
+        if(eventDate.compareTo("Date") != 0)             query += "time="     + eventDate + "&";
+        if(eventLocation.compareTo("City") != 0)         query += "city="     + eventLocation;
         if (query.endsWith("&"))            query = query.substring(0, query.length() - 1); //delete the last char if it '&'
 
 
