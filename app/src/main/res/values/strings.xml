@@ -11,13 +11,13 @@
 
     <string-array name="type_array">
         <item>Type</item>
-        <item>Career &amp; Business</item>
-        <item>Community &amp; Environment</item>
+        <item>Career&amp;Business</item>
+        <item>Community&amp;Environment</item>
         <item>Games</item>
         <item>Fitness</item>
-        <item>Health &amp; Wellbeing</item>
-        <item>Language &amp; Ethnic Identity</item>
-        <item>New age &amp; Spirituality</item>
+        <item>Health&amp;Wellbeing</item>
+        <item>Language&amp;Ethnic Identity</item>
+        <item>New Age&amp;Spirituality</item>
         <item>Socializing</item>
         <item>Tech</item>
     </string-array>
@@ -31,7 +31,7 @@
     <string-array name="cities_array">
         <item>City</item>
         <item>Jerusalem</item>
-        <item>Tel Aviv- Yafo</item>
+        <item>Tel Aviv-Yafo</item>
         <item>Haifa</item>
         <item>Herzeliyya</item>
         <item>Ra\'anana</item>

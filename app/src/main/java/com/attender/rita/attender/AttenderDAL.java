@@ -65,7 +65,7 @@ public class AttenderDAL
 
        // Query format: ?[category=***]&[time=***]&[city=***]";
         String query = "?";
-        if(eventType.compareTo("Type") != 0)             query += "type="     + eventType + "&";
+        if(eventType.compareTo("Type") != 0)             query += "category="     + eventType + "&";
         if(eventDate.compareTo("Date") != 0)             query += "time="     + eventDate + "&";
         if(eventLocation.compareTo("City") != 0)         query += "city="     + eventLocation;
         if (query.endsWith("&") || query.endsWith("?"))  query = query.substring(0, query.length() - 1); //delete the last char if it '&'

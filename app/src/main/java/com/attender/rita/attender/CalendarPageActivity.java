@@ -38,16 +38,16 @@ public class CalendarPageActivity extends Activity
         ListView listView = (ListView) findViewById(R.id.listView);
 
 
-         events = bl.getEvents("type", "fds", "aaa");  ///!!!!!!!!!!!!!!!!!!!!!!!!!!
+     //   events = bl.getEvents("type", "fds", "aaa");  ///!!!!!!!!!!!!!!!!!!!!!!!!!!
 
-        if(events == null)
-        {
-            printAlertDialog("No events to show!");
-        }
-        else
-        {
-            EventAdapter adapter = new EventAdapter(this, events);
-            listView.setAdapter(adapter);
+      //  if(events == null)
+     //   {
+     //       printAlertDialog("No events to show!");
+     ////   }
+      //  else
+      //  {
+      //      EventAdapter adapter = new EventAdapter(this, events);
+       //     listView.setAdapter(adapter);
 
             listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                 // private int position;
@@ -62,7 +62,7 @@ public class CalendarPageActivity extends Activity
                 }
             });
         }
-    }
+    //}
     public void eventsPressed(View v)
     {
         Intent intent=new Intent(this,searchEventActivity.class);

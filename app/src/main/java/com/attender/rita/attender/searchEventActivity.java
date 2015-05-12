@@ -76,9 +76,9 @@ public class searchEventActivity extends Activity
     {
         String theDate=dateSpinner.getSelectedItem().toString();
         String theType= typeSpinner.getSelectedItem().toString();
-        theType=theType.replaceAll("\\s","");
+        theType=theType.replaceAll("\\s","%20");
         String theCity=citySpinner.getSelectedItem().toString();
-        theCity=theCity.replaceAll("\\s","");
+        theCity=theCity.replaceAll("\\s","%20");
         switch(theDate)
         {
            case "1 day ahead":      theDate="1d";   break;
