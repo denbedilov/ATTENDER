@@ -2,6 +2,7 @@ __author__ = 'olesya'
 
 from google.appengine.ext import ndb
 from datetime import datetime
+
 import logging
 
 class Event(ndb.Model):
@@ -35,7 +36,7 @@ class Event(ndb.Model):
         if category is not None:
             res = res.filter(Event.category == category)
         if date is not None:
-           res = res.filter(Event.date < date)
+            res = res.filter(Event.date < date)
         res = res.filter(Event.date > datetime.now())
         return res
 

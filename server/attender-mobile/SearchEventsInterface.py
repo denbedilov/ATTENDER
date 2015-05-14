@@ -145,10 +145,10 @@ def save_in_db(event, category=None):
     e = Event()
     date = datetime.fromtimestamp(sec)
     if category is not None:
-        e.update_category(event['id'],category)
-    if not e.check_event_exist(event['id']):
-        mydb.set_event_details(event['id'], event['name'], date, event['city'], event['address'],
-                               event['description'], event['host'], event['event_url'], event['attendees'], event['price'], category)
+        e.update_category(event['id'], category)
+
+    mydb.set_event_details(event['id'], event['name'], date, event['city'], event['address'],
+                           event['description'], event['host'], event['event_url'], event['attendees'], event['price'], category)
 
 
 def check_city(city):

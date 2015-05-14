@@ -6,6 +6,6 @@ from Event import Event
 
 
 class Attendings(ndb.Model):
-    user_id = ndb.KeyProperty(kind=User)
-    event_id = ndb.KeyProperty(kind=Event)
+    user_id = ndb.IntegerProperty()
+    event_id = ndb.IntegerProperty()
 

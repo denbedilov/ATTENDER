@@ -7,100 +7,69 @@ from google.appengine.ext import ndb
 from models.User import User
 from models.Event import Event
 from models.Attendings import Attendings
-import datetime
+import logging
 
 
 class DAL():
-    us_list = []
-    ev_list = []
-    user1 = User()
-    user1.user_name = "oles_ka"
-    user1.email = "someemail@gmail.com"
-    user1.user_password = "12345"
-    user1.first_name = "Olesya"
-    user1.last_name = "Shapira"
+    def get_user_details(self, user_id):
+        user = User.query(User.user_id == user_id).get()
+        user_details = dict()
+        user_details['name'] = user.first_name
+        user_details['lastname'] = user.last_name
+        return user_details
 
-    us_list.append(user1)
+    def get_event_details(self, event_id):
+       pass
 
-    event1 = Event()
-    event1.address = "somesdress"
-    event1.date = datetime.datetime(15,5,5,13,9,0)
-    event1.description = "some description"
-    event1.name = "python meeting"
-    event1.host = "Olesya"
+    def get_attendings(self, ev_id):
+        if Event.get_by_id(ev_id) is None:
+            return 1
+        results = Attendings.query(Attendings.event_id == ev_id).get()
+        if results is None:
+            return 0
+        return results
 
-    ev_list.append(event1)
-
-    attendings1 = Attendings()
-    attendings1.event_id = attendings1.key
-    attendings1.user_id = attendings1.key
-
-    def get_user_details(self, data_type):
-        if data_type == "user_name":
-            return self.user1.user_name
-        elif data_type == "first_name":
-            return self.user1.first_name
-        elif data_type == "last_name":
-            return self.user1.last_name
-        elif data_type == "email":
-            return self.user1.email
-        elif data_type == "user_password":
-            return self.user1.user_password
-
-    def get_event_details(self, data_type):
-        if data_type == "address":
-            return self.event1.address
-        elif data_type == "date":
-            return self.event1.date
-        elif data_type == "description":
-            return self.event1.description
-        elif data_type == "name":
-            return self.event1.name
-        elif data_type == "owner":
-            return self.event1.host
-        elif data_type == "time":
-            return self.event1.time
-
-    def get_attendings(self, data_type):
-        if data_type == "event_id":
-            return self.attendings1.event_id
-        elif data_type == "user_id":
-            return self.attendings1.user_id
-
-    def set_user_details(self, un, em, psw, fn=None, ls=None):
+    def set_user_details(self, user_id,  name, last_name, em=None):
         user1 = User()
-        user1.user_name = un
-        user1.email = em
-        user1.user_password = psw
-        user1.first_name = fn
-        user1.last_name = ls
-        self.us_list.append(user1)
-        print self.us_list
-        return self.us_list
-        #user1.put()
+        if not user1.check_user_exist(user_id):
+            user1.user_id = user_id
+            user1.first_name = name
+            user1.last_name = last_name
+            user1.email = em
+            user1.put()
 
     def set_event_details(self, e_id, name, date, city,  add, descr, host, url, attendees, price, category):
-        event1 = Event(id=e_id)
-        event1.id = e_id
-        event1.name = name
-        event1.date = date
-        event1.city = city
-        event1.address = add
-        event1.description = descr
-        event1.host = host
-        event1.event_url = url
-        if (attendees != "Unknown"):
-            event1.attendees = attendees
-        event1.price = price
-        if category is not None:
-            event1.category = category
-        event1.put()
+        event1 = Event()
+        if not event1.check_event_exist(e_id):
+            event1.id = e_id
+            event1.name = name
+            event1.date = date
+            event1.city = city
+            event1.address = add
+            event1.description = descr
+            event1.host = host
+            event1.event_url = url
+            if (attendees != "Unknown"):
+                event1.attendees = attendees
+            event1.price = price
+            if category is not None:
+                event1.category = category
+            event1.put()
 
     def set_attendings(self, u_key, e_key):
         attendings1 = Attendings()
-        attendings1.user_id = u_key
-        attendings1.event_id = e_key
 
-        #attendings1.put()
+        qry = User.query(User.user_id == u_key).get()
+        if qry is None:
+            return 1
+        else:
+            attendings1.user_id = u_key
+        if Event.get_by_id(e_key) is None:
+            return 2
+        else:
+            attendings1.event_id = e_key
+
+        attendings1.put()
+        return 0
 
 

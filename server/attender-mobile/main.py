@@ -19,6 +19,7 @@ from SearchEventsInterface import EventSearch
 from models.Event import Event
 import logging
 import json
+from DAL import DAL
 
 
 class MainHandler(webapp2.RequestHandler):
