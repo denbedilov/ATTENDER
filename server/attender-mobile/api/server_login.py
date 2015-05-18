@@ -42,15 +42,20 @@ class APILoginHandler(webapp2.RequestHandler):
 
 
 def validate_fb_login(id,access_token):
-    graph = facebook.GraphAPI(access_token)
-    user = graph.get_object("me")
-    _id = user['id']
-    if id == _id:
-        mydb = DAL()
-        mydb.set_user_details(id,user['name'],user['last_name'])
-        return True
-    else:
-        return 1
+    try:
+        graph = facebook.GraphAPI(access_token)
+        user = graph.get_object("me")
+        _id = user['id']
+        if id == _id:
+            mydb = DAL()
+            mydb.set_user_details(id,user['first_name'],user['last_name'])
+            return True
+
+    except facebook.GraphAPIError as e:
+        logging.info("invalid token")
+
+    return 1
+
 
 def get_results(request_url, params):
     request = requests.get(request_url, params=params, verify=True)
