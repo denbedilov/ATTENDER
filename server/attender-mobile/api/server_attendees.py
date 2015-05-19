@@ -19,7 +19,7 @@ class APIAttendeesHandler(webapp2.RequestHandler):
         else:
             fb = fb_logic()
             if fb.check_user(token) is not False:
-                self.post(self.mydb.get_attendings(int(fb.check_user(token))))
+                self.post(self.mydb.get_attendings(id))
             else:
                 self.post(2)
         '''
