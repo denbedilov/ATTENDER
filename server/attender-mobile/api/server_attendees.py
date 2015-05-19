@@ -1,6 +1,6 @@
 __author__ = 'itamar'
 
-import facebook
+from facebook_logic import fb_logic
 import json
 import logging
 import webapp2
@@ -17,8 +17,9 @@ class APIAttendeesHandler(webapp2.RequestHandler):
         if id == "" or token == "":
             self.post(-1)
         else:
-            if check_user(token) is not False:
-                self.post(self.mydb.get_attendings(int(check_user(token))))
+            fb = fb_logic()
+            if fb.check_user(token) is not False:
+                self.post(self.mydb.get_attendings(int(fb.check_user(token))))
             else:
                 self.post(2)
         '''
@@ -53,17 +54,7 @@ class APIAttendeesHandler(webapp2.RequestHandler):
             return
 
 
-def check_user(token):
-     _id = 0
-     try:
-        graph = facebook.GraphAPI(token)
-        user = graph.get_object("me")
-        _id = user['id']
 
-     except facebook.GraphAPIError as e:
-        logging.info("invalid token")
-        return False
-     return _id
 
 attendees = webapp2.WSGIApplication([
     ('/attendees', APIAttendeesHandler)

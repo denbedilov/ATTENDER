@@ -39,3 +39,15 @@ class fb_logic:
         except ValueError:
             return False
         return True
+
+    def check_user(self, token):
+        _id = 0
+        try:
+            graph = facebook.GraphAPI(token)
+            user = graph.get_object("me")
+            _id = user['id']
+
+        except facebook.GraphAPIError as e:
+            logging.info("invalid token")
+            return False
+        return _id
