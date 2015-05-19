@@ -1,14 +1,10 @@
 __author__ = 'itamar'
 
 import sys
-import json
+from facebook_logic import fb_logic
 import logging
 import webapp2
-import facebook
-import hashlib
-import jinja2
-import hmac
-from DAL import DAL
+
 sys.path.insert(0, 'lib')  #we need this line in order to make libraries imported from lib folder work properly
 import requests
 
@@ -23,9 +19,14 @@ class APILoginHandler(webapp2.RequestHandler):
         if id == "" or  token == "":
             received = False
         else:
-            received = validate_fb_login(id,token)
-            logging.info(received)
+            fb = fb_logic()
+            if fb.test_id(id = id) is not True:
+                received = 2
+            else:
+                fb = fb_logic()
+                received = fb.validate_fb_login(id=id,access_token=token)
 
+        logging.info(received)
         self.post(received)
 
     def post(self, received):
@@ -34,27 +35,17 @@ class APILoginHandler(webapp2.RequestHandler):
             self.response.write("ERROR: Missing parameters")
             return
         elif received == 1:
+             self.response.set_status(401)
              self.response.write("Session Aouth Failed")
+        elif received == 2:
+            self.response.set_status(402)
+            self.response.write("Invalid ID")
         else:
             self.response.set_status(200)
             self.response.write("OK")
             return
 
 
-def validate_fb_login(id,access_token):
-    try:
-        graph = facebook.GraphAPI(access_token)
-        user = graph.get_object("me")
-        _id = user['id']
-        if id == _id:
-            mydb = DAL()
-            mydb.set_user_details(id,user['first_name'],user['last_name'])
-            return True
-
-    except facebook.GraphAPIError as e:
-        logging.info("invalid token")
-
-    return 1
 
 
 def get_results(request_url, params):

@@ -1,18 +1,14 @@
 __author__ = 'itamar'
-
-
-import json
+from facebook_logic import fb_logic
 import logging
 import webapp2
-from DAL import DAL
 
 class APIAttendHandler(webapp2.RequestHandler):
     def get(self):
         received = 0
-        #TODO create a user db object
-        id = self.request.get("id").encode('ascii', 'ignore')
+        token = self.request.get("token").encode('ascii', 'ignore')
         eventid = self.request.get("eventid").encode('ascii', 'ignore')
-        logging.info("is:"+ id+"\nid: "+id+"\neventid: "+eventid)
+
         if eventid == "":
             received = -1
             self.post(received)
@@ -20,8 +16,12 @@ class APIAttendHandler(webapp2.RequestHandler):
             received = -2
             self.post(received)
         else:
-            mydb = DAL()
-            received = mydb.set_attendings(int(id), int(eventid))
+            fb = fb_logic()
+            if fb.check_token(token = token,eventid = eventid):#check if the token is valid
+                received = True
+            else:
+                return 1
+
             self.post(received)
         '''returns:
                 0 = OK
@@ -32,7 +32,7 @@ class APIAttendHandler(webapp2.RequestHandler):
     def post(self, received):
         if received is -2:
             self.response.set_status(400)
-            self.response.write("ERROR: Missing User ID")
+            self.response.write("ERROR: Missing User Token")
             return
         elif received is -1:
             self.response.set_status(401)
