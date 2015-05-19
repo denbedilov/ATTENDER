@@ -20,8 +20,9 @@ class Event(ndb.Model):
 
     @staticmethod
     def check_event_exist(e_id):
-        if Event.query(Event.id == e_id).get():
-            return True
+        q = Event.query(Event.id == e_id).get()
+        if q:
+            return q
         else:
             return False
 
@@ -47,6 +48,15 @@ class Event(ndb.Model):
             res.put()
         except: #if such event not exist, add it later
             pass
+
+    def update_attendees(self, ev_id, action):
+        q = Event.get_by_id(ev_id)
+        if q is not False:
+            if action == "add":
+                q.attendees += 1
+            elif action == "sub":
+                q.attendees -= 1
+            q.put()
 
 
 

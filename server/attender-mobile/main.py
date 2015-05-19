@@ -20,11 +20,13 @@ from models.Event import Event
 import logging
 import json
 from DAL import DAL
+from facebook_logic import fb_logic
 
 
 class MainHandler(webapp2.RequestHandler):
     def get(self):
         self.response.write('Welcome to attender server!')
+        
 
 app = webapp2.WSGIApplication([
     ('/', MainHandler)

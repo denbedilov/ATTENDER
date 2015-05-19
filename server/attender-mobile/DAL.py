@@ -7,29 +7,63 @@ from google.appengine.ext import ndb
 from models.User import User
 from models.Event import Event
 from models.Attendings import Attendings
+import json
+from time import mktime
+from facebook_logic import fb_logic
 import logging
 
 
 class DAL():
-    def get_user_details(self, user_id):
+
+    @staticmethod
+    def get_user_details(user_id, fbf="false"):
         user = User.query(User.user_id == user_id).get()
         user_details = dict()
         user_details['name'] = user.first_name
         user_details['lastname'] = user.last_name
+        user_details['fbf'] = fbf
         return user_details
 
-    def get_event_details(self, event_id):
-       pass
+    @staticmethod
+    def get_event_details(event_id):
+        res = Event.get_by_id(event_id)
+        event = dict()
+        events_list = list()
+        event['id'] = res.key.id()
+        event['name'] = res.name
+        date_time = int(mktime(res.date.utctimetuple()) * 1000)
+        event['date'] = date_time
+        event['city'] = res.city
+        event['address'] = res.address
+        event['description'] = res.description
+        event['host'] = res.host
+        event['event_url'] = res.event_url
+        event['attendees'] = res.attendees
+        event['price'] = res.price
+        return event
 
-    def get_attendings(self, ev_id):
+    def get_attendings(self, ev_id, token):
         if Event.get_by_id(ev_id) is None:
             return 1
-        results = Attendings.query(Attendings.event_id == ev_id).get()
+        results = Attendings.query(Attendings.event_id == ev_id)
         if results is None:
             return 0
-        return results
+        return self.json_format_attendees(results, token)
 
-    def set_user_details(self, user_id,  name, last_name, em=None):
+    def json_format_attendees(self, query_res, token):
+        users = list()
+        fb_friends = fb_logic.get_fb_friends(token)
+        for res in query_res:
+            fbf = "false"
+            for f in fb_friends:
+                if int(f) == res.user_id:
+                    fbf = "true"
+
+            users.append(self.get_user_details(res.user_id, fbf))
+        return json.dumps(users)
+
+    @staticmethod
+    def set_user_details(user_id,  name, last_name, em=None):
         user1 = User()
         if not user1.check_user_exist(user_id):
             user1.user_id = user_id
@@ -38,9 +72,11 @@ class DAL():
             user1.email = em
             user1.put()
 
-    def set_event_details(self, e_id, name, date, city,  add, descr, host, url, attendees, price, category):
+    @staticmethod
+    def set_event_details(e_id, name, date, city,  add, descr, host, url, attendees, price, category):
         event1 = Event()
-        if not event1.check_event_exist(e_id):
+        qry = event1.check_event_exist(e_id)
+        if qry is False:
             event1.id = e_id
             event1.name = name
             event1.date = date
@@ -56,7 +92,16 @@ class DAL():
                 event1.category = category
             event1.put()
 
-    def set_attendings(self, u_key, e_key):
+        else:
+            results = Attendings.query(Attendings.event_id == qry.get_by_id(e_id))
+            if results is not None:
+                qry.attendees = attendees + results.count()
+            else:
+                qry.attendees = attendees
+
+    @staticmethod
+    def set_attendings(u_key, e_key):
+        event1 = Event()
         attendings1 = Attendings()
 
         qry = User.query(User.user_id == u_key).get()
@@ -68,8 +113,32 @@ class DAL():
             return 2
         else:
             attendings1.event_id = e_key
-
-        attendings1.put()
+        if Attendings.check_attend_exist(u_key, e_key) is False:
+            attendings1.put()
+            event1.update_attendees(e_key, action="add")
         return 0
+
+    @staticmethod
+    def unuttend(u_key, e_key):
+        event1 = Event()
+        qry = User.query(User.user_id == u_key).get()
+        if qry is None:
+            return 1
+        if Event.get_by_id(e_key) is None:
+            return 2
+
+        q = Attendings.check_attend_exist(u_key, e_key)
+        if q:
+            q.key.delete()
+            event1.update_attendees(e_key, action="sub")
+        return 0
+
+    def get_all_user_events(self, u_id):
+        events_list = list()
+        results = Attendings.query(Attendings.user_id == u_id)
+        for res in results:
+            events_list.append(self.get_event_details(res.event_id))
+        return json.dumps(events_list)
+
 
 
