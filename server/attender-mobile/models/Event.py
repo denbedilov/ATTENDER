@@ -3,7 +3,6 @@ __author__ = 'olesya'
 from google.appengine.ext import ndb
 from datetime import datetime
 
-import logging
 
 class Event(ndb.Model):
     id = ndb.StringProperty()
@@ -41,8 +40,8 @@ class Event(ndb.Model):
         res = res.filter(Event.date > datetime.now())
         return res
 
-    def update_category(self, id,  category):
-        res = Event.query(Event.id == id).get()
+    def update_category(self, e_id,  category):
+        res = Event.query(Event.id == e_id).get()
         try:
             res.category = category
             res.put()
@@ -57,6 +56,8 @@ class Event(ndb.Model):
             elif action == "sub":
                 q.attendees -= 1
             q.put()
+
+
 
 
 

@@ -1,3 +1,4 @@
+# coding=utf-8
 __author__ = 'itamar and olesya'
 
 import sys
@@ -8,13 +9,10 @@ from time import mktime
 from models.Event import Event
 import logging
 
-sys.path.insert(0, 'lib')  #we need this line in order to make libraries imported from lib folder work properly
-import requests  #Used for http requests
+sys.path.insert(0, 'lib')  # we need this line in order to make libraries imported from lib folder work properly
+import requests  # Used for http requests
 
 
-
-
-#-*- coding: utf-8 -*-
 # Meetup.com documentation here: http://www.meetup.com/meetup_api/docs/2/groups/
 
 URL_PATTERN = "https://api.meetup.com/find/open_events?"
@@ -23,20 +21,21 @@ API_KEY = "185c2b3e44c4b4644365a3022d5a2f"
 
 
 class SearchUsingAPI():
-    topics = {"Career": 2,                           #Career & Business"
-              "Community": 4,                        #Community & Environment
+    topics = {"Career": 2,      #Career & Business"
+              "Community": 4,   #Community & Environment
               "Games": 11,
               "Fitness": 9,
-              "Health": 14,                          #Health & Wellbeing"
-              "Language": 16,      #Language & Ethnic Identity"
-              "New Age": 22,                         #New Age & Spirituality
+              "Health": 14,     #Health & Wellbeing"
+              "Language": 16,   #Language & Ethnic Identity"
+              "New Age": 22,    #New Age & Spirituality
               "Socializing": 31,
               "Tech": 34,
-              "Cars": 3}                             #Cars & Motorcycles
+              "Cars": 3}        #Cars & Motorcycles
 
-    possible_cities = ['Tel Aviv-Yafo', 'Jerusalem', 'Herzeliyya', 'Haifa', "Ra'anana", 'Rekhovot', 'Kefar Sava', 'Ramat Gan', 'Netanya', "Modi'in"]
+    possible_cities = ['Tel Aviv-Yafo', 'Jerusalem', 'Herzeliyya', 'Haifa', "Ra'anana", 'Rekhovot', 'Kefar Sava',
+                       'Ramat Gan', 'Netanya', "Modi'in"]
 
-    def request_events(self, city=None, category=None, date_and_time=None, city_num=10):
+    def request_events(self, city=None, category=None, date_and_time=None, city_num=10, radius="1"):
         events_list = []
         per_page = 200
         offset = 0
@@ -63,13 +62,13 @@ class SearchUsingAPI():
                 cities.append(city)
             else:
                 logging.info("The city is not exist")
-
         else:
             cities = self.request_city(city_num)
 
         for city in cities:  #for each city requst info from meetup
             request.update({"sign": "true", "country": "il", "key": API_KEY,
-                                    "page": per_page, "offset": offset, "fields": "event_hosts", "city": city, "text_format": "plain"})
+                            "page": per_page, "offset": offset, "fields": "event_hosts", "city": city,
+                            "text_format": "plain", "radius": radius})
 
             response, status_code = get_results("http://api.meetup.com/2/open_events", request)
             offset += 1
@@ -95,7 +94,7 @@ class SearchUsingAPI():
                     except:
                         event['host'] = 'Unknown'
                     try:
-                        event['attendees'] = res['yes_rsvp_count'] #Attendees
+                        event['attendees'] = res['yes_rsvp_count']  #Attendees
                     except:
                         event['attendees'] = 'Unknown'
                     try:
@@ -112,7 +111,7 @@ class SearchUsingAPI():
     def request_city(self, city_num):
         cities = []
         request = {"sign": "true", "country": "il", "key": API_KEY,
-                                   "page": city_num, "offset": 0}
+                   "page": city_num, "offset": 0}
         response, status_code = get_results(URL_PATTERN_CITIES, request)
         logging.info("In cities request, status code: {}".format(status_code))
         if status_code == 200:
@@ -148,30 +147,33 @@ def save_in_db(event, category=None):
         e.update_category(event['id'], category)
 
     mydb.set_event_details(event['id'], event['name'], date, event['city'], event['address'],
-                           event['description'], event['host'], event['event_url'], event['attendees'], event['price'], category)
+                           event['description'], event['host'], event['event_url'], event['attendees'], event['price'],
+                           category)
 
 
 def check_city(city):
-    if city in ["Jerusalem", "jerusalem"]:
+    if city in ["Jerusalem", "jerusalem", 'ירושלים']:
         return "Jerusalem"
-    elif city in ["Tel Aviv-Yafo", "Tel-Aviv", "Tel Aviv"]:
+    elif city in ["Tel Aviv-Yafo", "Tel-Aviv", "Tel Aviv", 'תל אביב', 'תל-אביב', 'תל-אביב יפו', 'תל אביב-יפו']:
         return "Tel Aviv-Yafo"
-    elif city in ['Herzeliyya', 'Herzeliya', 'Herzelia', 'Herzeliyya Pituach']:
+    elif city in ['Herzeliyya', 'Herzeliya', 'Herzliya', 'Herzelia', 'Hertzliya Pituach', 'Herzeliyah Pituach', 'Herzeliyya Pituach', 'Herzliya Pituach', 'הרצליה', 'הרצליה פיתוח']:
         return "Herzeliyya"
-    elif city in ['Haifa']:
+    elif city in ["Haifa", 'חיפה']:
         return "Haifa"
-    elif city in ["Ra'anana", "Raanana", "raanana"]:
+    elif city in ["Ra'anana", "Raanana", "raanana", 'רעננה']:
         return "Ra'anana"
-    elif city in ["Rekhovot", "rehovot"]:
+    elif city in ["Rekhovot", "rehovot", 'רחובות']:
         return "Rekhovot"
-    elif city in ["Kefar Sava"]:
+    elif city in ["Kefar Sava", 'כפר סבא', 'כפר-סבא']:
         return "Kefar Sava"
-    elif city in ["Ramat Gan", "RAMAT GAN"]:
+    elif city in ["Ramat Gan", "RAMAT GAN", 'רמת גן', 'רמת-גן']:
         return "Ramat Gan"
-    elif city in ["Netanya"]:
+    elif city in ["Netanya", 'נתניה']:
         return "Netanya"
-    elif city in ["Modi'in"]:
+    elif city in ["Modi'in", 'מודיעין', 'מודעין']:
         return "Modi'in"
+    elif city is None:
+        return "Unknown"
 
 
 
@@ -180,9 +182,8 @@ class EventSearch():
         se = SearchUsingAPI()
         events_list = []
 
-
         results = self.pull_from_db(city, category, date_and_time)
-        if results.count() < 5: # add more cities so will be more results for topics
+        if results.count() < 5:  # add more cities so will be more results for topics
             logging.info("Not enough results found")
             se.request_events(city, category, date_and_time, city_num=50)
             results = self.pull_from_db(city, category, date_and_time)

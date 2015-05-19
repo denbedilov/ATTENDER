@@ -1,20 +1,16 @@
 __author__ = 'olesya'
 
-#This class is suppose to access to DB and transfer answers to other classe
-#For the time the server is under development it will retrieve fake data
+#This class is suppose to access to DB and transfer answers to other classes
 
-from google.appengine.ext import ndb
 from models.User import User
 from models.Event import Event
 from models.Attendings import Attendings
 import json
 from time import mktime
 from facebook_logic import fb_logic
-import logging
 
 
 class DAL():
-
     @staticmethod
     def get_user_details(user_id, fbf="false"):
         user = User.query(User.user_id == user_id).get()

@@ -1,4 +1,5 @@
 __author__ = 'olesya'
+# coding=utf-8
 #!/usr/bin/env python
 #
 # Copyright 2007 Google Inc.
@@ -16,24 +17,32 @@ __author__ = 'olesya'
 # limitations under the License.
 #
 import webapp2
-from SearchEventsInterface import SearchUsingAPI
+import SearchEventsInterface
 from models.Event import Event
 import logging
 from datetime import datetime
 
+
 class DailyTreatEventsHandler(webapp2.RequestHandler):
     def get(self):
         self.response.write('Welcome to attender server! Here is a cron job for pulling events from Meetup API')
-        obj = SearchUsingAPI()
+        obj = SearchEventsInterface.SearchUsingAPI()
         ev = Event()
         logging.info("Adding new events to DataStore")
-        obj.request_events()
+        results = obj.request_events(radius="25")
+        logging.info("Events added: {}".format(results))
         logging.info("Deleting old events from DataStore")
         qe = ev.return_all_events()
         results = qe.filter(Event.date < datetime.now())
         for res in results:
             res.key.delete()
 
+        #Update city names
+        for q in qe:
+            changed = SearchEventsInterface.check_city(q.city)
+            if changed:
+                q.city = changed
+                q.put()
 
 app = webapp2.WSGIApplication([
     ('/cron', DailyTreatEventsHandler)
