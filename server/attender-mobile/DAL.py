@@ -1,7 +1,7 @@
 __author__ = 'olesya'
 
 #This class is suppose to access to DB and transfer answers to other classes
-
+import logging
 from models.User import User
 from models.Event import Event
 from models.Attendings import Attendings
@@ -96,7 +96,7 @@ class DAL():
                 qry.attendees = attendees
 
     @staticmethod
-    def set_attendings(u_key, e_key):
+    def attend(u_key, e_key):
         event1 = Event()
         attendings1 = Attendings()
 
@@ -109,21 +109,21 @@ class DAL():
             return 2
         else:
             attendings1.event_id = e_key
-        if Attendings.check_attend_exist(u_key, e_key) is False:
+        if attendings1.check_attend_exist(u_key, e_key) is False:
             attendings1.put()
             event1.update_attendees(e_key, action="add")
         return 0
 
     @staticmethod
-    def unuttend(u_key, e_key):
+    def unattend(u_key, e_key):
         event1 = Event()
         qry = User.query(User.user_id == u_key).get()
         if qry is None:
             return 1
         if Event.get_by_id(e_key) is None:
             return 2
-
-        q = Attendings.check_attend_exist(u_key, e_key)
+        attendings1 = Attendings()
+        q = attendings1.check_attend_exist(u_key, e_key)
         if q:
             q.key.delete()
             event1.update_attendees(e_key, action="sub")

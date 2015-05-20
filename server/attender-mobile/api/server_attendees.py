@@ -12,15 +12,15 @@ class APIAttendeesHandler(webapp2.RequestHandler):
     def get(self):
         reply = -1
         received = False
-        id = self.request.get("eventid").encode('ascii', 'ignore')
+        eventid = self.request.get("eventid").encode('ascii', 'ignore')
         token = self.request.get("token").encode('ascii','ignore')
-        logging.info("eventid: "+id)
-        if id == "" or token == "":
+        logging.info("eventid: "+eventid)
+        if eventid == "" or token == "":
             self.post(-1)
         else:
             fb = fb_logic()
             if fb.check_user(token) is not False:
-                self.post(self.mydb.get_attendings(id,token))
+                self.post(self.mydb.get_attendings(ev_id=int(eventid),token=token))
             else:
                 self.post(2)
         '''
