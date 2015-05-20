@@ -1,6 +1,7 @@
 __author__ = 'itamar'
 from api import facebook
 import logging
+import DAL
 
 class fb_logic():
     def validate_fb_login(self, id, access_token):

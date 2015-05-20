@@ -9,7 +9,7 @@
         <option name="email" value="itamarsharify@gmail.com" />
         <option name="gp" value="dfdddfc2dfc3dfd9dfdadfcfdfd8dfc7dfd3dfc6dfc5dfdcdfcf" />
         <option name="oauth2" value="false" />
-        <option name="deployConfigured" value="false" />
+        <option name="deployConfigured" value="true" />
         <option name="saveCredentials" value="true" />
       </configuration>
     </facet>
