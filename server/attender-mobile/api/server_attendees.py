@@ -8,6 +8,7 @@ from DAL import DAL
 
 class APIAttendeesHandler(webapp2.RequestHandler):
     mydb = DAL()
+
     def get(self):
         reply = -1
         received = False
@@ -30,26 +31,26 @@ class APIAttendeesHandler(webapp2.RequestHandler):
             0 - No Attendees
         '''
 
-    def post(self, attendees):
-        if attendees == -1:
+    def post(self, received):
+        if received == -1:
             self.response.set_status(400)
             self.response.write("ERROR: Missing parameters")
             return
-        elif attendees == 1:
+        elif received == 1:
             self.response.set_status(401)
             self.response.write("ERROR: No Such ID")
             return
-        elif attendees == 0:
+        elif received == 0:
             self.response.set_status(402)
             self.response.write("ERROR: No Attendees")
             return
-        elif attendees == 2:
+        elif received == 2:
             self.response.set_status(403)
             self.response.write("ERROR: Invalid Token")
             return
         else:
             self.response.set_status(200)
-            reply_json = json.dumps(attendees)
+            reply_json = json.dumps(received)
             self.response.write(reply_json)
             return
 

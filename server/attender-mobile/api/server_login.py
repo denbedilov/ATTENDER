@@ -4,6 +4,7 @@ import sys
 from facebook_logic import fb_logic
 import logging
 import webapp2
+from DAL import DAL
 
 sys.path.insert(0, 'lib')  #we need this line in order to make libraries imported from lib folder work properly
 import requests
@@ -14,33 +15,40 @@ class APILoginHandler(webapp2.RequestHandler):
 
     def get(self):
         received = False
-        id = self.request.get("id").encode('ascii', 'ignore')
+        _id = self.request.get("id").encode('ascii', 'ignore')
         token = self.request.get("token").encode('ascii', 'ignore')
-        if id == "" or  token == "":
+        if _id == "" or token == "":
             received = False
         else:
             fb = fb_logic()
-            if fb.test_id(id = id) is not True:
+            if fb.test_id(_id) is False:
                 received = 2
             else:
                 fb = fb_logic()
-                received = fb.validate_fb_login(id=id,access_token=token)
+                if fb.validate_fb_login(_id, access_token=token) is not False:
+                    mydb = DAL()
+                    user = fb.validate_fb_login(_id, access_token=token)
+                    mydb.set_user_details(user_id=int(_id), name=user['first_name'].encode('ascii', 'ignore'), last_name=user['last_name'].encode('ascii', 'ignore'))
+                    received = True
+                    logging.info("received is True")
+                else:
+                    received = -1
 
         logging.info(received)
         self.post(received)
 
     def post(self, received):
-        if received == False:
+        if received is False:
             self.response.set_status(400)
             self.response.write("ERROR: Missing parameters")
             return
-        elif received == 1:
-             self.response.set_status(401)
-             self.response.write("Session Aouth Failed")
+        elif received == -1:
+            self.response.set_status(401)
+            self.response.write("Session Aouth Failed")
         elif received == 2:
             self.response.set_status(402)
             self.response.write("Invalid ID")
-        else:
+        elif received is True:
             self.response.set_status(200)
             self.response.write("OK")
             return

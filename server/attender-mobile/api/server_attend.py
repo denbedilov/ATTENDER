@@ -6,7 +6,7 @@ import webapp2
 class APIAttendHandler(webapp2.RequestHandler):
     def get(self):
         received = 0
-        token = self.request.get("token").encode('ascii', 'ignore')
+        _token = self.request.get("token").encode('ascii', 'ignore')
         eventid = self.request.get("eventid").encode('ascii', 'ignore')
 
         if eventid == "":
@@ -17,7 +17,7 @@ class APIAttendHandler(webapp2.RequestHandler):
             self.post(received)
         else:
             fb = fb_logic()
-            if fb.check_token(token = token,eventid = eventid):#check if the token is valid
+            if fb.check_token(token=_token):  #check if the token is valid
                 received = True
             else:
                 return 1
