@@ -1,5 +1,5 @@
-__author__ = 'olesya'
 # coding=utf-8
+__author__ = 'olesya'
 #!/usr/bin/env python
 #
 # Copyright 2007 Google Inc.

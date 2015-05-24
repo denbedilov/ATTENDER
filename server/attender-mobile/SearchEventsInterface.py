@@ -152,25 +152,25 @@ def save_in_db(event, category=None):
 
 
 def check_city(city):
-    if city in ["Jerusalem", "jerusalem", 'ירושלים']:
+    if city in ["Jerusalem", "jerusalem", u'ירושלים']:
         return "Jerusalem"
-    elif city in ["Tel Aviv-Yafo", "Tel-Aviv", "Tel Aviv", 'תל אביב', 'תל-אביב', 'תל-אביב יפו', 'תל אביב-יפו']:
+    elif city in ["Tel Aviv-Yafo", "Tel-Aviv", "Tel Aviv", u'תל אביב', u'תל-אביב', u'תל-אביב יפו', u'תל אביב-יפו']:
         return "Tel Aviv-Yafo"
-    elif city in ['Herzeliyya', 'Herzeliya', 'Herzliya', 'Herzelia', 'Hertzliya Pituach', 'Herzeliyah Pituach', 'Herzeliyya Pituach', 'Herzliya Pituach', 'הרצליה', 'הרצליה פיתוח']:
+    elif city in ['Herzeliyya', 'Herzeliya', 'Herzliya', 'Herzelia', 'Hertzliya Pituach', 'Herzeliyah Pituach', 'Herzeliyya Pituach', 'Herzliya Pituach', u'הרצליה', u'הרצליה פיתוח']:
         return "Herzeliyya"
-    elif city in ["Haifa", 'חיפה']:
+    elif city in ["Haifa", u'חיפה']:
         return "Haifa"
-    elif city in ["Ra'anana", "Raanana", "raanana", 'רעננה']:
+    elif city in ["Ra'anana", "Raanana", "raanana", u'רעננה']:
         return "Ra'anana"
-    elif city in ["Rekhovot", "rehovot", 'רחובות']:
+    elif city in ["Rekhovot", "rehovot", u'רחובות']:
         return "Rekhovot"
-    elif city in ["Kefar Sava", 'כפר סבא', 'כפר-סבא']:
+    elif city in ["Kefar Sava", u'כפר סבא', u'כפר-סבא']:
         return "Kefar Sava"
-    elif city in ["Ramat Gan", "RAMAT GAN", 'רמת גן', 'רמת-גן']:
+    elif city in ["Ramat Gan", "RAMAT GAN", u'רמת גן', u'רמת-גן']:
         return "Ramat Gan"
-    elif city in ["Netanya", 'נתניה']:
+    elif city in ["Netanya", u'נתניה']:
         return "Netanya"
-    elif city in ["Modi'in", 'מודיעין', 'מודעין']:
+    elif city in ["Modi'in", u'מודיעין', u'מודעין']:
         return "Modi'in"
     elif city is None:
         return "Unknown"
