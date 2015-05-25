@@ -1,7 +1,6 @@
 __author__ = 'itamar'
 
 from facebook_logic import fb_logic
-import json
 import logging
 import webapp2
 from DAL import DAL
@@ -50,8 +49,7 @@ class APIAttendeesHandler(webapp2.RequestHandler):
             return
         else:
             self.response.set_status(200)
-            reply_json = json.dumps(received)
-            self.response.write(reply_json)
+            self.response.write(received)
             return
 
 
