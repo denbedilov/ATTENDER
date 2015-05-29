@@ -12,31 +12,69 @@ from facebook_logic import fb_logic
 
 class DAL():
     @staticmethod
+    def set_user_details(user_id,  name, last_name, em=None):
+        user1 = User()
+        if not user1.check_user_exist(user_id):
+            user1.user_id = user_id
+            user1.first_name = name
+            user1.last_name = last_name
+            user1.email = em
+            user1.put()
+
+    @staticmethod
     def get_user_details(user_id, fbf="false"):
-        user = User.query(User.user_id == user_id).get()
         user_details = dict()
-        user_details['name'] = user.first_name
-        user_details['lastname'] = user.last_name
-        user_details['fbf'] = fbf
-        return user_details
+        user = User.query(User.user_id == user_id).get()
+        if user is not None:
+            user_details['name'] = user.first_name
+            user_details['lastname'] = user.last_name
+            user_details['fbf'] = fbf
+            return user_details
+
+    @staticmethod
+    def set_event_details(e_id, name, date, city,  add, descr, host, url, attendees, price, category):
+        event1 = Event()
+        qry = event1.check_event_exist(e_id)
+        if qry is False:
+            event1.id = e_id
+            event1.name = name
+            event1.date = date
+            event1.city = city
+            event1.address = add
+            event1.description = descr
+            event1.host = host
+            event1.event_url = url
+            if (attendees != "Unknown"):
+                event1.attendees = attendees
+            event1.price = price
+            if category is not None:
+                event1.category = category
+            key = event1.put()
+            return key
+        else:
+            results = Attendings.query(Attendings.event_id == qry.get_by_id(e_id))
+            if results is not None:
+                qry.attendees = attendees + results.count()
+            else:
+                qry.attendees = attendees
 
     @staticmethod
     def get_event_details(event_id):
         res = Event.get_by_id(event_id)
-        event = dict()
-        events_list = list()
-        event['id'] = res.key.id()
-        event['name'] = res.name
-        date_time = int(mktime(res.date.utctimetuple()) * 1000)
-        event['date'] = date_time
-        event['city'] = res.city
-        event['address'] = res.address
-        event['description'] = res.description
-        event['host'] = res.host
-        event['event_url'] = res.event_url
-        event['attendees'] = res.attendees
-        event['price'] = res.price
-        return event
+        if res is not None:
+            event = dict()
+            event['id'] = res.key.id()
+            event['name'] = res.name
+            date_time = int(mktime(res.date.utctimetuple()) * 1000)
+            event['date'] = date_time
+            event['city'] = res.city
+            event['address'] = res.address
+            event['description'] = res.description
+            event['host'] = res.host
+            event['event_url'] = res.event_url
+            event['attendees'] = res.attendees
+            event['price'] = res.price
+            return event
 
     def get_attendings(self, ev_id, token):
         if Event.get_by_id(ev_id) is None:
@@ -58,42 +96,9 @@ class DAL():
             users.append(self.get_user_details(res.user_id, fbf))
         return json.dumps(users)
 
-    @staticmethod
-    def set_user_details(user_id,  name, last_name, em=None):
-        user1 = User()
-        if not user1.check_user_exist(user_id):
-            user1.user_id = user_id
-            user1.first_name = name
-            user1.last_name = last_name
-            user1.email = em
-            user1.put()
 
-    @staticmethod
-    def set_event_details(e_id, name, date, city,  add, descr, host, url, attendees, price, category):
-        event1 = Event()
-        qry = event1.check_event_exist(e_id)
-        if qry is False:
-            event1.id = e_id
-            event1.name = name
-            event1.date = date
-            event1.city = city
-            event1.address = add
-            event1.description = descr
-            event1.host = host
-            event1.event_url = url
-            if (attendees != "Unknown"):
-                event1.attendees = attendees
-            event1.price = price
-            if category is not None:
-                event1.category = category
-            event1.put()
 
-        else:
-            results = Attendings.query(Attendings.event_id == qry.get_by_id(e_id))
-            if results is not None:
-                qry.attendees = attendees + results.count()
-            else:
-                qry.attendees = attendees
+
 
     @staticmethod
     def attend(u_key, e_key):
