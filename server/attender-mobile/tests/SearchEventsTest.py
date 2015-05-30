@@ -1,5 +1,5 @@
+# coding=utf-8
 __author__ = 'olesya'
-
 import unittest
 from SearchEventsInterface import SearchUsingAPI
 import json
@@ -39,6 +39,12 @@ class SearchEventsTester(unittest.TestCase):
     def test_get_cities(self):
         cities = self.obj.request_city(10)
         print cities
+
+    def test_unicode(self):
+        flag = False
+        if 'ירושלים' in ["Jerusalem", "jerusalem", 'ירושלים']:
+           flag = True
+        self.assertTrue(flag)
 
 def main():
     unittest.main()

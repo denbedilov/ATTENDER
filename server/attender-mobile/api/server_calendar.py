@@ -1,7 +1,5 @@
 __author__ = 'itamar'
 from facebook_logic import fb_logic
-import json
-import logging
 import webapp2
 from DAL import DAL
 
@@ -30,8 +28,7 @@ class APICalendarHandler(webapp2.RequestHandler):
             self.response.status(401)
             self.response.write("ERROR: Wrong ID")
         else:
-            reply_json = json.dumps(status)
-            self.response.write(reply_json)
+            self.response.write(status)
 
 calendar = webapp2.WSGIApplication([
     ('/calendar', APICalendarHandler)

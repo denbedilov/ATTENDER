@@ -13,6 +13,8 @@ handlers:
   script: api.search_endpoint.app
 - url: /login
   script: api.server_login.login
+  login: optional
+  secure: always
 - url: /attend
   script: api.server_attend.attend
 - url: /attendees

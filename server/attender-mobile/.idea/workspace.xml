@@ -21,7 +21,7 @@
     <SUITE FILE_PATH="coverage/attender-mobile$Unittests_in_SearchEventsTest.coverage" NAME="Unittests in SearchEventsTest Coverage Results" MODIFIED="1430917326844" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/tests" />
     <SUITE FILE_PATH="coverage/attender-mobile$Unittest_SearchEvents_test_get_json_events.coverage" NAME="Unittest SearchEvents.test_get_json_events Coverage Results" MODIFIED="1430840163352" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/tests" />
     <SUITE FILE_PATH="coverage/attender-mobile$Unittests_in_SearchEvents.coverage" NAME="Unittests in SearchEvents Coverage Results" MODIFIED="1430838982117" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/tests" />
-    <SUITE FILE_PATH="coverage/attender-mobile$attender_mobile.coverage" NAME="attender-mobile Coverage Results" MODIFIED="1432895841014" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="" />
+    <SUITE FILE_PATH="coverage/attender-mobile$attender_mobile.coverage" NAME="attender-mobile Coverage Results" MODIFIED="1432997611928" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="" />
     <SUITE FILE_PATH="coverage/attender-mobile$Unittests_in_DBTest.coverage" NAME="Unittests in DBTest Coverage Results" MODIFIED="1430499624609" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/tests" />
     <SUITE FILE_PATH="coverage/attender-mobile$Unittests_in_UserDetails.coverage" NAME="Unittests in UserDetails Coverage Results" MODIFIED="1430917772209" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/tests" />
     <SUITE FILE_PATH="coverage/attender-mobile$Unittest_UserDetails_test_get_name.coverage" NAME="Unittest UserDetails.test_get_name Coverage Results" MODIFIED="1430499821515" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/tests" />
@@ -68,10 +68,10 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="facebook_logic.py" pinned="false" current-in-tab="true">
+      <file leaf-file-name="facebook_logic.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/facebook_logic.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.111363634">
+            <state vertical-scroll-proportion="0.0">
               <caret line="51" column="0" selection-start-line="51" selection-start-column="0" selection-end-line="51" selection-end-column="0" />
               <folding />
             </state>
@@ -100,24 +100,14 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="SearchEventsTest.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/tests/SearchEventsTest.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="33" column="30" selection-start-line="33" selection-start-column="30" selection-end-line="33" selection-end-column="30" />
-              <folding>
-                <element signature="e#23#38#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="server_attendees.py" pinned="false" current-in-tab="false">
+      <file leaf-file-name="server_attendees.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/api/server_attendees.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="22" column="50" selection-start-line="22" selection-start-column="36" selection-end-line="22" selection-end-column="50" />
-              <folding />
+            <state vertical-scroll-proportion="2.0477273">
+              <caret line="53" column="0" selection-start-line="53" selection-start-column="0" selection-end-line="53" selection-end-column="0" />
+              <folding>
+                <element signature="e#23#58#0" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -126,7 +116,7 @@
         <entry file="file://$PROJECT_DIR$/tests/DBTest.py">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0">
-              <caret line="15" column="28" selection-start-line="15" selection-start-column="28" selection-end-line="15" selection-end-column="28" />
+              <caret line="35" column="28" selection-start-line="35" selection-start-column="28" selection-end-line="35" selection-end-column="28" />
               <folding />
             </state>
           </provider>
@@ -136,9 +126,10 @@
         <entry file="file://$PROJECT_DIR$/DAL.py">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0">
-              <caret line="43" column="34" selection-start-line="43" selection-start-column="29" selection-end-line="43" selection-end-column="34" />
+              <caret line="1" column="0" selection-start-line="1" selection-start-column="0" selection-end-line="1" selection-end-column="0" />
               <folding>
                 <element signature="e#100#114#0" expanded="true" />
+                <marker date="1432946205834" expanded="true" signature="302:4566" placeholder="..." />
               </folding>
             </state>
           </provider>
@@ -148,13 +139,30 @@
         <entry file="file://$PROJECT_DIR$/app.yaml">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0">
-              <caret line="23" column="8" selection-start-line="23" selection-start-column="8" selection-end-line="23" selection-end-column="8" />
+              <caret line="16" column="10" selection-start-line="16" selection-start-column="10" selection-end-line="16" selection-end-column="16" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="google_logic.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/google_logic.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0">
+              <caret line="12" column="67" selection-start-line="12" selection-start-column="45" selection-end-line="12" selection-end-column="67" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
     </leaf>
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Python Script" />
+      </list>
+    </option>
   </component>
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
@@ -170,15 +178,16 @@
         <option value="$PROJECT_DIR$/DailyTreatEvents.py" />
         <option value="$PROJECT_DIR$/tests/SearchEventsTest.py" />
         <option value="$PROJECT_DIR$/cron.yaml" />
-        <option value="$PROJECT_DIR$/app.yaml" />
         <option value="$PROJECT_DIR$/dailytreatevents.py" />
         <option value="$PROJECT_DIR$/models/Event.py" />
         <option value="$PROJECT_DIR$/search_endpoint.py" />
         <option value="$PROJECT_DIR$/SearchEventsInterface.py" />
-        <option value="$PROJECT_DIR$/api/server_attendees.py" />
         <option value="$PROJECT_DIR$/tests/DBTest.py" />
         <option value="$PROJECT_DIR$/main.py" />
         <option value="$PROJECT_DIR$/facebook_logic.py" />
+        <option value="$PROJECT_DIR$/app.yaml" />
+        <option value="$PROJECT_DIR$/google_logic.py" />
+        <option value="$PROJECT_DIR$/api/server_attendees.py" />
       </list>
     </option>
   </component>
@@ -219,6 +228,7 @@
     </navigator>
     <panes>
       <pane id="Scratches" />
+      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <PATH>
@@ -281,7 +291,6 @@
           </PATH>
         </subPane>
       </pane>
-      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -626,16 +635,17 @@
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
       <envs />
-      <option name="SDK_HOME" value="C:\Python27\python27.3\python.exe" />
+      <option name="SDK_HOME" value="" />
       <option name="WORKING_DIRECTORY" value="" />
-      <option name="IS_MODULE_SDK" value="false" />
+      <option name="IS_MODULE_SDK" value="true" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
       <module name="attender-mobile" />
       <EXTENSION ID="PythonCoverageRunConfigurationExtension" enabled="false" sample_coverage="true" runner="coverage.py" />
       <option name="launchJavascriptDebuger" value="false" />
       <option name="host" value="127.0.0.1" />
-      <option name="browserUrl" value="http://127.0.0.1:9080/" />
+      <option name="port" value="8080" />
+      <option name="browserUrl" value="http://127.0.0.1:8080/" />
       <option name="additionalOptions" value="" />
       <RunnerSettings RunnerId="PythonRunner" />
       <ConfigurationWrapper RunnerId="PythonRunner" />
@@ -868,17 +878,17 @@
     </configuration>
     <list size="15">
       <item index="0" class="java.lang.String" itemvalue="App Engine server.attender-mobile" />
-      <item index="1" class="java.lang.String" itemvalue="Python tests.Unittest UserDetails.test_set_name" />
-      <item index="2" class="java.lang.String" itemvalue="Python tests.Unittests in UserDetails" />
-      <item index="3" class="java.lang.String" itemvalue="Python tests.Unittest UserDetails.test_get_name" />
-      <item index="4" class="java.lang.String" itemvalue="Python tests.Unittests in SearchEvents" />
-      <item index="5" class="java.lang.String" itemvalue="Python tests.Unittest SearchEvents.test_get_events_by_time" />
-      <item index="6" class="java.lang.String" itemvalue="Python tests.Unittest UserDetails.test_set_event" />
-      <item index="7" class="java.lang.String" itemvalue="Python tests.Unittest SearchEventsTester.test_get_empty_json" />
-      <item index="8" class="java.lang.String" itemvalue="Python tests.Unittest UserDetails.test_pull_from_db" />
-      <item index="9" class="java.lang.String" itemvalue="Python tests.Unittest SearchEventsTester.test_get_cities" />
-      <item index="10" class="java.lang.String" itemvalue="Python.EventSearch" />
-      <item index="11" class="java.lang.String" itemvalue="Python.TestFindPerson" />
+      <item index="1" class="java.lang.String" itemvalue="Python.EventSearch" />
+      <item index="2" class="java.lang.String" itemvalue="Python.TestFindPerson" />
+      <item index="3" class="java.lang.String" itemvalue="Python tests.Unittest UserDetails.test_set_name" />
+      <item index="4" class="java.lang.String" itemvalue="Python tests.Unittests in UserDetails" />
+      <item index="5" class="java.lang.String" itemvalue="Python tests.Unittest UserDetails.test_get_name" />
+      <item index="6" class="java.lang.String" itemvalue="Python tests.Unittests in SearchEvents" />
+      <item index="7" class="java.lang.String" itemvalue="Python tests.Unittest SearchEvents.test_get_events_by_time" />
+      <item index="8" class="java.lang.String" itemvalue="Python tests.Unittest UserDetails.test_set_event" />
+      <item index="9" class="java.lang.String" itemvalue="Python tests.Unittest SearchEventsTester.test_get_empty_json" />
+      <item index="10" class="java.lang.String" itemvalue="Python tests.Unittest UserDetails.test_pull_from_db" />
+      <item index="11" class="java.lang.String" itemvalue="Python tests.Unittest SearchEventsTester.test_get_cities" />
       <item index="12" class="java.lang.String" itemvalue="Python tests.Unittests in SearchEventsTest" />
       <item index="13" class="java.lang.String" itemvalue="Python tests.Unittest SearchEvents.test_get_json_events" />
       <item index="14" class="java.lang.String" itemvalue="Python tests.Unittest SearchEventsTester.test_get_json_events" />
@@ -928,7 +938,7 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1382" height="744" extended-state="6" />
-    <editor active="false" />
+    <editor active="true" />
     <layout>
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.1317716" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3283082" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
@@ -937,7 +947,7 @@
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Python Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32952693" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.26844585" sideWeight="0.6459909" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.26844585" sideWeight="0.6459909" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32952693" sideWeight="0.5" order="11" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
@@ -977,16 +987,6 @@
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/DAL.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding>
-            <element signature="e#100#114#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/tests/DBTest.py">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
@@ -1067,6 +1067,7 @@
           <caret line="17" column="29" selection-start-line="17" selection-start-column="29" selection-end-line="17" selection-end-column="29" />
           <folding>
             <element signature="e#100#114#0" expanded="true" />
+            <marker date="1432946205834" expanded="true" signature="302:4566" placeholder="..." />
           </folding>
         </state>
       </provider>
@@ -1141,6 +1142,7 @@
           <caret line="7" column="30" selection-start-line="7" selection-start-column="30" selection-end-line="7" selection-end-column="30" />
           <folding>
             <element signature="e#100#114#0" expanded="true" />
+            <marker date="1432946205834" expanded="true" signature="302:4566" placeholder="..." />
           </folding>
         </state>
       </provider>
@@ -1207,6 +1209,7 @@
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding>
             <element signature="e#100#114#0" expanded="true" />
+            <marker date="1432946205834" expanded="true" signature="302:4566" placeholder="..." />
           </folding>
         </state>
       </provider>
@@ -1279,7 +1282,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.54347825">
           <caret line="1247" column="0" selection-start-line="1247" selection-start-column="0" selection-end-line="1247" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1309,34 +1311,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="33" column="30" selection-start-line="33" selection-start-column="30" selection-end-line="33" selection-end-column="30" />
-          <folding>
-            <element signature="e#23#38#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app.yaml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="23" column="8" selection-start-line="23" selection-start-column="8" selection-end-line="23" selection-end-column="8" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/dailytreatevents.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="33" column="10" selection-start-line="33" selection-start-column="10" selection-end-line="33" selection-end-column="10" />
-          <folding>
-            <element signature="e#638#652#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/api/server_attendees.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="22" column="50" selection-start-line="22" selection-start-column="36" selection-end-line="22" selection-end-column="50" />
           <folding />
         </state>
       </provider>
@@ -1344,9 +1318,10 @@
     <entry file="file://$PROJECT_DIR$/DAL.py">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
-          <caret line="43" column="34" selection-start-line="43" selection-start-column="29" selection-end-line="43" selection-end-column="34" />
+          <caret line="1" column="0" selection-start-line="1" selection-start-column="0" selection-end-line="1" selection-end-column="0" />
           <folding>
             <element signature="e#100#114#0" expanded="true" />
+            <marker date="1432946205834" expanded="true" signature="302:4566" placeholder="..." />
           </folding>
         </state>
       </provider>
@@ -1354,7 +1329,7 @@
     <entry file="file://$PROJECT_DIR$/tests/DBTest.py">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
-          <caret line="15" column="28" selection-start-line="15" selection-start-column="28" selection-end-line="15" selection-end-column="28" />
+          <caret line="35" column="28" selection-start-line="35" selection-start-column="28" selection-end-line="35" selection-end-column="28" />
           <folding />
         </state>
       </provider>
@@ -1387,11 +1362,47 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/dailytreatevents.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="33" column="10" selection-start-line="33" selection-start-column="10" selection-end-line="33" selection-end-column="10" />
+          <folding>
+            <element signature="e#638#652#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/facebook_logic.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.111363634">
+        <state vertical-scroll-proportion="0.0">
           <caret line="51" column="0" selection-start-line="51" selection-start-column="0" selection-end-line="51" selection-end-column="0" />
           <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app.yaml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="16" column="10" selection-start-line="16" selection-start-column="10" selection-end-line="16" selection-end-column="16" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/google_logic.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="12" column="67" selection-start-line="12" selection-start-column="45" selection-end-line="12" selection-end-column="67" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/api/server_attendees.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="2.0477273">
+          <caret line="53" column="0" selection-start-line="53" selection-start-column="0" selection-end-line="53" selection-end-column="0" />
+          <folding>
+            <element signature="e#23#58#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
