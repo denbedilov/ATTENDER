@@ -52,6 +52,7 @@ class APIAttendeesHandler(webapp2.RequestHandler):
             self.response.set_status(200)
             reply_json = json.dumps(received)
             self.response.write(reply_json)
+            logging.info("received: "+received)
             return
 
 

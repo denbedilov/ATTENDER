@@ -27,6 +27,7 @@ class MainHandler(webapp2.RequestHandler):
     res = ev.get_events(city="Tel Aviv-Yafo")
     logging.info("results: {}".format(res))
 
+
 app = webapp2.WSGIApplication([
     ('/', MainHandler)
 ], debug=True)

@@ -17,6 +17,8 @@ handlers:
   script: api.server_attend.attend
 - url: /attendees
   script: api.server_attendees.attendees
+- url: /calendar
+  script: api.server_calendar.calendar
 - url: /cron
   script: dailytreatevents.app
 - url: /
