@@ -22,7 +22,7 @@ handlers:
 - url: /calendar
   script: api.server_calendar.calendar
 - url: /cron
-  script: dailytreatevents.app
+  script: daily_treat_events.app
 - url: /
   script: main.app
 
