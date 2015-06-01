@@ -8,13 +8,18 @@ handlers:
 - url: /favicon\.ico
   static_files: favicon.ico
   upload: favicon\.ico
-# Endpoints handler: this must be /_ah/spi for Endpoints, NOT /_ah/api!
 - url: /api
   script: api.search_endpoint.app
 - url: /login
   script: api.server_login.login
-  login: optional
+- url: /userlogin
+  script: api.server_user_login.userlogin
+  login: required
+  secure: optional
+- url: /googlelogin
+  script: api.google_login.googlelogin
   secure: always
+  login: required
 - url: /attend
   script: api.server_attend.attend
 - url: /attendees
@@ -22,10 +27,10 @@ handlers:
 - url: /calendar
   script: api.server_calendar.calendar
 - url: /cron
-  script: daily_treat_events.app
+  script: dailytreatevents.app
 - url: /
   script: main.app
-
+  login: admin
 
 libraries:
 - name: webapp2
