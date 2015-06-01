@@ -16,10 +16,18 @@ class Event(ndb.Model):
     attendees = ndb.IntegerProperty()
     price = ndb.StringProperty()
     category = ndb.StringProperty(default="All")
+    source = ndb.StringProperty()
 
     @staticmethod
     def check_event_exist(e_id):
         q = Event.query(Event.id == e_id).get()
+        if q:
+            return q
+        else:
+            return False
+
+    def check_event_exist_by_name(self, name):
+        q = Event.query(Event.name == name).get()
         if q:
             return q
         else:

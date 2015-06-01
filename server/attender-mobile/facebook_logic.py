@@ -60,6 +60,7 @@ class fb_logic():
         try:
             graph = facebook.GraphAPI(access_token)
             friends = graph.get_connections("me", "friends")
+            logging.info(friends)
             friend_list = [friend['id'] for friend in friends['data']]
             logging.info(friend_list)
             return friend_list

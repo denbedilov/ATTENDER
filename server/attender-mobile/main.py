@@ -15,18 +15,14 @@
 # limitations under the License.
 #
 import webapp2
-from SearchEventsInterface import EventSearch
+from search_events_interface import EventSearch
 import logging
-
+import sources_wrapper
+from DAL import DAL
 
 class MainHandler(webapp2.RequestHandler):
     def get(self):
         self.response.write('Welcome to attender server!')
-
-    ev = EventSearch()
-    res = ev.get_events(city="Tel Aviv-Yafo")
-    logging.info("results: {}".format(res))
-
 
 app = webapp2.WSGIApplication([
     ('/', MainHandler)

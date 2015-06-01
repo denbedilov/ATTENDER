@@ -3,7 +3,7 @@
 import json
 import logging
 import webapp2
-from SearchEventsInterface import EventSearch
+from search_events_interface import EventSearch
 
 class APIHandler(webapp2.RequestHandler):
 

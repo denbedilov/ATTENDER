@@ -1,6 +1,6 @@
 __author__ = 'olesya'
-
 #This class is suppose to access to DB and transfer answers to other classes
+
 import logging
 from models.User import User
 from models.Event import Event
@@ -32,9 +32,9 @@ class DAL():
             return user_details
 
     @staticmethod
-    def set_event_details(e_id, name, date, city,  add, descr, host, url, attendees, price, category):
+    def set_event_details(e_id, name, date, city,  add, descr, host, url, attendees, price, category, source):
         event1 = Event()
-        qry = event1.check_event_exist(e_id)
+        qry = event1.check_event_exist(e_id) or event1.check_event_exist_by_name(name)
         if qry is False:
             event1.id = e_id
             event1.name = name
@@ -44,6 +44,7 @@ class DAL():
             event1.description = descr
             event1.host = host
             event1.event_url = url
+            event1.source = source
             if (attendees != "Unknown"):
                 event1.attendees = attendees
             event1.price = price
@@ -96,10 +97,6 @@ class DAL():
             users.append(self.get_user_details(res.user_id, fbf))
         return json.dumps(users)
 
-
-
-
-
     @staticmethod
     def attend(u_key, e_key):
         event1 = Event()
@@ -135,10 +132,11 @@ class DAL():
         return 0
 
     def get_all_user_events(self, u_id):
-        events_list = list()
+        events_list = []
         results = Attendings.query(Attendings.user_id == u_id)
         for res in results:
-            events_list.append(self.get_event_details(res.event_id))
+            if self.get_event_details(res.event_id) is not None:
+               events_list.append(self.get_event_details(res.event_id))
         return json.dumps(events_list)
 
 

@@ -2,7 +2,7 @@ __author__ = 'olesya'
 
 import unittest
 from DAL import DAL
-from SearchEventsInterface import SearchUsingAPI
+from search_events_interface import SearchUsingAPI
 from google.appengine.ext.ndb import query
 from models.User import User
 from models.Event import Event
