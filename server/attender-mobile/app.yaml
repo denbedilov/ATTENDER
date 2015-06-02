@@ -13,9 +13,9 @@ handlers:
 - url: /login
   script: api.server_login.login
 - url: /userlogin
-  script: api.server_user_login.userlogin
+  script: api.user_login.user
   login: required
-  secure: optional
+  secure: always
 - url: /googlelogin
   script: api.google_login.googlelogin
   secure: always
