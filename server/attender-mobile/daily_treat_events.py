@@ -18,8 +18,8 @@ __author__ = 'olesya'
 #
 import webapp2
 from sources_wrapper import SearchEventsUsingAPI
-from models.Event import Event
-from models.Attendings import Attendings
+from models.event import Event
+from models.attendings import Attendings
 import logging
 from datetime import datetime
 from api_request import ApiRequest

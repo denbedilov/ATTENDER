@@ -2,9 +2,9 @@ __author__ = 'olesya'
 #This class is suppose to access to DB and transfer answers to other classes
 
 import logging
-from models.User import User
-from models.Event import Event
-from models.Attendings import Attendings
+from models.user import User
+from models.event import Event
+from models.attendings import Attendings
 import json
 from time import mktime
 from facebook_logic import fb_logic
@@ -12,24 +12,56 @@ from facebook_logic import fb_logic
 
 class DAL():
     @staticmethod
-    def set_user_details(user_id,  name, last_name, em=None):
+    def set_user_details(user_id,  name, last_name, email):
         user1 = User()
-        if not user1.check_user_exist(user_id):
-            user1.user_id = user_id
+        if not user1.check_fb_logged_in(user_id):
+            user1.fb_id = user_id
             user1.first_name = name
             user1.last_name = last_name
-            user1.email = em
+            user1.email = email
             user1.put()
 
     @staticmethod
     def get_user_details(user_id, fbf="false"):
         user_details = dict()
-        user = User.query(User.user_id == user_id).get()
+        user = User.query(User.fb_id == user_id).get()
         if user is not None:
             user_details['name'] = user.first_name
             user_details['lastname'] = user.last_name
             user_details['fbf'] = fbf
             return user_details
+
+    @staticmethod
+    def user_login(email, password):
+        #check all credentials are right
+        qry = User.query(User.email == email, User.password == password).get()
+        if qry:
+            return qry.key.id()
+        else:
+            #check password wrong
+            q = User.query(User.email == email).get()
+            if q and q.password == "None":
+                return 2
+            elif q:
+                return 1
+            elif q is None:
+                return False
+
+    @staticmethod
+    def register(email, hashed_password, first, last):
+        user1 = User()
+        qry = user1.check_user_exist_by_email(email)
+        try:
+            qry.password = hashed_password
+            token = qry.put()
+            return token.id()
+        except:
+            user1.email = email
+            user1.password = hashed_password
+            user1.first_name = first
+            user1.last_name = last
+            token = user1.put()
+            return token.id()
 
     @staticmethod
     def set_event_details(e_id, name, date, city,  add, descr, host, url, attendees, price, category, source):
@@ -102,7 +134,7 @@ class DAL():
         event1 = Event()
         attendings1 = Attendings()
 
-        qry = User.query(User.user_id == u_key).get()
+        qry = User.query(User.fb_id == u_key).get()
         if qry is None:
             return 1
         else:
@@ -119,7 +151,7 @@ class DAL():
     @staticmethod
     def unattend(u_key, e_key):
         event1 = Event()
-        qry = User.query(User.user_id == u_key).get()
+        qry = User.query(User.fb_id == u_key).get()
         if qry is None:
             return 1
         if Event.get_by_id(e_key) is None:

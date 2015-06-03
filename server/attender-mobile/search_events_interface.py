@@ -5,7 +5,7 @@ import sys
 import json
 from datetime import datetime, timedelta
 from time import mktime
-from models.Event import Event
+from models.event import Event
 from sources_wrapper import SearchEventsUsingAPI
 import logging
 

@@ -4,23 +4,28 @@ from google.appengine.ext import ndb
 
 
 class User(ndb.Model):
-    user_id = ndb.IntegerProperty()
+    fb_id = ndb.IntegerProperty()
     first_name = ndb.StringProperty()
     last_name = ndb.StringProperty()
-    password = ndb.StringProperty()
-    email = ndb.StringProperty(default="None")
+    password = ndb.StringProperty(default="None")
+    email = ndb.StringProperty()
 
-    def check_user_exist(self, user_id):
-        if User.query(User.user_id == user_id).get():
+    def check_fb_logged_in(self, fb_id):
+        if User.query(User.fb_id == fb_id).get():
             return True
         else:
             return False
 
-    def check_email_exist(self, email):
-        if User.query(User.email == email).get():
-            return True
+    def check_user_exist_by_email(self, email):
+        qry = User.query(User.email == email).get()
+        if qry:
+            return qry
         else:
             return False
+
+
+
+
 
 
 

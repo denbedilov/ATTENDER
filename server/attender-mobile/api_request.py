@@ -6,7 +6,7 @@ import defenitions
 from lib import requests
 import logging
 from DAL import DAL
-from models.Event import Event
+from models.event import Event
 from datetime import datetime, timedelta
 
 

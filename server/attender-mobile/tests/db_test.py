@@ -2,10 +2,9 @@ __author__ = 'olesya'
 
 import unittest
 from DAL import DAL
-from search_events_interface import SearchUsingAPI
-from google.appengine.ext.ndb import query
-from models.User import User
-from models.Event import Event
+from search_events_interface import SearchEventsUsingAPI
+from models.user import User
+from models.event import Event
 from datetime import datetime
 
 from google.appengine.ext import ndb
@@ -27,7 +26,7 @@ class UserDetails(unittest.TestCase):
         # using ndb.get_context().set_cache_policy(False)
         ndb.get_context().clear_cache()
         self.mydb = DAL()
-        self.obj = SearchUsingAPI()
+        self.obj = SearchEventsUsingAPI()
 
     def test_get_user_details(self):
         self.mydb.set_user_details(10204308876621622, 'Itamar', 'Sharify')
