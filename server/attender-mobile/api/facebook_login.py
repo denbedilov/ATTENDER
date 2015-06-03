@@ -28,7 +28,11 @@ class APILoginHandler(webapp2.RequestHandler):
                 if fb.validate_fb_login(_id, access_token=token) is not False:
                     mydb = DAL()
                     user = fb.validate_fb_login(_id, access_token=token)
-                    mydb.set_user_details(user_id=int(_id), name=user['first_name'].encode('ascii', 'ignore'), last_name=user['last_name'].encode('ascii', 'ignore'))
+                    logging.info(user)
+                    mydb.set_user_details(user_id=int(_id), name=user['first_name'].encode('ascii', 'ignore'),
+                                          last_name=user['last_name'].encode('ascii', 'ignore'),
+                                          email = user["email"].encode('ascii', 'ignore'))
+
                     received = True
                     logging.info("received is True")
                 else:

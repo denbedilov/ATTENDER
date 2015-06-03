@@ -11,15 +11,12 @@ handlers:
 - url: /api
   script: api.search_endpoint.app
 - url: /login
-  script: api.server_login.login
+  script: api.facebook_login.login
 - url: /userlogin
   script: api.user_login.user
-  login: required
   secure: always
 - url: /googlelogin
   script: api.google_login.googlelogin
-  secure: always
-  login: required
 - url: /attend
   script: api.server_attend.attend
 - url: /attendees
@@ -30,7 +27,6 @@ handlers:
   script: daily_treat_events.app
 - url: /
   script: main.app
-  login: admin
 
 libraries:
 - name: webapp2
