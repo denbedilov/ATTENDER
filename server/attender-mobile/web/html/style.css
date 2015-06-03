@@ -1,0 +1,271 @@
+html, body {
+	margin: 0;
+	padding: 0;
+}
+body {
+	font: 73% "Trebuchet MS", Arial, Tahoma, Helvetica, sans-serif;
+	background: #B5B5B5 url(images/bg4.jpg) center repeat-y;
+	color: #666;
+}
+
+/* CONTAINER PROPERTIES */
+#container {
+	width: 750px;
+	margin: 0 auto;
+	padding: 0;
+}
+.divider {
+	clear: both;
+	width: 750px;
+	height: 10px;
+	padding-bottom: 0;
+	background: transparent url(images/divider.jpg) repeat-x;
+	color: #000;
+}
+.topimg {
+	clear: both;
+	width: 100%;
+	height: 250px;
+	margin: 0;
+	padding-bottom: 0;
+	color: #d0e0db;
+}
+.topimg h2 {
+	text-align:center;
+	font-size: 6em;
+	letter-spacing: 5px;
+	padding: 50px 20 0 560px;
+	color:#272449;
+}
+.slide {
+	position: absolute;
+	width: 35%;
+	height: 250px;
+	left: 330px;
+	top: 200px;
+
+}
+.slide:nth-child(1) {
+	-webkit-animation: fade 32s 28s infinite;
+	z-index: 80;
+}
+.slide:nth-child(2) {
+	-webkit-animation: fade  32s 24s infinite;
+	z-index: 70;
+}
+.slide:nth-child(3) {
+	-webkit-animation: fade 32s 20s infinite;
+	z-index: 60;
+}
+.slide:nth-child(4) {
+	-webkit-animation: fade 32s 16s infinite;
+	z-index: 50;
+}
+.slide:nth-child(5) {
+	-webkit-animation: fade 32s 12s infinite;
+	z-index: 40;
+}
+.slide:nth-child(6) {
+	-webkit-animation: fade 32s 8s infinite;
+	z-index: 30;
+}
+.slide:nth-child(7) {
+	-webkit-animation: fade 32s 4s infinite;
+	z-index: 20;
+}
+.slide:nth-child(8) {
+	-webkit-animation: fade 32s 0s infinite;
+	z-index: 10;
+}
+@-webkit-keyframes fade {
+	0% {
+		opacity: 1;
+	}
+	10% {
+		opacity: 1;
+	}
+	12.5% {
+		opacity: 0;
+	}
+	97.5% {
+		opacity: 0;
+	}
+	100% {
+		opacity: 1;
+	}
+}
+
+/* TOPBAR PROPERTIES */
+#topbar {
+	height: 40px;
+	padding-top: 0;
+	border-top: 10px solid #17916C;
+	border-bottom: 0px solid #3D5F9A;
+	background: #d0e0db;
+	color: #333;
+}
+#topbar h2 {
+	float: left;
+	margin: 0;
+	padding: 10px 10px 0 0;
+	font-size: 100%;
+}
+#topbar h3 {
+	float: right;
+	margin: 0;
+	padding: 0px;
+	margin-top: 10px;
+	margin-right: 0px;
+	font-size: 50%;
+	float: right;
+}
+
+/* CONTENT PROPERTIES */
+#content {
+	margin: 0 240px 40px 0;
+	padding: 40px;
+	line-height: 2em;
+	background: #D0E0DB	;
+	color: #666;
+}
+#content h1 {
+	margin: .5em 0 0 .5em;
+	padding: 5px;
+	letter-spacing: 2px;
+	font-size: 200%;
+	background: inherit;
+	color: #22428e;
+	text-align:center;
+	font-family: "David";
+	font-style:italic;
+}
+
+#content h3 {
+	margin: .5em 0 0 0.5em;
+	padding: 5px;
+	font-size: 140%;
+	border-top: 1px solid #ddd;
+	border-bottom: 1px solid #ddd;
+	background: inherit;
+	color: #22428e;
+}
+
+/* SIDEBAR PROPERTIES */
+#sidebar {
+	float: right;
+	width: 205px;
+	margin: 0;
+	padding: 0 1em 1em 1em;
+	border-left: 0px solid #eee;
+	background:inherit;
+	line-height: 1.5em;
+}
+#sidebar p {
+	margin-bottom: .5em;
+	padding: 0px;
+}
+#sidebar h2 {
+	margin: 0;
+	padding: 15px 0 0 0;
+	font-size: 125%;
+	letter-spacing: 2px;
+	text-align: center;
+	background: inherit;
+	color: #FFeFFF;
+}
+
+
+#credits {
+	text-align: left;
+	clear: both;
+	width: 750px;
+	margin-top: 0;
+	padding: 0;
+	font-size: 1em;
+	background: #fff;
+	color: #333;
+}
+
+/* LINK PROPERTIES */
+
+a:link, a:visited {
+	text-decoration: none;
+	background: inherit;
+	color: #000;
+}
+a:hover {
+	text-decoration: underline;
+	background: inherit;
+	color: #000;
+}
+
+/* TYPOGRAPHY*/
+p {
+	padding: 0 0 .2em 1em;
+}
+blockquote {
+	padding: 10px;
+	margin: 0 20px;
+	font-weight: bold;
+	border: 1px solid #4e4e8e;
+	font-style: italic;
+	color: #3c76fc;
+}
+
+
+#menuh-container
+	{
+	width:100%;
+	position:  relative;
+	margin: 0 0 0 0;
+	padding: 0;
+	}
+
+#menuh	{
+	width:100%;
+	float:right;
+	margin:0;
+	font: bold 90%  "lucida sans", Helvetica, "Trebuchet MS",arial, sans-serif;
+	border-top: 3px solid #57BFA0;
+	border-bottom: 3px solid #57BFA0;
+	color: #fff;
+	background: #93B013;
+	
+	}
+		
+#menuh a
+	{
+	text-align: right;
+	display:block;
+	border: 0px solid #8B795E;
+	white-space:nowrap;
+	margin:0;
+	padding: 0.5em 0.3em 0.5em 1em;
+	}
+	
+#menuh a, #menuh a:visited	
+	{
+	color: #fff;
+	background: #17916C;
+	text-decoration:none;
+	}
+	
+#menuh a:hover	/* menu at mouse-over  */
+	{
+	color: #000;
+	background : #57BFA0;
+	}
+
+#menuh ul
+	{
+	list-style:none;
+	margin:0;
+	padding:0;
+	float:right;
+	width:150px;	/* width of all menu boxes */
+	}
+
+#menuh li
+	{
+	position:relative;
+	}
