@@ -52,3 +52,10 @@ class UserDetails(unittest.TestCase):
         res = self.mydb.user_login("sometest@gmail.com", "1213")
         self.assertEqual(res, 2)
 
+    def test_check_token_exist(self):
+        self.mydb.set_user_details(12, "Itamar", "Sharify", "sometest@gmail.com")
+        self.assertTrue(self.mydb.check_token(1))
+
+    def test_check_token_not_exist(self):
+        self.mydb.set_user_details(12, "Itamar", "Sharify", "sometest@gmail.com")
+        self.assertFalse(self.mydb.check_token(2))
