@@ -25,14 +25,15 @@ class UserLoginHandler(webapp2.RequestHandler):
         if user is False or user is 2:
             if first_name is not  "" and last_name is not "":
                 user = mydb.register(email, hashed_password, first_name, last_name)
+                logging.info("in register  "+str(user))
             elif first_name is not "" and last_name is "":
                 self.post(-3)
             elif first_name is "" and last_name is not "":
                 self.post(-2)
             else:
                 self.post(False)
-        else:
-            self.post(user)
+        logging.info("after if   "+str(user))
+        self.post(user)
 
     def post(self,response):
         if response is -3:
@@ -52,6 +53,7 @@ class UserLoginHandler(webapp2.RequestHandler):
             self.response.write("Wrong Password")
         else:
             self.response.set_status(200)
+            logging.info("in else")
             self.response.write(response)
 
 user = webapp2.WSGIApplication([

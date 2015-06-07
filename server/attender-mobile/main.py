@@ -23,6 +23,7 @@ from DAL import DAL
 class MainHandler(webapp2.RequestHandler):
     def get(self):
         self.response.write('Welcome to attender server!')
+        self.redirect("/home", permanent=True)
 
 app = webapp2.WSGIApplication([
     ('/', MainHandler)

@@ -25,6 +25,13 @@ handlers:
   script: api.server_calendar.calendar
 - url: /cron
   script: daily_treat_events.app
+- url: /home
+  static_files: web/index.html
+  upload: web/*
+- url: /(.*\.(gif|png|jpg|ico|bmp|css|otf|eot|svg|ttf|woff))
+  static_files: web/\1
+  upload: web/(.*\.(gif|png|jpg|ico|bmp|css|otf|eot|svg|ttf|woff))
+#  script: web.website.page
 - url: /
   script: main.app
 
