@@ -1,7 +1,6 @@
 __author__ = 'olesya'
 #This class is suppose to access to DB and transfer answers to other classes
 
-import logging
 from models.user import User
 from models.event import Event
 from models.attendings import Attendings
@@ -14,19 +13,12 @@ class DAL():
     @staticmethod
     def set_user_details(user_id,  name, last_name, email):
         user1 = User()
-        qry =  user1.check_user_exist_by_email(email)
-        token = ""
-        if qry:
-            qry.fb_id = user_id
-            token = qry.put().key.id()
-
-        elif not user1.check_fb_logged_in(user_id):
+        if not user1.check_fb_logged_in(user_id):
             user1.fb_id = user_id
             user1.first_name = name
             user1.last_name = last_name
             user1.email = email
-            token = user1.put().key.id()
-        return token
+            user1.put()
 
     @staticmethod
     def get_user_details(user_id, fbf="false"):
@@ -116,13 +108,18 @@ class DAL():
             event['price'] = res.price
             return event
 
-    def get_attendings(self, ev_id, token):
+    def get_attendings(self, ev_id, user_id):
+        us = User.get_by_id(user_id)
+        token = None
+        if us is not None:
+            token = us.fb_id
         if Event.get_by_id(ev_id) is None:
             return 1
         results = Attendings.query(Attendings.event_id == ev_id)
         if results is None:
             return 0
-        return self.json_format_attendees(results, token)
+        if token is not None:
+            return self.json_format_attendees(results, token)
 
     def json_format_attendees(self, query_res, token):
         users = list()
@@ -141,7 +138,7 @@ class DAL():
         event1 = Event()
         attendings1 = Attendings()
 
-        qry = User.query(User.fb_id == u_key).get()
+        qry = User.get_by_id(u_key)
         if qry is None:
             return 1
         else:
@@ -158,7 +155,7 @@ class DAL():
     @staticmethod
     def unattend(u_key, e_key):
         event1 = Event()
-        qry = User.query(User.fb_id == u_key).get()
+        qry = User.get_by_id(u_key)
         if qry is None:
             return 1
         if Event.get_by_id(e_key) is None:
@@ -175,8 +172,12 @@ class DAL():
         results = Attendings.query(Attendings.user_id == u_id)
         for res in results:
             if self.get_event_details(res.event_id) is not None:
-               events_list.append(self.get_event_details(res.event_id))
+                events_list.append(self.get_event_details(res.event_id))
         return json.dumps(events_list)
 
-
+    def check_token(self, token):
+        if User.get_by_id(token) is None:
+            return False
+        else:
+            return True
 
