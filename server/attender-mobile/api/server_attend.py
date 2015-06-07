@@ -20,7 +20,7 @@ class APIAttendHandler(webapp2.RequestHandler):
             self.post(received)
         else:
             mydb= DAL()
-            if mydb.check_token(_token) is True:  #check if the token is valid
+            if mydb.check_token(int(_token)) is True:  #check if the token is valid
                 logging.info("user id : "+_token)
                 if attend_func == "true":
                     self.post(mydb.attend(int(_token),int(eventid)))

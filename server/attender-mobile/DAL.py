@@ -7,7 +7,7 @@ from models.attendings import Attendings
 import json
 from time import mktime
 from facebook_logic import fb_logic
-
+import logging
 
 class DAL():
     @staticmethod
@@ -23,7 +23,7 @@ class DAL():
     @staticmethod
     def get_user_details(user_id, fbf="false"):
         user_details = dict()
-        user = User.query(User.fb_id == user_id).get()
+        user = User.get_by_id(user_id)
         if user is not None:
             user_details['name'] = user.first_name
             user_details['lastname'] = user.last_name
@@ -118,19 +118,21 @@ class DAL():
         results = Attendings.query(Attendings.event_id == ev_id)
         if results is None:
             return 0
-        if token is not None:
-            return self.json_format_attendees(results, token)
+        return self.json_format_attendees(results, token, user_id)
 
-    def json_format_attendees(self, query_res, token):
+    def json_format_attendees(self, query_res, token, my_id):
         users = list()
         fb_friends = fb_logic.get_fb_friends(token)
+        logging.info(fb_friends)
+        if fb_friends is None:
+            fb_friends = []
         for res in query_res:
             fbf = "false"
             for f in fb_friends:
                 if int(f) == res.user_id:
                     fbf = "true"
-
-            users.append(self.get_user_details(res.user_id, fbf))
+            if res.user_id != my_id: #do not return myself!
+                users.append(self.get_user_details(res.user_id, fbf))
         return json.dumps(users)
 
     @staticmethod

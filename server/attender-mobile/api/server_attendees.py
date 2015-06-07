@@ -17,8 +17,8 @@ class APIAttendeesHandler(webapp2.RequestHandler):
         if eventid == "" or token == "":
             self.post(-1)
         else:
-            if self.mydb.check_token(token) is not False:
-                self.post(self.mydb.get_attendings(int(eventid),int(token)))
+            if self.mydb.check_token(int(token)) is not False:
+                    self.post(self.mydb.get_attendings(int(eventid),int(token)))
             else:
                 self.post(2)
         '''
@@ -48,7 +48,6 @@ class APIAttendeesHandler(webapp2.RequestHandler):
             return
         else:
             self.response.set_status(200)
-            logging.info("received: "+received)
             self.response.write(received)
             return
 
