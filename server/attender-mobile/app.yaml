@@ -12,11 +12,14 @@ handlers:
   script: api.search_endpoint.app
 - url: /login
   script: api.facebook_login.login
+  secure: always
 - url: /userlogin
   script: api.user_login.user
   secure: always
 - url: /googlelogin
   script: api.google_login.googlelogin
+  login: required
+  secure: always
 - url: /attend
   script: api.server_attend.attend
 - url: /attendees

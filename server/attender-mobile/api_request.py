@@ -58,10 +58,11 @@ class ApiRequest():
 
     def prepare_get_url(self, url, params):
         new_url = url
-        for key, value in params.iteritems():
-            new_url = new_url + key + '=' + str(value)
-            if key != params.keys()[-1]:
-                new_url += "&"
+        if params is not None:
+            for key, value in params.iteritems():
+                new_url = new_url + key + '=' + str(value)
+                if key != params.keys()[-1]:
+                    new_url += "&"
         return new_url
 
     def http_request_using_requests_lib(self, http_url, params):

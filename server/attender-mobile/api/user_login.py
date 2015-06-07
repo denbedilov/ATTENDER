@@ -4,13 +4,17 @@ import sys
 import logging
 import webapp2
 from DAL import DAL
+from google.appengine.api import mail
 
 class UserLoginHandler(webapp2.RequestHandler):
     def get(self):
-        email = self.request.get("email")
+        email = self.request.get("email").encode('ascii', 'ignore')
         hashed_password = self.request.get("password")
         first_name = self.request.get("firstname")
         last_name = self.request.get("lastname")
+        if not mail.is_email_valid(email):
+            self.post(-4)
+            return
 
         if email is "" or hashed_password is "":
             self.post(-1)
@@ -36,6 +40,9 @@ class UserLoginHandler(webapp2.RequestHandler):
         self.post(user)
 
     def post(self,response):
+        if response is -4:
+            self.response.set_status(403)
+            self.response.write("Invalid mail")
         if response is -3:
             self.response.set_status(402)
             self.response.write("Missing Last Name")

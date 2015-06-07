@@ -15,16 +15,19 @@ class DAL():
     def set_user_details(user_id,  name, last_name, email):
         user1 = User()
         qry =  user1.check_user_exist_by_email(email)
+        token = ""
         if qry:
             qry.fb_id = user_id
-            qry.put()
+            token = qry.put().key.id()
 
         elif not user1.check_fb_logged_in(user_id):
             user1.fb_id = user_id
             user1.first_name = name
             user1.last_name = last_name
             user1.email = email
-            user1.put()
+            token = user1.put().key.id()
+        return token
+
     @staticmethod
     def get_user_details(user_id, fbf="false"):
         user_details = dict()

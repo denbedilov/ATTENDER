@@ -7,3 +7,5 @@ app/
 gradle/
 Releases/
 server/attender-mobile/.idea/workspace.xml
+*.xml
+*.pyc
