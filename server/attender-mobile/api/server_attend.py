@@ -19,14 +19,13 @@ class APIAttendHandler(webapp2.RequestHandler):
             received = -2
             self.post(received)
         else:
-            fb = fb_logic()
-            if fb.check_token(token=_token):  #check if the token is valid
-                mydb= DAL()
-                logging.info("user id : "+fb.get_id(_token))
+            mydb= DAL()
+            if mydb.check_token(_token) is True:  #check if the token is valid
+                logging.info("user id : "+_token)
                 if attend_func == "true":
-                    self.post(mydb.attend(int(fb.get_id(_token)),int(eventid)))
+                    self.post(mydb.attend(int(_token),int(eventid)))
                 elif attend_func == "false":
-                    self.post(mydb.unattend(int(fb.get_id(_token)),int(eventid)))
+                    self.post(mydb.unattend(int(_token),int(eventid)))
             else:
                 self.post(-3)
             return

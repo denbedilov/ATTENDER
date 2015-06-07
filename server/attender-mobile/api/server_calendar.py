@@ -11,11 +11,11 @@ class APICalendarHandler(webapp2.RequestHandler):
         if token == "":
             self.post(False)
         else:
-            fb = fb_logic()
-            if fb.check_token(token) is not False:
-                user_id = fb.check_user(token)
-                mydb = DAL()
-                replyJson = mydb.get_all_user_events(int(user_id))
+            # fb = fb_logic()
+            mydb = DAL()
+            if mydb.check_token(token) is not False:
+                # user_id = fb.check_user(token)
+                replyJson = mydb.get_all_user_events(int(token))
                 self.post(replyJson)
             else:
                 self.post(0)

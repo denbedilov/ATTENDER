@@ -9,3 +9,5 @@ Releases/
 server/attender-mobile/.idea/workspace.xml
 *.xml
 *.pyc
+*.xml
+*.pyc

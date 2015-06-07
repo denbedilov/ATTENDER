@@ -17,9 +17,8 @@ class APIAttendeesHandler(webapp2.RequestHandler):
         if eventid == "" or token == "":
             self.post(-1)
         else:
-            fb = fb_logic()
-            if fb.check_user(token) is not False:
-                self.post(self.mydb.get_attendings(ev_id=int(eventid),token=token))
+            if self.mydb.check_token(token) is not False:
+                self.post(self.mydb.get_attendings(int(eventid),int(token)))
             else:
                 self.post(2)
         '''
