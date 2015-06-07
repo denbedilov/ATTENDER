@@ -7,7 +7,7 @@ from lib import requests
 import logging
 from DAL import DAL
 from models.event import Event
-from datetime import datetime, timedelta
+from datetime import datetime
 
 
 class ApiRequest():

@@ -30,7 +30,7 @@ class DailyTreatEventsHandler(webapp2.RequestHandler):
     api_obj = ApiRequest()
 
     def get(self):
-        self.response.write('Welcome to attender server! Here is a cron job for pulling events from Meetup API')
+        self.response.write('Welcome to attender server! Here is a cron job for pulling events from sorces: meetup.com and evenbrite.com')
 
         ev = Event()
         at = Attendings()

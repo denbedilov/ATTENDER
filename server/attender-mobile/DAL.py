@@ -7,7 +7,7 @@ from models.attendings import Attendings
 import json
 from time import mktime
 from facebook_logic import fb_logic
-import logging
+
 
 class DAL():
     @staticmethod
@@ -83,12 +83,25 @@ class DAL():
                 event1.category = category
             key = event1.put()
             return key
-        else:
+        else:  # Update existing meetings! It could be changed or canceled!
+            qry.name = name
+            qry.date = date
+            qry.city = city
+            qry.address = add
+            qry.description = descr
+            qry.host = host
+            qry.event_url = url
+            qry.source = source
+            qry.price = price
+            if category is not None:
+                qry.category = category
             results = Attendings.query(Attendings.event_id == qry.get_by_id(e_id))
             if results is not None:
                 qry.attendees = attendees + results.count()
             else:
                 qry.attendees = attendees
+            qry.put()
+
 
     @staticmethod
     def get_event_details(event_id):
@@ -123,7 +136,6 @@ class DAL():
     def json_format_attendees(self, query_res, token, my_id):
         users = list()
         fb_friends = fb_logic.get_fb_friends(token)
-        logging.info(fb_friends)
         if fb_friends is None:
             fb_friends = []
         for res in query_res:
