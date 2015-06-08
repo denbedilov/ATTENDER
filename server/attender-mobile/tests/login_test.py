@@ -7,6 +7,7 @@ from search_events_interface import SearchEventsUsingAPI
 from models.user import User
 from google.appengine.ext import ndb
 from google.appengine.ext import testbed
+import json
 
 
 class UserDetails(unittest.TestCase):
@@ -59,3 +60,8 @@ class UserDetails(unittest.TestCase):
     def test_check_token_not_exist(self):
         self.mydb.set_user_details(12, "Itamar", "Sharify", "sometest@gmail.com")
         self.assertFalse(self.mydb.check_token(2))
+
+    def test_check_json_for_get_user_by_token(self):
+        self.mydb.set_user_details(12, "Itamar", "Sharify", "sometest@gmail.com")
+        print self.mydb.get_user_by_token(1)
+        self.assertTrue(json.loads(self.mydb.get_user_by_token(1)))

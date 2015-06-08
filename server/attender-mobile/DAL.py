@@ -11,24 +11,31 @@ from facebook_logic import fb_logic
 
 class DAL():
     @staticmethod
-    def set_user_details(user_id,  name, last_name, email):
+    def set_user_details(fb_id,  name, last_name, email):
         user1 = User()
-        if not user1.check_fb_logged_in(user_id):
-            user1.fb_id = user_id
+        if not user1.check_fb_logged_in(fb_id):
+            user1.fb_id = fb_id
             user1.first_name = name
             user1.last_name = last_name
             user1.email = email
-            user1.put()
+            id = user1.put().id()
+            return id
 
     @staticmethod
-    def get_user_details(user_id, fbf="false"):
+    def get_user_details(user_id, fbf=None):
         user_details = dict()
         user = User.get_by_id(user_id)
         if user is not None:
             user_details['name'] = user.first_name
             user_details['lastname'] = user.last_name
-            user_details['fbf'] = fbf
+            if fbf is not None:
+                user_details['fbf'] = fbf
             return user_details
+
+    def get_user_by_token(self, token):
+        l = list()
+        l.append(self.get_user_details(token))
+        return json.dumps(l)
 
     @staticmethod
     def user_login(email, password):
@@ -129,8 +136,6 @@ class DAL():
         if Event.get_by_id(ev_id) is None:
             return 1
         results = Attendings.query(Attendings.event_id == ev_id)
-        if results is None:
-            return 0
         return self.json_format_attendees(results, token, user_id)
 
     def json_format_attendees(self, query_res, token, my_id):

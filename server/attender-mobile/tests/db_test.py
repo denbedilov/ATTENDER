@@ -29,24 +29,22 @@ class UserDetails(unittest.TestCase):
         self.obj = SearchEventsUsingAPI()
 
     def test_get_user_details(self):
-        self.mydb.set_user_details(10204308876621622, 'Itamar', 'Sharify')
-        self.assertIsNotNone(self.mydb.get_user_details(user_id=10204308876621622))
+        id = self.mydb.set_user_details(10204308876621622, 'Itamar', 'Sharify', 'email@gmail.com')
+        self.assertIsNotNone(self.mydb.get_user_details(user_id=id))
 
     def test_set_name(self):
-        self.mydb.set_user_details(10204308876621622, 'Itamar', 'Sharify')
-        self.assertEqual(self.mydb.get_user_details(user_id=10204308876621622)['name'], "Itamar")
+        id = self.mydb.set_user_details(10204308876621622, 'Itamar', 'Sharify', 'email@gmail.com')
+        self.assertEqual(self.mydb.get_user_details(user_id=id)['name'], "Itamar")
 
     def test_set_event(self):
         self.mydb.set_event_details("222342395", "Hadoop Ecosystem Workshop", datetime.now(),
-                                    "Tel Aviv-Yafo",  "Kiryat Atidim", "long-story-short", "rika pedro-shoham", "http://www.meetup.com", 64, "free", "All")
+                                    "Tel Aviv-Yafo",  "Kiryat Atidim", "long-story-short", "rika pedro-shoham", "http://www.meetup.com", 64, "free", "All", "meetup")
         self.assertTrue(Event.check_event_exist("222342395"))
 
     def test_get_event_details(self):
         key = self.mydb.set_event_details("222342395", "Hadoop Ecosystem Workshop", datetime.now(),
-                                    "Tel Aviv-Yafo",  "Kiryat Atidim", "long-story-short", "rika pedro-shoham", "http://www.meetup.com", 64, "free", "All")
+                                    "Tel Aviv-Yafo",  "Kiryat Atidim", "long-story-short", "rika pedro-shoham", "http://www.meetup.com", 64, "free", "All", "meetup")
         self.assertIsNotNone(self.mydb.get_event_details(key.id()))
-
-
 
     def tearDown(self):
         self.testbed.deactivate()
