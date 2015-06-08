@@ -65,3 +65,8 @@ class UserDetails(unittest.TestCase):
         self.mydb.set_user_details(12, "Itamar", "Sharify", "sometest@gmail.com")
         print self.mydb.get_user_by_token(1)
         self.assertTrue(json.loads(self.mydb.get_user_by_token(1)))
+
+    def test_check_json_for_get_user_by_token_error(self):
+        self.mydb.set_user_details(12, "Itamar", "Sharify", "sometest@gmail.com")
+        res = self.mydb.get_user_by_token(35)
+        self.assertEqual(1, res)

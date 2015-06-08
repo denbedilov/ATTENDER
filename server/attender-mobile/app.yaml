@@ -16,6 +16,9 @@ handlers:
 - url: /userlogin
   script: api.user_login.user
   secure: always
+- url: /userdetails
+  script: api.user_details.user
+  secure: always
 - url: /googlelogin
   script: api.google_login.googlelogin
   login: required

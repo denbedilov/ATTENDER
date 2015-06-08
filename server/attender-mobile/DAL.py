@@ -31,11 +31,17 @@ class DAL():
             if fbf is not None:
                 user_details['fbf'] = fbf
             return user_details
+        else:
+            return 1
 
     def get_user_by_token(self, token):
         l = list()
-        l.append(self.get_user_details(token))
-        return json.dumps(l)
+        res = self.get_user_details(token)
+        if res == 1:
+            return 1
+        else:
+            l.append(res)
+            return json.dumps(l)
 
     @staticmethod
     def user_login(email, password):
@@ -149,7 +155,9 @@ class DAL():
                 if int(f) == res.user_id:
                     fbf = "true"
             if res.user_id != my_id: #do not return myself!
-                users.append(self.get_user_details(res.user_id, fbf))
+                user = self.get_user_details(res.user_id, fbf)
+                if user != 1:
+                    users.append(user)
         return json.dumps(users)
 
     @staticmethod
