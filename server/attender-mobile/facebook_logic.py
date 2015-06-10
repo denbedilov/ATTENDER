@@ -67,3 +67,4 @@ class fb_logic():
 
         except facebook.GraphAPIError as e:
             logging.info("invalid token")
+            return None
