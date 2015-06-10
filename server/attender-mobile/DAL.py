@@ -62,6 +62,9 @@ class DAL():
     @staticmethod
     def register(email, hashed_password, first, last):
         user1 = User()
+        qry = User.query(User.email==email, User.password==hashed_password, User.first_name==first, User.last_name==last).get()
+        if qry:
+            return 2
         qry = user1.check_user_exist_by_email(email)
         try:
             qry.password = hashed_password

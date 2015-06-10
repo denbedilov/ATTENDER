@@ -19,7 +19,7 @@ class GoogleLoginHandler(webapp2.RequestHandler):
         if user is not None:
             mydb =DAL()
             logging.info(user.nickname())
-            token = mydb.register(user.email(),None, firstname,lastname)
+            token = mydb.register(user.email(), None, firstname,lastname)
             self.response.write(token)
         else:
             self.post(False)

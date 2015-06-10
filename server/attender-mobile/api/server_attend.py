@@ -23,18 +23,18 @@ class APIAttendHandler(webapp2.RequestHandler):
             if mydb.check_token(int(_token)) is True:  #check if the token is valid
                 logging.info("user id : "+_token)
                 if attend_func == "true":
-                    self.post(mydb.attend(int(_token),int(eventid)))
+                    try:
+                        self.post(mydb.attend(int(_token), int(eventid)))
+                    except ValueError:
+                        self.post(3)
                 elif attend_func == "false":
-                    self.post(mydb.unattend(int(_token),int(eventid)))
+                    try:
+                        self.post(mydb.unattend(int(_token), int(eventid)))
+                    except ValueError:
+                        self.post(3)
             else:
                 self.post(-3)
             return
-            # self.post(received)
-        '''returns:
-                0 = OK
-                1 = wrong ID
-                2 = wrong Event ID
-        '''
 
     def post(self, received):
         if received is -3:
@@ -48,6 +48,10 @@ class APIAttendHandler(webapp2.RequestHandler):
         elif received is -1:
             self.response.set_status(401)
             self.response.write("ERROR: Missing Event ID")
+            return
+        elif received is 3:
+            self.response.set_status(404)
+            self.response.write("ERROR: Invalid id. Should be integer!")
             return
         elif received is 2:
             self.response.set_status(402)

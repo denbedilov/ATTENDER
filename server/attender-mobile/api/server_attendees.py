@@ -17,10 +17,17 @@ class APIAttendeesHandler(webapp2.RequestHandler):
         if eventid == "" or token == "":
             self.post(-1)
         else:
-            if self.mydb.check_token(int(token)) is not False:
-                    self.post(self.mydb.get_attendings(int(eventid),int(token)))
-            else:
-                self.post(2)
+            try:
+                if self.mydb.check_token(int(token)) is not False:
+                    try:
+                        self.post(self.mydb.get_attendings(int(eventid),int(token)))
+                    except ValueError:
+                        self.post(3)
+                else:
+                    self.post(2)
+
+            except ValueError:
+                    self.post(3)
         '''
         Db Returns:
             JSON containing data
@@ -45,6 +52,10 @@ class APIAttendeesHandler(webapp2.RequestHandler):
         elif received == 2:
             self.response.set_status(403)
             self.response.write("ERROR: Invalid Token")
+            return
+        elif received == 3:
+            self.response.set_status(404)
+            self.response.write("ERROR: Invalid token. Should be integer!")
             return
         else:
             self.response.set_status(200)
