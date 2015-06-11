@@ -25,7 +25,7 @@ email_address = re.compile('\A%s\Z' % addr_spec)
 
 class UserLoginHandler(webapp2.RequestHandler):
     def get(self):
-        email = self.request.get("email")
+        email = self.request.get("email")#.encode('ascii', 'ignore')
         hashed_password = self.request.get("password")
         first_name = self.request.get("firstname")
         last_name = self.request.get("lastname")

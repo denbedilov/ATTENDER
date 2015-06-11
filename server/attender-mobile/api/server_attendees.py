@@ -13,21 +13,26 @@ class APIAttendeesHandler(webapp2.RequestHandler):
         received = False
         eventid = self.request.get("eventid").encode('ascii', 'ignore')
         token = self.request.get("token").encode('ascii','ignore')
-        logging.info("eventid: "+eventid)
+        fb_token = self.request.get("fbtoken").encode('ascii','ignore')
         if eventid == "" or token == "":
             self.post(-1)
         else:
+            if fb_token == "":
+                fb_token = None
+
             try:
-                if self.mydb.check_token(int(token)) is not False:
-                    try:
-                        self.post(self.mydb.get_attendings(int(eventid),int(token)))
-                    except ValueError:
-                        self.post(3)
+                int_token = int(token)
+                if self.mydb.check_token(int_token) is not False:
+                    self.post(self.mydb.get_attendings(int(eventid), int_token, fb_token))
+
                 else:
                     self.post(2)
 
             except ValueError:
-                    self.post(3)
+                self.post(3)
+
+
+
         '''
         Db Returns:
             JSON containing data
@@ -43,7 +48,7 @@ class APIAttendeesHandler(webapp2.RequestHandler):
             return
         elif received == 1:
             self.response.set_status(401)
-            self.response.write("ERROR: No Such ID")
+            self.response.write("ERROR: No Such event ID")
             return
         elif received == 0:
             self.response.set_status(402)

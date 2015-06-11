@@ -13,13 +13,16 @@ class DAL():
     @staticmethod
     def set_user_details(fb_id,  name, last_name, email):
         user1 = User()
-        if not user1.check_fb_logged_in(fb_id):
+        qry = user1.check_fb_logged_in(fb_id)
+        if not qry:
             user1.fb_id = fb_id
             user1.first_name = name
             user1.last_name = last_name
             user1.email = email
-            id = user1.put().id()
-            return id
+            id = user1.put()
+            return id.id()
+        else:
+            return qry.key.id()
 
     @staticmethod
     def get_user_details(user_id, fbf=None):
@@ -137,25 +140,28 @@ class DAL():
             event['price'] = res.price
             return event
 
-    def get_attendings(self, ev_id, user_id):
+    def get_attendings(self, ev_id, user_id, fb_token=None):
         us = User.get_by_id(user_id)
         token = None
+        fb_id = None
         if us is not None:
-            token = us.fb_id
+            fb_id = us.fb_id
         if Event.get_by_id(ev_id) is None:
             return 1
         results = Attendings.query(Attendings.event_id == ev_id)
-        return self.json_format_attendees(results, token, user_id)
+        return self.json_format_attendees(results, fb_token, fb_id, user_id)
 
-    def json_format_attendees(self, query_res, token, my_id):
+    def json_format_attendees(self, query_res, token, fb_id, my_id):
         users = list()
         fb_friends = fb_logic.get_fb_friends(token)
+
         if fb_friends is None:
             fb_friends = []
         for res in query_res:
             fbf = "false"
             for f in fb_friends:
-                if int(f) == res.user_id:
+                qry = User.get_by_id(res.user_id)
+                if int(f) == qry.fb_id:
                     fbf = "true"
             if res.user_id != my_id: #do not return myself!
                 user = self.get_user_details(res.user_id, fbf)

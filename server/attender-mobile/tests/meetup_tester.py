@@ -22,7 +22,7 @@ class MeetupEventsTester(unittest.TestCase):
         ndb.get_context().clear_cache()
 
     def test_get_category(self):
-        self.assertEqual(self.api_object.get_category("city", "meetup"), 2)
+        self.assertEqual(self.api_object.get_category("Career", "meetup"), 2)
 
     def test_get_wrong_category(self):
         self.assertEqual( self.api_object.get_category("Car", "meetup"), 401)
@@ -32,7 +32,7 @@ class MeetupEventsTester(unittest.TestCase):
         self.assertEqual(events, 401)
 
     def test_get_json_events_meetup(self):
-        events = self.wrapper_object.meetup_response(city="Jerusalem")
+        events = self.wrapper_object.meetup_response(category="Career")
         print events
 
         self.assertTrue(json.loads(events))

@@ -11,8 +11,9 @@ class User(ndb.Model):
     email = ndb.StringProperty()
 
     def check_fb_logged_in(self, fb_id):
-        if User.query(User.fb_id == fb_id).get():
-            return True
+        qry = User.query(User.fb_id == fb_id).get()
+        if qry:
+            return qry
         else:
             return False
 

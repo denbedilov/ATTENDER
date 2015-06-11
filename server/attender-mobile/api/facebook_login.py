@@ -29,11 +29,15 @@ class APILoginHandler(webapp2.RequestHandler):
                     mydb = DAL()
                     user = fb.validate_fb_login(_id, access_token=token)
                     logging.info(user)
+                    try:
+                        email = user["email"].encode('ascii', 'ignore')
+                    except:
+                        email = None
                     received = mydb.set_user_details(fb_id=int(_id), name=user['first_name'].encode('ascii', 'ignore'),
                                           last_name=user['last_name'].encode('ascii', 'ignore'),
-                                          email=user["email"].encode('ascii', 'ignore'))
+                                          email=email)
 
-                    logging.info("received is "+received)
+                    logging.info("received is "+ str(received))
                 else:
                     received = -1
 
@@ -51,9 +55,9 @@ class APILoginHandler(webapp2.RequestHandler):
         elif received == 2:
             self.response.set_status(402)
             self.response.write("Invalid ID")
-        elif received is True:
+        else:
             self.response.set_status(200)
-            self.response.write("OK")
+            self.response.write(received)
             return
 
 
