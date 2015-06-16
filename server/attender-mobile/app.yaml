@@ -21,8 +21,7 @@ handlers:
   secure: always
 - url: /googlelogin
   script: api.google_login.googlelogin
-  login: required
-  secure: always
+#  secure: always
 - url: /attend
   script: api.server_attend.attend
 - url: /attendees

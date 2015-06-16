@@ -7,7 +7,7 @@ from models.attendings import Attendings
 import json
 from time import mktime
 from facebook_logic import fb_logic
-
+import logging
 
 class DAL():
     @staticmethod
@@ -66,6 +66,7 @@ class DAL():
     def register(email, hashed_password, first, last):
         user1 = User()
         qry = User.query(User.email==email, User.password==hashed_password, User.first_name==first, User.last_name==last).get()
+        logging.info(qry)
         if qry:
             return 2
         qry = user1.check_user_exist_by_email(email)
@@ -76,6 +77,20 @@ class DAL():
         except:
             user1.email = email
             user1.password = hashed_password
+            user1.first_name = first
+            user1.last_name = last
+            token = user1.put()
+            return token.id()
+
+    @staticmethod
+    def google_login(email, first, last):
+        user1 = User()
+        qry = User.query(User.email == email, User.first_name == first, User.last_name == last).get()
+        logging.info(qry)
+        if qry:
+            return qry.key.id()
+        else:
+            user1.email = email
             user1.first_name = first
             user1.last_name = last
             token = user1.put()
