@@ -46,6 +46,26 @@ class UserDetails(unittest.TestCase):
                                     "Tel Aviv-Yafo",  "Kiryat Atidim", "long-story-short", "rika pedro-shoham", "http://www.meetup.com", 64, "free", "All", "meetup")
         self.assertIsNotNone(self.mydb.get_event_details(key.id()))
 
+    def test_check_update_event_canceled(self):
+        key = self.mydb.set_event_details("222342395", "Hadoop Ecosystem Workshop", datetime.now(),
+                                    "Tel Aviv-Yafo",  "Kiryat Atidim", "long-story-short", "rika pedro-shoham", "http://www.meetup.com", 64, "free", "All", "meetup")
+        key = self.mydb.set_event_details("222342395", "Canceled", datetime.now(),
+                                    "Tel Aviv-Yafo",  "Kiryat Atidim", "long-story-short", "rika pedro-shoham", "http://www.meetup.com", 64, "free", "All", "meetup")
+        results = Event.query(Event.id == "222342395")
+        self.assertEqual(results.count(), 1)
+        result = results.get()
+        self.assertEqual("Canceled", result.name)
+
+    def test_check_update_event_by_same_name(self):
+        key = self.mydb.set_event_details("22234666", "Hadoop Ecosystem Workshop", datetime.now(),
+                                    "Tel Aviv-Yafo",  "Kiryat Atidim", "long-story-short", "rika pedro-shoham", "http://www.meetup.com", 64, "free", "All", "meetup")
+
+        key = self.mydb.set_event_details("222342395", "Hadoop Ecosystem Workshop", datetime.now(),
+                                    "Tel Aviv-Yafo",  "Kiryat Atidim", "long-story-short", "rika pedro-shoham", "http://www.eventbrite.com", 64, "free", "All", "evenbrite")
+
+        results = Event.query(Event.name == "Hadoop Ecosystem Workshop")
+        self.assertEqual(results.count(), 1)
+
     def tearDown(self):
         self.testbed.deactivate()
 

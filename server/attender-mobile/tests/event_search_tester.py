@@ -29,11 +29,11 @@ class MeetupEventsTester(unittest.TestCase):
         self.testbed.init_urlfetch_stub()
 
     def test_get_events(self):
-        events = self.object.get_events(city="Jerusalem")
+        events = self.object.get_events(category="Transport")
         print events
 
         self.assertTrue(json.loads(events))
         events_list = json.loads(events)
         for ev in events_list:
-            print ev
+            print ev["city"]
             print '\n'

@@ -60,11 +60,11 @@ class MeetupEventsTester(unittest.TestCase):
         self.assertTrue(json.loads(events))
         events_list = json.loads(events)
         for ev in events_list:
-            print ev
+            print ev["city"]
             print '\n'
 
     def test_get_events_by_city(self):
-        events = self.wrapper_object.eventbrite_response(city="Jerusalem")
+        events = self.wrapper_object.eventbrite_response(city="Tel Aviv-Yafo")
         print events
 
         self.assertTrue(json.loads(events))
@@ -74,9 +74,20 @@ class MeetupEventsTester(unittest.TestCase):
             print '\n'
 
     def test_get_events_by_time(self):
-        events = self.wrapper_object.eventbrite_response(date_and_time="1d")
+        events = self.wrapper_object.eventbrite_response(date_and_time="1m")
         self.assertTrue(json.loads(events))
         events_list = json.loads(events)
         for ev in events_list:
             print ev
             print '\n'
+
+    def test_get_all_events(self):
+        counter = 0
+        events = self.wrapper_object.eventbrite_response()
+        self.assertTrue(json.loads(events))
+        events_list = json.loads(events)
+        for ev in events_list:
+            print counter
+            print ev["city"]
+            print '\n'
+            counter += 1

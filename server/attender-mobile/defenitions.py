@@ -37,5 +37,6 @@ eventbrite_categories = {"Career": 101,
                          "Tech": 102,
                          "Transport": 118}  # Auto, Boat & Air
 
-eventbrite_cities = ['Tel Aviv-Yafo', 'Jerusalem', 'Herzliya', 'Haifa', "Ra'anana", 'Rehovot', 'Kfar Saba',
-                     'Ramat Gan', 'Netanya', "Modiin Ilit"]
+eventbrite_cities = {'Tel Aviv-Yafo': 'Tel+Aviv-Yafo', 'Jerusalem': 'Jerusalem', 'Herzeliyya': 'Herzliya', 'Haifa': 'Haifa' ,
+          "Ra'anana": "Ra'anana", 'Rekhovot': 'Rehovot', 'Kefar Sava': 'Kfar+Saba', 'Ramat Gan': 'Ramat+Gan',
+          'Netanya': 'Netanya', "Modi'in": "Modiin+Ilit"}
