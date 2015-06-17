@@ -13,8 +13,7 @@ class EventbriteApi(api_request.ApiRequest):
 
     def request_events(self, city=None, category=None, date_and_time=None):
         events_list = []
-        request = {'token': self.settings['token']}
-
+        request = {'token': self.settings['token'], "venue.country": "IL"}
 
         if category is not None:
             catg = self.get_category(category.strip(), self.source)  #find in dictionary
@@ -23,13 +22,13 @@ class EventbriteApi(api_request.ApiRequest):
             else:
                 return 401
         if city is not None:
-            if city in self.possible_cities(self.source):
+            try:
+                city = self.possible_cities(self.source)[city]
                 logging.info("city exist")
                 request.update({"venue.city": city})
-            else:
+            except:
                 logging.info("The city is not exist")
-        else:
-            request.update({"venue.country": "IL"})
+
 
         if date_and_time is not None:
             d_t = {
@@ -40,7 +39,7 @@ class EventbriteApi(api_request.ApiRequest):
             request.update({"start_date.keyword": d_t})
         logging.info("Starting connection to eventbrite.api")
         response, status_code = self.http_request_using_urlfetch(self.settings['URL_PATTERN'], request)
-        logging.info("response {}".format(response))
+        logging.info("eventbrite actual response {}".format(response))
         response = json.loads(response)
 
         if status_code == 200:

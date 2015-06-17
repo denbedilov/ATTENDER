@@ -51,7 +51,7 @@ class UserLoginHandler(webapp2.RequestHandler):
                         self.register(email, hashed_password, first_name, last_name)
 
     def login(self, email, hashed_password):
-        token = self.mydb.user_login(email,hashed_password)
+        token = self.mydb.user_login(email, hashed_password)
         self.post(token)
 
     def register(self, email, hashed_password, first_name, last_name):
