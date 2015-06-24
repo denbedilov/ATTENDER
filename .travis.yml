@@ -2,4 +2,7 @@ language: python
 # command to install dependencies
 install: "pip install nosegae"
 # command to run tests
-script: nosetests server/attender-mobile/tests2
+before_script:
+- wget https://googleappengine.googlecode.com/files/google_appengine_1.8.9.zip -nv
+- unzip -q google_appengine_1.8.9.zip
+script: nosetests server/attender-mobile/tests
