@@ -30,7 +30,7 @@ handlers:
 - url: /calendar
   script: api.server_calendar.calendar
 - url: /cron
-  script: daily_treat_events.app
+  script: engine.daily_treat_events.app
 - url: /home
   static_files: web/index.html
   upload: web/*
@@ -39,7 +39,7 @@ handlers:
   upload: web/(.*\.(gif|png|jpg|ico|bmp|css|otf|eot|svg|ttf|woff))
 #  script: web.website.page
 - url: /
-  script: main.app
+  script: engine.main.app
 
 libraries:
 - name: webapp2
