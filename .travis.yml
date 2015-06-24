@@ -2,4 +2,4 @@ language: python
 # command to install dependencies
 install: "pip install nosegae"
 # command to run tests
-script: nosetests --with-gae server/attender-mobile/tests
+script: nosetests server/attender-mobile/tests2
