@@ -1,5 +1,5 @@
 language: python
 # command to install dependencies
-install: "pypm install nosegae"
+install: "pip install nosegae"
 # command to run tests
 script: nosetests --with-gae server/attender-mobile/tests
