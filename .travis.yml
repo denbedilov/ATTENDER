@@ -4,5 +4,5 @@ install: "pip install nosegae"
 # command to run tests
 before_script:
 - wget https://googleappengine.googlecode.com/files/google_appengine_1.8.9.zip -nv
-- unzip -qd  /home/travis/virtualenv/python2.7.9/lib/python2.7/site-packages/ google_appengine_1.8.9.zip
+- unzip -qd  /home/travis/virtualenv/python2.7.9/lib/python2.7/site-packages google_appengine_1.8.9.zip
 script: nosetests --with-gae server/attender-mobile/tests
