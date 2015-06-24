@@ -1,3 +1,3 @@
 language: python
 # command to run tests
-script: "python -m server/attender-mobile/tests/db_test.py"
+script: nosetests server/tests
