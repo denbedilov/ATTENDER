@@ -31,9 +31,9 @@ class DAL():
         if user is not None:
             user_details['name'] = user.first_name
             user_details['lastname'] = user.last_name
-            user_details['id'] = user_id
             if fbf is not None:
                 user_details['fbf'] = fbf
+                user_details['id'] = user.fb_id
             return user_details
         else:
             return 1
