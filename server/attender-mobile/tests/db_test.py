@@ -1,12 +1,11 @@
 __author__ = 'olesya'
 
 import unittest
-from DAL import DAL
-from search_events_interface import SearchEventsUsingAPI
+from engine.DAL import DAL
+from engine.search_events_interface import SearchEventsUsingAPI
 from models.user import User
 from models.event import Event
 from datetime import datetime
-
 from google.appengine.ext import ndb
 from google.appengine.ext import testbed
 
