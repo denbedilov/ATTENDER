@@ -2,7 +2,7 @@ __author__ = 'olesya'
 
 import unittest
 import json
-from search_events_interface import EventSearch
+from engine.search_events_interface import EventSearch
 from google.appengine.ext import ndb
 from google.appengine.ext import testbed
 
