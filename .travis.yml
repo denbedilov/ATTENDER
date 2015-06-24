@@ -1,3 +1,5 @@
 language: python
+# command to install dependencies
+install: "python server/attender-mobile/lib/NoseGAE-0.5.7/setup.py install"
 # command to run tests
 script: nosetests server/attender-mobile/tests

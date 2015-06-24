@@ -1,0 +1,20 @@
+Metadata-Version: 1.1
+Name: NoseGAE
+Version: 0.5.7
+Summary: NoseGAE: nose plugin for Google App Engine testing
+Home-page: https://github.com/Trii/NoseGAE
+Author: Josh Johnston
+Author-email: johnston.joshua+nosegae@gmail.com
+License: BSD License
+Download-URL: https://github.com/Trii/NoseGAE/tarball/0.5.7
+Description: UNKNOWN
+Keywords: google,appengine,unittest,nose,testing
+Platform: UNKNOWN
+Classifier: Development Status :: 4 - Beta
+Classifier: Environment :: Console
+Classifier: Intended Audience :: Developers
+Classifier: License :: OSI Approved :: BSD License
+Classifier: Natural Language :: English
+Classifier: Operating System :: OS Independent
+Classifier: Programming Language :: Python :: 2.7
+Classifier: Topic :: Software Development :: Testing
