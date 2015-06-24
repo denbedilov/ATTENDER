@@ -5,4 +5,4 @@ install: "pip install nosegae"
 before_script:
 - wget https://googleappengine.googlecode.com/files/google_appengine_1.8.9.zip -nv
 - unzip -q google_appengine_1.8.9.zip
-script: nosetests server/attender-mobile/tests
+script: nosetests --with-gae server/attender-mobile/tests
