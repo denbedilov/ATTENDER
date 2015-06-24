@@ -4,7 +4,7 @@ import unittest
 import json
 import datetime
 from engine.api_request import ApiRequest
-from sources_wrapper import SearchEventsUsingAPI
+from engine.sources_wrapper import SearchEventsUsingAPI
 from engine.meetup_api import MeetupApi
 from google.appengine.ext import ndb
 from google.appengine.ext import testbed

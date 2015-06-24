@@ -32,9 +32,6 @@ if user:
     friends = graph.get_connections("me", "friends")
 
 """
-
-import cgi
-import time
 import urllib
 import urllib2
 import httplib

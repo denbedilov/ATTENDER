@@ -2,7 +2,7 @@ __author__ = 'olesya'
 
 import unittest
 from engine.api_request import ApiRequest
-from sources_wrapper import SearchEventsUsingAPI
+from engine.sources_wrapper import SearchEventsUsingAPI
 from engine.eventbrite_api import EventbriteApi
 import json
 

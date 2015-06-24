@@ -1,8 +1,7 @@
 __author__ = 'itamar'
-from facebook_logic import fb_logic
-import logging
+
 import webapp2
-from DAL import DAL
+from engine.DAL import DAL
 
 
 class APIAttendHandler(webapp2.RequestHandler):

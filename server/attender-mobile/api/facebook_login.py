@@ -1,10 +1,10 @@
 __author__ = 'itamar'
 
 import sys
-from facebook_logic import fb_logic
+from engine.facebook_logic import fb_logic
 import logging
 import webapp2
-from DAL import DAL
+from engine.DAL import DAL
 
 sys.path.insert(0, 'lib')  #we need this line in order to make libraries imported from lib folder work properly
 import requests
