@@ -14,9 +14,9 @@ class APICalendarHandler(webapp2.RequestHandler):
             # fb = fb_logic()
             mydb = DAL()
             try:
-                int_token = int(token)
-                if mydb.check_token(int_token) is not False:
-                    replyJson = mydb.get_all_user_events(int_token)
+                inttoken = int(token)
+                if mydb.check_token(inttoken) is not False:
+                    replyJson = mydb.get_all_user_events(inttoken)
                     self.post(replyJson)
                 else:
                     self.post(0)
