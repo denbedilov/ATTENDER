@@ -15,10 +15,7 @@
 # limitations under the License.
 #
 import webapp2
-from search_events_interface import EventSearch
-import logging
-import sources_wrapper
-from DAL import DAL
+
 
 class MainHandler(webapp2.RequestHandler):
     def get(self):

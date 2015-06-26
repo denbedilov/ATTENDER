@@ -33,6 +33,7 @@ class DAL():
             user_details['lastname'] = user.last_name
             if fbf is not None:
                 user_details['fbf'] = fbf
+                user_details['id'] = user.fb_id
             return user_details
         else:
             return 1
@@ -190,6 +191,7 @@ class DAL():
         attendings1 = Attendings()
 
         qry = User.get_by_id(u_key)
+        logging.info("query is : {}".format(qry))
         if qry is None:
             return 1
         else:

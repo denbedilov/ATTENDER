@@ -1,8 +1,7 @@
 __author__ = 'itamar'
-from facebook_logic import fb_logic
-import logging
+
 import webapp2
-from DAL import DAL
+from engine.DAL import DAL
 
 
 class APIAttendHandler(webapp2.RequestHandler):
@@ -19,22 +18,19 @@ class APIAttendHandler(webapp2.RequestHandler):
             received = -2
             self.post(received)
         else:
-            mydb= DAL()
-            if mydb.check_token(int(_token)) is True:  #check if the token is valid
-                logging.info("user id : "+_token)
-                if attend_func == "true":
-                    try:
-                        self.post(mydb.attend(int(_token), int(eventid)))
-                    except ValueError:
-                        self.post(3)
-                elif attend_func == "false":
-                    try:
-                        self.post(mydb.unattend(int(_token), int(eventid)))
-                    except ValueError:
-                        self.post(3)
-            else:
-                self.post(-3)
-            return
+            mydb = DAL()
+            try:
+                int_token = int(_token)
+                if mydb.check_token(int_token) is True:  #check if the token is valid
+                    if attend_func == "true":
+                        self.post(mydb.attend(int_token, int(eventid)))
+                    elif attend_func == "false":
+                        self.post(mydb.unattend(int_token, int(eventid)))
+                else:
+                    self.post(-3)
+                    return
+            except ValueError:
+                self.post(3)
 
     def post(self, received):
         if received is -3:

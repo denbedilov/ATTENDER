@@ -1,9 +1,9 @@
 __author__ = 'olesya'
 
 import unittest
-from api_request import ApiRequest
-from sources_wrapper import SearchEventsUsingAPI
-from eventbrite_api import EventbriteApi
+from engine.api_request import ApiRequest
+from engine.sources_wrapper import SearchEventsUsingAPI
+from engine.eventbrite_api import EventbriteApi
 import json
 
 from google.appengine.ext import ndb

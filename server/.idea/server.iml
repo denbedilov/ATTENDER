@@ -3,14 +3,12 @@
   <component name="FacetManager">
     <facet type="google-appengine-python" name="Google App Engine (Python)">
       <configuration>
-        <option name="rootFolder" value="C:\Users\itamar\Documents\GitHub\ATTENDER\server\attender-mobile" />
+        <option name="rootFolder" value="C:\Users\olesya\Documents\GitHub\ATTENDER\server\attender-mobile" />
         <option name="sdkFolder" value="C:\Program Files (x86)\Google\google_appengine" />
         <option name="templatesFolder" value="" />
         <option name="email" value="itamarsharify@gmail.com" />
         <option name="gp" value="dfdddfc2dfc3dfd9dfdadfcfdfd8dfc7dfd3dfc6dfc5dfdcdfcf" />
         <option name="oauth2" value="false" />
-        <option name="deployConfigured" value="true" />
-        <option name="saveCredentials" value="true" />
       </configuration>
     </facet>
   </component>

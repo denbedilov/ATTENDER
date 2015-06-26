@@ -1,7 +1,7 @@
 __author__ = 'olesya'
 
 import webapp2
-from DAL import DAL
+from engine.DAL import DAL
 
 
 class UserDetailsHandler(webapp2.RequestHandler):

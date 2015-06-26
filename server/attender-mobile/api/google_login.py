@@ -5,8 +5,7 @@ import logging
 from google.appengine.api import oauth
 
 import webapp2
-from DAL import DAL
-
+from engine.DAL import DAL
 
 class GoogleLoginHandler(webapp2.RequestHandler):
     def get(self):

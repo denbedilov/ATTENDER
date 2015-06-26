@@ -3,9 +3,9 @@ __author__ = 'olesya'
 import unittest
 import json
 import datetime
-from api_request import ApiRequest
-from sources_wrapper import SearchEventsUsingAPI
-from meetup_api import MeetupApi
+from engine.api_request import ApiRequest
+from engine.sources_wrapper import SearchEventsUsingAPI
+from engine.meetup_api import MeetupApi
 from google.appengine.ext import ndb
 from google.appengine.ext import testbed
 
