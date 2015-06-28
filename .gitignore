@@ -17,3 +17,5 @@ server/attender-mobile/.idea/workspace.xml
 server/attender-mobile/.idea/workspace.xml
 
 *.xml
+*.pyc
+*.pyc

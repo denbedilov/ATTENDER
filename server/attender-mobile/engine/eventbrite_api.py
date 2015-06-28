@@ -13,7 +13,7 @@ class EventbriteApi(api_request.ApiRequest):
 
     def request_events(self, city=None, category=None, date_and_time=None):
         events_list = []
-        request = {'token': self.settings['token'], "venue.country": "IL"}
+        request = {'token': self.settings['token'], "venue.country": "IL", "expand": "venue"}
 
         if category is not None:
             catg = self.get_category(category.strip(), self.source)  #find in dictionary
@@ -21,6 +21,13 @@ class EventbriteApi(api_request.ApiRequest):
                 request.update({"categories": catg})
             else:
                 return 401
+        if date_and_time is not None:
+            d_t = {
+                "1d": "tomorrow",
+                "1w": "this_week",
+                "1m": "this_month"
+            }[date_and_time]
+            request.update({"start_date.keyword": d_t})
         if city is not None:
             try:
                 city = self.possible_cities(self.source)[city]
@@ -29,14 +36,6 @@ class EventbriteApi(api_request.ApiRequest):
             except:
                 logging.info("The city is not exist")
 
-
-        if date_and_time is not None:
-            d_t = {
-                "1d": "tomorrow",
-                "1w": "this_week",
-                "1m": "this_month"
-            }[date_and_time]
-            request.update({"start_date.keyword": d_t})
         logging.info("Starting connection to eventbrite.api")
         response, status_code = self.http_request_using_urlfetch(self.settings['URL_PATTERN'], request)
         logging.info("eventbrite actual response {}".format(response))
@@ -67,11 +66,13 @@ class EventbriteApi(api_request.ApiRequest):
                 self.check_valid(event, res, 'event_url', 'url')
                 self.check_valid(event, res, 'host', 'organizer', 'name')
                 event['attendees'] = 0
-                if all(r['free'] for r in res['ticket_classes']):
-                    event['price'] = "free"
-                else:
+                try:
+                    if all(r['free'] for r in res['ticket_classes']):
+                        event['price'] = "free"
+                    else:
+                        event['price'] = event['event_url']
+                except KeyError:
                     event['price'] = event['event_url']
-
                 events_list.append(event)
                 self.save_in_db(event, self.source, category)
 

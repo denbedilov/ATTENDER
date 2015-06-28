@@ -8,8 +8,6 @@ import json
 
 from google.appengine.ext import ndb
 from google.appengine.ext import testbed
-from google.appengine.api import apiproxy_stub_map
-
 
 try:
     from google.appengine.api import urlfetch
@@ -18,8 +16,7 @@ except ImportError:
     pass
 
 
-
-class MeetupEventsTester(unittest.TestCase):
+class EventBriteEventsTester(unittest.TestCase):
     def setUp(self):
         self.api_object = ApiRequest()
         self.wrapper_object = SearchEventsUsingAPI()

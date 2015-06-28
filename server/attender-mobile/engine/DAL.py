@@ -177,8 +177,9 @@ class DAL():
             fbf = "false"
             for f in fb_friends:
                 qry = User.get_by_id(res.user_id)
-                if int(f) == qry.fb_id:
-                    fbf = "true"
+                if qry is not None:
+                    if int(f) == qry.fb_id:
+                        fbf = "true"
             if res.user_id != my_id: #do not return myself!
                 user = self.get_user_details(res.user_id, fbf)
                 if user != 1:

@@ -6,7 +6,6 @@ from engine.search_events_interface import EventSearch
 from google.appengine.ext import ndb
 from google.appengine.ext import testbed
 
-
 try:
     from google.appengine.api import urlfetch
     _httplib = 'urlfetch'
@@ -14,8 +13,7 @@ except ImportError:
     pass
 
 
-
-class MeetupEventsTester(unittest.TestCase):
+class EventsTester(unittest.TestCase):
     def setUp(self):
         self.object =EventSearch()
 
